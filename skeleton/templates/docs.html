@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Unit Converter API Documentation</h1>
+
+    <table border="1">
+        <tr>
+            <th>Endpoint</th>
+            <th>Expects</th>
+            <th>Returns</th>
+        </tr>
+
+        <tr>
+            <td>/</td>
+            <td>Nothing</td>
+            <td>
+                Status 200 with the service name and
+                "running"
+            </td>
+        </tr>
+
+        <tr>
+            <td>/temperature</td>
+            <td>
+                value: a number<br>
+                from: C or F<br>
+                to: C or F
+            </td>
+            <td>
+                Status 200 with the original value,
+                units, and converted result.<br><br>
+
+                Status 400 if the request is invalid.
+            </td>
+        </tr>
+
+        <tr>
+            <td>/docs</td>
+            <td>Nothing</td>
+            <td>
+                This documentation page.
+            </td>
+        </tr>
+
+    </table>
+
+    <h2>Examples</h2>
+
+    <h3>Temperature Conversion</h3>
+
+    <p>
+        Example request:
+    </p>
+
+    <pre>
+/temperature?value=32&from=F&to=C
+    </pre>
+
+    <p>
+        Successful response:
+    </p>
+
+    <pre>
+{
+    "value": 32,
+    "from": "F",
+    "to": "C",
+    "result": 0
+}
+    </pre>
+
+    <p>
+        Invalid requests return HTTP status 400.
+    </p>
+
+</body>
+</html>
