@@ -11,8 +11,7 @@ def home():
         "status": "running"
     }), 200
 
-#http://127.0.0.1:5000/temp?value=0&from=C&to=F
-#http://127.0.0.1:5000/temp?value=32&from=F&to=C
+
 @app.route("/temp")
 def temperature():
     value = request.args.get("value")
@@ -59,5 +58,3 @@ def docs():
 
 
 
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
