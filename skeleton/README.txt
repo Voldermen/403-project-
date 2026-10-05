@@ -30,3 +30,4 @@ Current thought process:
 #################
 
 
+The automated test uses flasks built in test functions
