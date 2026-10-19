@@ -5,8 +5,8 @@ from time import sleep
 # Date: 10/17/2026
 
 # Implementation:
-# from census_geocoder import get_lat_long
-# from census_geocoder import get_address
+# from address_coords import get_lat_long
+# from address_coords import get_address
 
 # Calling get_lat_long with Street, City, and State
 #    lat, long = get_lat_long(street="201 Mayfield Avenue", city="Ruston", state="LA")
