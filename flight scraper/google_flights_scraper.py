@@ -7,6 +7,7 @@ Run it as an interactive command-line program:
     python google_flights_scraper.py
 
 Other Python files can also import and call search_flights() directly.
+Returns up to 5 price-ranked flight objects using the exact requested fields.
 
 NOTE: fast-flights is an unofficial scraper, NOT a Google Flights API.
 The website may change, block automated searches, or return incomplete data.
@@ -38,6 +39,10 @@ from fast_flights import FlightQuery, Passengers, create_query, get_flights
 # Load the airport database once when the Python module is imported.
 # "IATA" means the three-letter airport codes (MSY, MCO, ORD, etc.).
 AIRPORTS = airportsdata.load("IATA")
+
+# Always return at most the five cheapest itineraries supplied by fast_flights.
+# This is set by the program, not requested as input or passed as a parameter.
+TOP_RESULTS = 5 # change this to increase the number of possible results. Note the amount scrapped may not be equal to the max size. 
 
 
 def parse_search_date(text: str) -> date:
@@ -127,14 +132,14 @@ def elapsed_minutes(first, last) -> int | None:
 
 
 def clock_time(value) -> str:
-    """Format a 24-hour time as 12-hour local time (e.g., '3:05 PM')."""
+    """Format local time as 'h:mm' with no AM/PM, matching our JSON example."""
     hour, minute = time_parts(value)
-    period = "AM" if hour < 12 else "PM"
 
-    # 15 % 12 = 3, giving 3 PM. "or 12" handles midnight/noon.
+    # 15 % 12 = 3, giving 3:00. "or 12" handles midnight/noon.
     twelve_hour = hour % 12 or 12
     # :02d prints minutes with two digits: 3:05 instead of 3:5.
-    return f"{twelve_hour}:{minute:02d} {period}"
+    # NOTE: Without AM/PM, the JSON alone cannot distinguish morning/evening.
+    return f"{twelve_hour}:{minute:02d}"
 
 
 def itinerary_to_json(itinerary, priority: int) -> dict:
@@ -151,7 +156,7 @@ def itinerary_to_json(itinerary, priority: int) -> dict:
         # provided by fast_flights instead.
         duration = first.duration
 
-    # Return a Python dictionary. json.dumps() converts it into actual JSON.
+    # Return a Python dictionary for one result. json.dumps() turns it into JSON.
     return {
         "Method": {
             "Type": "Air",  # Our application also handles other transport types.
@@ -162,29 +167,27 @@ def itinerary_to_json(itinerary, priority: int) -> dict:
             "Arrival": clock_time(last.arrival),  # Destination airport's local time.
             "Date": f"{month}/{day}/{year}",
             # Keep the original JSON field spelling for compatibility.
-            "Staring Location": airport_location(first.from_airport.code),
-            "Destination": {"Location": airport_location(last.to_airport.code)},
-            "Airlines": itinerary.airlines,  # Airlines associated with this itinerary.
-            "Stops": len(legs) - 1,  # Two flight legs = one stop/connection.
+            "Starting Location": airport_location(first.from_airport.code),
+            # Put destination fields directly inside Destination, as requested.
+            "Destination": airport_location(last.to_airport.code),
         }
     }
 
 
-def search_flights(origin: str, destination: str, travel_date: date, adults: int = 1, limit: int = 5) -> dict:
-    """Search Google Flights and return a dictionary containing flight results.
+def search_flights(origin: str, destination: str, travel_date: date, adults: int = 1) -> list[dict]:
+    """Search Google Flights and return up to five flight objects as a list.
 
     Example use from another Python script:
         from datetime import date
         from google_flights_scraper import search_flights
-        flights = search_flights("MSY", "MCO", date(2026, 11, 16), adults=2, limit=5)
+        flights = search_flights("MSY", "MCO", date(2026, 11, 16), adults=2)
 
     The function RETURNS data; it does not ask for input or save a file.
+    A JSON array holds the five objects. Each has exactly the requested Method keys.
     """
-    # Avoid invalid passenger counts and unreasonable output sizes.
+    # Avoid invalid passenger counts. Result count is fixed by TOP_RESULTS.
     if not 1 <= adults <= 9:
         raise ValueError("Passengers must be between 1 and 9.")
-    if not 1 <= limit <= 50:
-        raise ValueError("Number of results must be between 1 and 50.")
 
     # Build the flight query. create_query prepares it; it doesn't search yet.
     query = create_query(
@@ -199,20 +202,21 @@ def search_flights(origin: str, destination: str, travel_date: date, adults: int
     # THIS is the network-backed retrieval step from the third-party library.
     # Discard itineraries without any flight legs.
     itineraries = [item for item in get_flights(query) if item.flights]
+   
 
     # Sort cheapest -> most expensive. Missing prices are pushed to the end.
     # Note: this ranks only the flights returned by the library, not necessarily
     # every flight sold by airlines on this route.
     itineraries.sort(key=lambda item: (item.price is None, item.price if item.price is not None else float("inf")))
 
-    # [:limit] keeps only the requested number of results.
+    # [:TOP_RESULTS] automatically takes up to five results (fewer if needed).
     # enumerate(..., start=1) supplies Priority 1, 2, 3, and so on.
-    return {
-        "Flights": [
-            itinerary_to_json(itinerary, rank)
-            for rank, itinerary in enumerate(itineraries[:limit], start=1)
-        ]
-    }
+    # Return a LIST, so the JSON output is an array of exactly shaped objects:
+    # [{"Method": {...}}, {"Method": {...}}, ...]. No "Flights" wrapper.
+    return [
+        itinerary_to_json(itinerary, rank)
+        for rank, itinerary in enumerate(itineraries[:TOP_RESULTS], start=1)
+    ]
 
 
 def main() -> None:
@@ -230,22 +234,22 @@ def main() -> None:
         # The date function checks formatting and prevents past dates.
         travel_date = parse_search_date(input("Travel date (YYYY-MM-DD): "))
 
-        # When someone just presses Enter, 'or "1"' / 'or "5"' supplies defaults.
-        # int() converts those strings into integer numbers.
+        # When someone just presses Enter, 'or "1"' supplies the default.
+        # int() converts the typed text into an integer number.
         adults = int(input("Adult passengers [1]: ").strip() or "1")
-        limit = int(input("Maximum results [5]: ").strip() or "5")
 
-        # Call the reusable search function to get our Python dictionary.
-        result = search_flights(origin, destination, travel_date, adults, limit)
+        # Call the reusable search function to get up to five flight dictionaries.
+        # We don't ask for the result limit because TOP_RESULTS is always five.
+        result = search_flights(origin, destination, travel_date, adults)
 
-        # Save the dictionary as readable JSON in the current working folder.
+        # Save the list as readable JSON in the current working folder.
         output = Path("flights.json")
         output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
         # Also show the results in the command prompt for convenience.
         print("\n" + json.dumps(result, indent=2, ensure_ascii=False))
-        print(f"\nSaved {len(result['Flights'])} result(s) to {output.resolve()}")
-        if not result["Flights"]:
+        print(f"\nSaved {len(result)} result(s) to {output.resolve()}")
+        if not result:
             print("No flights returned for this search.", file=sys.stderr)
 
     except (ValueError, LookupError) as exc:
