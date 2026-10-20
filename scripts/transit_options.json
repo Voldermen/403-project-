@@ -1,0 +1,29 @@
+[
+  {
+    "Method": {
+      "Type": "Bus",
+      "Priority": 3,
+      "Cost": null,
+      "Travel Time (min)": 23,
+      "Departure": "10:37",
+      "Arrival": "11:00",
+      "Date": "10/20/2026",
+      "Staring Location": {
+        "City": "New Orleans",
+        "Name": "New Orleans Union Passenger Terminal",
+        "GPS": {
+          "LAT": 29.9457412743404,
+          "LONG": -90.0776182253991
+        }
+      },
+      "Destination": {
+        "City": "New Orleans",
+        "Name": "Magazine St. at Natatorium",
+        "GPS": {
+          "LAT": 29.924942,
+          "LONG": -90.12846
+        }
+      }
+    }
+  }
+]
