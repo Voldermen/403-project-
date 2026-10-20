@@ -186,7 +186,7 @@ def _stops_to_method(start, end, origin_city, dest_city):
                 "Departure": None,
                 "Arrival": None,
                 "Date": None,
-                "Staring Location": block(origin_city, start),
+                "Starting Location": block(origin_city, start),
                 "Destination": block(dest_city, end),
             }
         }
@@ -258,7 +258,6 @@ def get_nearest_stops(origin, destination, radius=MAX_STOP_RADIUS_M, api_key=Non
 
     origin / destination : (lat, long) tuple, or address dict (see get_transit_options).
     radius               : search radius in meters (Transit's maximum is 1500).
-
     Costs 2 API calls. By default returns a list with one item in the Example.json
     format (Priority 3): Starting Location = closest stop to origin, Destination =
     closest stop to destination; [] if either has no stop in range. Cost, times, date
