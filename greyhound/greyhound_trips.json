@@ -1,0 +1,242 @@
+[
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 39.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 279,
+        "Departure": "00:01",
+        "Arrival": "04:40",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T00:01:00-05:00",
+        "Arrival Timestamp": "2026-10-23T04:40:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:c5f8f958-8f54-49bd-942b-b44f84503327:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 39.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 350,
+        "Departure": "06:50",
+        "Arrival": "12:40",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T06:50:00-05:00",
+        "Arrival Timestamp": "2026-10-23T12:40:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:5b629d81-bb8c-42eb-9986-20168b024805:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 36.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 295,
+        "Departure": "13:00",
+        "Arrival": "17:55",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T13:00:00-05:00",
+        "Arrival Timestamp": "2026-10-23T17:55:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:7b6a1e0a-523a-4260-8742-76bff3f9ae9e:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 42.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 395,
+        "Departure": "13:15",
+        "Arrival": "19:50",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T13:15:00-05:00",
+        "Arrival Timestamp": "2026-10-23T19:50:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:cfd44931-6486-4838-a198-38c7fa72cd17:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 37.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 295,
+        "Departure": "17:55",
+        "Arrival": "22:50",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T17:55:00-05:00",
+        "Arrival Timestamp": "2026-10-23T22:50:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:b370358c-7626-4903-9fbd-1371031fdbe3:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Name": "Greyhound",
+        "Scope": "Interstate",
+        "Cost": 38.98,
+        "Currency": "USD",
+        "Price Basis": "total_with_platform_fee",
+        "Travel Time (min)": 270,
+        "Departure": "19:00",
+        "Arrival": "23:30",
+        "Date": "10/23/2026",
+        "Departure Timestamp": "2026-10-23T19:00:00-05:00",
+        "Arrival Timestamp": "2026-10-23T23:30:00-05:00",
+        "Transfers": 0,
+        "Trip ID": "direct:54802415-e4a0-484c-b94c-3709dbf71c80:ab615f55-9409-4216-a06f-5cf7769812c5:70fe4a43-595a-4723-8b23-1ed1247b62b1"
+      },
+      "starting_location": {
+        "City": "Dallas",
+        "State": "TX",
+        "Name": "Dallas Bus Station",
+        "Station ID": "ab615f55-9409-4216-a06f-5cf7769812c5",
+        "GPS": {
+          "LAT": 32.853309,
+          "LONG": -96.879878
+        }
+      },
+      "destination": {
+        "City": "Houston",
+        "State": "TX",
+        "Name": "Houston Bus Station (Greyhound)",
+        "Station ID": "70fe4a43-595a-4723-8b23-1ed1247b62b1",
+        "GPS": {
+          "LAT": 29.735379,
+          "LONG": -95.301864
+        }
+      }
+    }
+  }
+]

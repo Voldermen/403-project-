@@ -1,0 +1,18 @@
+{
+  "ab615f55-9409-4216-a06f-5cf7769812c5": {
+    "LAT": 32.853309,
+    "LONG": -96.879878,
+    "Name": "Dallas Bus Station",
+    "Source": "https://www.greyhound.com/bus/dallas-tx/dallas-bus-station",
+    "Coordinate source": "Station page structured latitude and longitude",
+    "Verified": "2026-10-20"
+  },
+  "70fe4a43-595a-4723-8b23-1ed1247b62b1": {
+    "LAT": 29.735379,
+    "LONG": -95.301864,
+    "Name": "Houston Bus Station (Greyhound)",
+    "Source": "https://www.flixbus.com/bus/houston-tx/houston-bus-station-greyhound",
+    "Coordinate source": "Station page structured latitude and longitude",
+    "Verified": "2026-10-20"
+  }
+}
