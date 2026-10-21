@@ -1,0 +1,31 @@
+{
+  "Rides": [
+    {
+      "Method": {
+        "Type": "Rail",
+        "Priority": 1,
+        "Cost": null,
+        "Travel Time (min)": 221,
+        "Departure": "4:50",
+        "Arrival": "8:31",
+        "Date": "11/27/2026",
+        "Staring Location": {
+          "City": "New York",
+          "Name": "NYP",
+          "GPS": {
+            "LAT": 40.7527,
+            "LONG": -73.9772
+          }
+        },
+        "Destination": {
+          "City": "Washington",
+          "Name": "WAS",
+          "GPS": {
+            "LAT": 38.8973,
+            "LONG": -77.0063
+          }
+        }
+      }
+    }
+  ]
+}
