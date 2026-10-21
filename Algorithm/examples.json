@@ -1348,5 +1348,35 @@
         }
       }
     }
+  },
+  {
+    "method": {
+      "info": {
+        "Type": "Bus",
+        "Priority": 2,
+        "Scope": "Regional",
+        "Cost": 7,
+        "Travel Time (min)": 50,
+        "Departure": "23:00",
+        "Arrival": "23:50",
+        "Date": "10/20/2026"
+      },
+      "starting_location": {
+        "City": "Milwaukee",
+        "Name": "Downtown Milwaukee",
+        "GPS": {
+          "LAT": 43.0389,
+          "LONG": -87.9065
+        }
+      },
+      "destination": {
+        "City": "Seatle",
+        "Name": "MadeUpBusStation",
+        "GPS": {
+          "LAT": 47.6062,
+          "LONG": 122.3321
+        }
+      }
+    }
   }
 ]

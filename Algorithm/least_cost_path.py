@@ -9,11 +9,10 @@ Assumes no time spent walking from station to station
 
 
 
-import argparse
 import heapq
 import json
 import math
-from datetime import datetime, date, time, timedelta
+from datetime import datetime
 from pathlib import Path
 
 
@@ -101,6 +100,7 @@ def minutes_to_time(value):
 def get_method_duration(method):
     arrive = time_to_minutes(method.get("arrival"))
     depart = time_to_minutes(method.get("departure"))
+    
     return arrive - depart
 
 def get_wait_time(method, previous_method):
@@ -239,25 +239,37 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
         if cost_so_far > best.get((node, ready_at), math.inf):
             continue
         if node == end_key:
-            print(f"dest reached with cost {cost_so_far}")
+            print(f"finished with cost: {cost_so_far}")
             path = reconstruct(previous, (node, ready_at))
             return format_result(path, locations, cost_so_far, start_time, objective)
 
         for next_node, method in graph.get(node, []):
+                        
             depart_time = time_to_minutes(method.get("departure"))
             arrive_time = time_to_minutes(method.get("arrival"))
 
-            #if looking for fastest we want the duration and layover time
+            # You cannot take a connection that leaves before you arrive.
+            if depart_time < ready_at:
+                continue
+
             if Time:
-                new_cost = cost_so_far + get_method_duration(method) + get_wait_time(method, previous)
+                # Time spent traveling
+                travel_duration = get_method_duration(method)
+
+                # Time spent waiting for this connection
+                wait_duration = depart_time - ready_at
+
+                new_cost = cost_so_far + wait_duration + travel_duration
             else:
                 new_cost = cost_so_far + method["cost"]
-            state = (next_node, arrive_time)
 
+            state = (next_node, arrive_time)
 
             if new_cost < best.get(state, math.inf):
                 best[state] = new_cost
-                previous[state] = ((node, ready_at), method, depart_time, arrive_time)
+                previous[state] = (
+                    ((node, ready_at), method, depart_time, arrive_time)
+                )
                 heapq.heappush(queue, (new_cost, arrive_time, next_node))
 
     raise ValueError("No route found between the requested locations.")
@@ -277,12 +289,71 @@ def format_result(path, locations, total_cost, start_time, objective):
     }
     return results
 
-methods = load_methods()
-origin = (29.9511, -90.0715)
-dest = "Chicago Midway International Airport"
-start_time = "12:01 am"
-obj = "cost"
-print(find_lowest_cost_path(methods, origin, dest, start_time, obj))
+
+###################################
+#printing funcs for demonstration
+
+def print_path(path):
+    
+    for i, (start_point, end_point, details) in enumerate(path, start=1):
+        
+        print("=" * 65)
+        print(f"Leg {i}: {details.get('name', 'Unnamed route')}")
+        print("=" * 65)
+        print(f"  Type:           {details.get('type')}")
+        print(f"  Scope:          {details.get('scope')}")
+        print(f"  Priority:       {details.get('priority')}")
+        print(f"  Date:           {details.get('date')}")
+      
+        start = details.get("start", {})
+        destination = details.get("destination", {})
+        print("  DEPARTURE")
+        print(f"    City:         {start.get('City')}")
+        print(f"    Location:     {start.get('Name')}")
+        print(f"    Time:         {details.get('departure')}")
+        print(f"    GPS:          {start_point[0]}")
+
+        print("  ARRIVAL")
+        print(f"    City:         {destination.get('City')}")
+        print(f"    Location:     {destination.get('Name')}")
+        print(f"    Time:         {details.get('arrival')}")
+        print(f"    GPS:          {end_point[0]}")
+
+        print("  LEG SUMMARY")
+        print(f"    Cost:         ${details.get('cost', 0):.2f}")
+        print(f"    Duration:     {details.get('travel_minutes')} minutes")
+        print()
+
+
+
+def print_result(full_trip):
+    path = full_trip.get("path")
+    locations = full_trip.get("locations")
+    start_time = full_trip.get("start_time")
+    objective = full_trip.get("objective")
+    total_cost = full_trip.get("total_cost")
+
+    print(f"Objective: {objective}")
+    print_path(path)
+
+
+if __name__ == "__main__":
+    methods = load_methods()
+    #trip test 1 (looking for price)
+    origin = (29.9511, -90.0715)
+    dest = "Chicago Midway International Airport"
+    start_time = "12:01 am"
+    obj = "cost"
+    print_result(find_lowest_cost_path(methods, origin, dest, start_time, obj))
+
+    print()
+    print()
+    print()
+    
+    #trip test 2 (diff dest looking for time)
+    dest = "MadeUpBusStation" #downtown milwakee
+    obj = "time"
+    print_result(find_lowest_cost_path(methods, origin, dest, start_time, obj))
 
 """
 add info fucntions like
