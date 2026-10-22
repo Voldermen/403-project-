@@ -160,7 +160,7 @@ def itinerary_to_json(itinerary, priority: int) -> dict:
     return {
         "Method": {
             "Type": "Air",  # Our application also handles other transport types.
-            "Priority": priority,  # Price rank: 1 = cheapest retrieved result.
+            "Priority": 1,  # Flight is a priority 1 form of travel.
             "Cost": itinerary.price,  # Price supplied by scraper in USD; not independently verified.
             "Travel Time (min)": duration,
             "Departure": clock_time(first.departure),  # First airport's local time.

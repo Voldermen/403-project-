@@ -3,7 +3,7 @@
     "Method": {
       "Type": "Air",
       "Priority": 1,
-      "Cost": 146,
+      "Cost": 336,
       "Travel Time (min)": 1051,
       "Departure": "3:15",
       "Arrival": "8:46",
@@ -29,11 +29,11 @@
   {
     "Method": {
       "Type": "Air",
-      "Priority": 2,
-      "Cost": 222,
-      "Travel Time (min)": 355,
-      "Departure": "6:02",
-      "Arrival": "11:57",
+      "Priority": 1,
+      "Cost": 443,
+      "Travel Time (min)": 459,
+      "Departure": "10:56",
+      "Arrival": "6:35",
       "Date": "10/28/2026",
       "Starting Location": {
         "City": "New Orleans",
@@ -56,11 +56,11 @@
   {
     "Method": {
       "Type": "Air",
-      "Priority": 3,
-      "Cost": 222,
-      "Travel Time (min)": 331,
-      "Departure": "6:28",
-      "Arrival": "11:59",
+      "Priority": 1,
+      "Cost": 443,
+      "Travel Time (min)": 398,
+      "Departure": "12:38",
+      "Arrival": "7:16",
       "Date": "10/28/2026",
       "Starting Location": {
         "City": "New Orleans",
@@ -83,38 +83,38 @@
   {
     "Method": {
       "Type": "Air",
-      "Priority": 4,
-      "Cost": 343,
-      "Travel Time (min)": 160,
-      "Departure": "10:28",
-      "Arrival": "1:08",
-      "Date": "10/28/2026",
-      "Starting Location": {
-        "City": "New Orleans",
-        "Name": "MSY",
-        "GPS": {
-          "LAT": 29.993272,
-          "LONG": -90.259028
-        }
-      },
-      "Destination": {
-        "City": "Chicago",
-        "Name": "ORD",
-        "GPS": {
-          "LAT": 41.97694,
-          "LONG": -87.90815
-        }
-      }
-    }
-  },
-  {
-    "Method": {
-      "Type": "Air",
-      "Priority": 5,
-      "Cost": 440,
+      "Priority": 1,
+      "Cost": 819,
       "Travel Time (min)": 263,
       "Departure": "7:50",
       "Arrival": "12:13",
+      "Date": "10/28/2026",
+      "Starting Location": {
+        "City": "New Orleans",
+        "Name": "MSY",
+        "GPS": {
+          "LAT": 29.993272,
+          "LONG": -90.259028
+        }
+      },
+      "Destination": {
+        "City": "Chicago",
+        "Name": "ORD",
+        "GPS": {
+          "LAT": 41.97694,
+          "LONG": -87.90815
+        }
+      }
+    }
+  },
+  {
+    "Method": {
+      "Type": "Air",
+      "Priority": 1,
+      "Cost": 977,
+      "Travel Time (min)": 164,
+      "Departure": "11:07",
+      "Arrival": "1:51",
       "Date": "10/28/2026",
       "Starting Location": {
         "City": "New Orleans",

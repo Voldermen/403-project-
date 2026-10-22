@@ -1,27 +1,27 @@
 [
   {
     "Method": {
-      "Type": "Bus",
+      "Type": "Tram",
       "Priority": 3,
       "Cost": null,
-      "Travel Time (min)": 23,
-      "Departure": "10:37",
-      "Arrival": "11:00",
-      "Date": "10/20/2026",
+      "Travel Time (min)": 33,
+      "Departure": "9:47",
+      "Arrival": "10:20",
+      "Date": "10/21/2026",
       "Staring Location": {
         "City": "New Orleans",
-        "Name": "New Orleans Union Passenger Terminal",
+        "Name": "Canal St. Ferry Terminal",
         "GPS": {
-          "LAT": 29.9457412743404,
-          "LONG": -90.0776182253991
+          "LAT": 29.950095,
+          "LONG": -90.064622
         }
       },
       "Destination": {
         "City": "New Orleans",
-        "Name": "Magazine St. at Natatorium",
+        "Name": "St Charles Ave at Tulane/Loyola",
         "GPS": {
-          "LAT": 29.924942,
-          "LONG": -90.12846
+          "LAT": 29.934161,
+          "LONG": -90.12236
         }
       }
     }
