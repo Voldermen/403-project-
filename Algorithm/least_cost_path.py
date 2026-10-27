@@ -232,7 +232,7 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
     best = {(start_key, start_time): 0.0}#initialze best as start to start with 0 time spent
     queue = [(0.0, start_time, start_key)]
     previous = {}
-    best_state_for_location = {start_key: (0.0, start_time)}
+    #best_state_for_location = {start_key: (0.0, start_time)}
 
     while queue:
         cost_so_far, ready_at, node = heapq.heappop(queue)
@@ -243,6 +243,7 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
             path = reconstruct(previous, (node, ready_at))
             return format_result(path, locations, cost_so_far, start_time, objective)
 
+        #looks at all possible next nodes
         for next_node, method in graph.get(node, []):
                         
             depart_time = time_to_minutes(method.get("departure"))
