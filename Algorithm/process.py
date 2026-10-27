@@ -10,6 +10,7 @@ near that city
  
 """
 
+import pandas as pd
 from math import asin, cos, radians, sin, sqrt
 
 
@@ -49,10 +50,72 @@ def find_nearest_bus(lat, lon):
     name or coords of the nearest bus station maybe also the distance to it"""
     pass
 
+def find_nearest_amtrack(lat,lon):
+    """take in a lat and lon of some location and return the name or coords of
+    nearest amteack station and distance to it"""
+    try:
+        amtrack = pd.read_csv("../data/amtrack_database/cleaned_amtrack.csv")
+    except:
+        print("Unable to open amtrack dataset")
+    # Calculate distance to each airport
+    amtrack["distance_m"] = amtrack.apply(
+        lambda airport: find_distance(
+            lat,
+            lon,
+            airport["stop_lat"],
+            airport["stop_lon"]
+        ),
+        axis=1
+    )        
+
+    # Sort by distance and return the closest three
+    return amtrack.sort_values("distance_m").head(5)
+
+    
+
+
 
 def find_nearest_airports(lat,lon):
     """take in a lat and lon of some locationa and return the three closest aiports
-    codes and coords"""
+    codes and coords in a a pandas dataframe"""
+    try:
+        airports = pd.read_csv("../data/airports_database/cleaned_airport.csv")
+    except:
+        print("Unable to open airports dataset")
+
+    # Calculate distance to each airport
+    airports["distance_m"] = airports.apply(
+        lambda airport: find_distance(
+            lat,
+            lon,
+            airport["latitude_deg"],
+            airport["longitude_deg"]
+        ),
+        axis=1
+    )
+
+    #only grab important info
+    airports = airports[["name","latitude_deg","longitude_deg","icao_code","iata_code","gps_code","local_code","distance_m"]]
+
+    # Sort by distance and return the closest three
+    return airports.sort_values("distance_m").head(3)
+
+
+# Example usage
+my_lat = 32.5
+my_lon = -92.0
+
+closest_air = find_nearest_airports(
+    my_lat,
+    my_lon
+)
+closest_am = find_nearest_amtrack(
+    my_lat,
+    my_lon
+)
+
+print(closest_am)
+
 
 
 
