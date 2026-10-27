@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      # Keeps the clone and installed packages across container restarts
+      - app_code:/app
+      - app_venv:/opt/venv
+
+volumes:
+  app_code:
+  app_venv:

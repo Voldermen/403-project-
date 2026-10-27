@@ -1,0 +1,4 @@
+requests==2.34.2
+geopy==2.5.0
+gtfs_kit==3.0.6
+pandas==13.0.1
