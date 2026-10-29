@@ -1,0 +1,286 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search flights, Amtrak schedules and Greyhound buses. Your recent results are saved in your browser session.">
+  <title>RouteWise — Transportation Aggregator</title>
+  <link rel="stylesheet" href="{% static 'routes/style.css' %}">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="{% url 'home' %}" aria-label="RouteWise homepage">
+        <span class="brand-mark" aria-hidden="true">↗</span><span>routewise</span>
+      </a>
+      <span class="topbar-note">TRANSPORTATION AGGREGATOR</span>
+      <span class="build-label">Django prototype</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span class="eyebrow-line"></span> COMPARE YOUR OPTIONS</div>
+        <h1>Every route.<br><em>One search.</em></h1>
+        <p>Search flights, Amtrak timetables, and Greyhound buses. Your latest completed search and entered information are saved for this browser.</p>
+      </section>
+
+      <section class="search-panel" aria-labelledby="form-heading">
+        <div class="section-header">
+          <h2 id="form-heading">Plan your trip</h2>
+          <div class="search-help">One-way travel · Economy flights · USD</div>
+        </div>
+        <form id="trip-form" method="post" action="{% url 'home' %}">
+          {% csrf_token %}
+          {% if form.non_field_errors %}<div class="form-alert">{{ form.non_field_errors }}</div>{% endif %}
+          <div class="field-grid">
+            <div class="field">
+              <label for="{{ form.origin.id_for_label }}">Departure airport</label>
+              {{ form.origin }}
+              <small>3-letter IATA code, e.g. MSY</small>
+              {% for err in form.origin.errors %}<span class="error">{{ err }}</span>{% endfor %}
+            </div>
+            <div class="field">
+              <label for="{{ form.destination.id_for_label }}">Arrival airport</label>
+              {{ form.destination }}
+              <small>3-letter IATA code, e.g. ORD</small>
+              {% for err in form.destination.errors %}<span class="error">{{ err }}</span>{% endfor %}
+            </div>
+            <div class="field">
+              <label for="{{ form.travel_date.id_for_label }}">Departure date</label>
+              {{ form.travel_date }}
+              <small>Today or any future date</small>
+              {% for err in form.travel_date.errors %}<span class="error">{{ err }}</span>{% endfor %}
+            </div>
+            <div class="field">
+              <label for="{{ form.adults.id_for_label }}">Travelers</label>
+              {{ form.adults }}
+              <small>1–9 adult passengers</small>
+              {% for err in form.adults.errors %}<span class="error">{{ err }}</span>{% endfor %}
+            </div>
+          </div>
+          <div class="train-panel">
+            <label class="checkbox-label" for="{{ form.include_train.id_for_label }}">
+              {{ form.include_train }} <span><strong>Also search Amtrak</strong> <span class="muted">(GTFS schedule only; no ticket prices)</span></span>
+            </label>
+            <div class="train-grid" id="train-fields">
+              <div class="field">
+                <label for="{{ form.train_origin.id_for_label }}">Departure station code</label>
+                {{ form.train_origin }}
+                <small>Example: NOL (not the airport code MSY)</small>
+                {% for err in form.train_origin.errors %}<span class="error">{{ err }}</span>{% endfor %}
+              </div>
+              <div class="field">
+                <label for="{{ form.train_destination.id_for_label }}">Arrival station code</label>
+                {{ form.train_destination }}
+                <small>Example: CHI (not the airport code ORD)</small>
+                {% for err in form.train_destination.errors %}<span class="error">{{ err }}</span>{% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="train-panel">
+            <label class="checkbox-label" for="{{ form.include_bus.id_for_label }}">
+              {{ form.include_bus }} <span><strong>Also search Greyhound</strong> <span class="muted">(one adult, city UUIDs)</span></span>
+            </label>
+            <p class="muted" style="margin: 7px 0 12px">Defaults to Dallas → Houston. Greyhound needs city UUIDs, not airport codes. Other-city results are kept separate, not mixed into route recommendations.</p>
+            <div class="train-grid" id="bus-fields">
+              <div class="field">
+                <label for="{{ form.bus_origin.id_for_label }}">Departure city UUID</label>
+                {{ form.bus_origin }}
+                {% for err in form.bus_origin.errors %}<span class="error">{{ err }}</span>{% endfor %}
+              </div>
+              <div class="field">
+                <label for="{{ form.bus_destination.id_for_label }}">Arrival city UUID</label>
+                {{ form.bus_destination }}
+                {% for err in form.bus_destination.errors %}<span class="error">{{ err }}</span>{% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="form-bottom">
+            <span class="muted">Live searches depend on provider availability.</span>
+            <button type="submit" class="search-button">Search routes <span aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </section>
+
+      <section class="train-panel" style="margin-top:16px; margin-bottom:16px">
+        {% if restored %}<p><strong>Restored your last completed search.</strong> These are saved results, not refreshed live fares. Search again for current prices.</p>{% endif %}
+        <p class="muted" id="draft-status">Your entries are saved in this browser while you type; completed searches are stored on this server for up to 30 days while your session cookie remains available. We don't use IP addresses to identify returning visitors.</p>
+        <form method="post" action="{% url 'clear_saved' %}" id="clear-saved-form">{% csrf_token %}
+          <button type="submit" class="search-button" style="background:#5c6776">Clear my saved searches</button>
+        </form>
+      </section>
+      {% if searched %}
+      <section class="results" aria-labelledby="results-heading">
+        <div class="results-intro">
+          <div><div class="eyebrow">YOUR RESULTS</div><h2 id="results-heading">Available options</h2></div>
+          <span class="count">{{ routes|length }} route{{ routes|length|pluralize }} retrieved</span>
+        </div>
+
+        <div class="provider-strip">
+          {% for key, provider in providers.items %}
+          <div class="provider-status">
+            <div class="provider-label"><strong>{{ provider.name }}</strong> <span class="status {% if provider.status == 'ok' %}good{% elif provider.status == 'error' %}bad{% else %}neutral{% endif %}">{{ provider.status|cut:'_' }}</span></div>
+            <p>{{ provider.message }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if recommendations %}
+        <div class="recommendation-grid">
+          {% for label, route in recommendations.items %}
+          <article class="recommendation">
+            <div class="tag">{{ label|title }} option</div>
+            <div class="recommendation-price">${{ route.cost|floatformat:0 }}</div>
+            <p>{{ route.start }} → {{ route.end }}</p>
+            <div class="small-metrics">{{ route.mode }} <span>·</span> {{ route.duration }}</div>
+          </article>
+          {% endfor %}
+        </div>
+        <p class="comparison-note">“Balanced” is a sample algorithm weighing price and duration equally; replace it with your team's algorithm if needed. Prices are copied from providers and are not booking guarantees.</p>
+        {% endif %}
+
+        {% if routes %}
+        <div class="list-heading"><h3>All retrieved routes</h3><span>Sorted by price, low to high</span></div>
+        <div class="routes-list">
+          {% for route in routes %}
+          <article class="route-card">
+            <div class="route-icon" aria-hidden="true">{% if route.mode == 'Air' %}✈{% else %}▣{% endif %}</div>
+            <div class="route-details">
+              <div class="route-title"><strong>{{ route.start }} <span aria-hidden="true">→</span> {{ route.end }}</strong><span class="method-pill">{{ route.mode }} · Mode priority {{ route.priority }}</span></div>
+              <p>{{ route.start_city }} to {{ route.end_city }}</p>
+              <div class="flight-meta"><span>{{ route.date }}</span><span>Departs {{ route.departure }}</span><span>Arrives {{ route.arrival }}</span><span>{{ route.duration }}</span></div>
+            </div>
+            <div class="route-price">{% if route.cost != None %}<strong>${{ route.cost|floatformat:0 }}</strong>{% else %}<strong>—</strong>{% endif %}<small>reported price</small></div>
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-results"><strong>No route listings were returned.</strong><p>Try another date or airport pair, and review the source status above.</p></div>
+        {% endif %}
+      </section>
+      {% if unmatched_routes %}
+      <section class="train-panel" style="margin-top:18px">
+        <h3>Other retrieved schedules (not compared)</h3>
+        <p class="muted">These results were not included in cheapest/fastest recommendations because their provider city names did not match the requested flight cities exactly. Check the entered station/city codes if you expected the same route.</p>
+        <div class="routes-list">
+          {% for route in unmatched_routes %}
+          <article class="route-card">
+            <div class="route-icon" aria-hidden="true">{% if route.mode == 'Rail' %}🚆{% elif route.mode == 'Air' %}✈{% else %}🚌{% endif %}</div>
+            <div class="route-details">
+              <div class="route-title"><strong>{{ route.start_city }} <span aria-hidden="true">→</span> {{ route.end_city }}</strong><span class="method-pill">{{ route.mode }} · Mode priority {{ route.priority }}</span></div>
+              <p>{{ route.start }} to {{ route.end }}</p>
+              <!-- The Amtrak GTFS adapter supplies Departure, Arrival, Date and
+                   Travel Time (min) even though it does not supply ticket prices.
+                   Display them here as well as in the matching-route section. -->
+              <div class="flight-meta">
+                <span>{{ route.date|default_if_none:"—" }}</span>
+                <span>Departs {{ route.departure|default_if_none:"—" }}</span>
+                <span>Arrives {{ route.arrival|default_if_none:"—" }}</span>
+                <span>Duration {{ route.duration }}</span>
+              </div>
+            </div>
+            <div class="route-price">
+              {% if route.cost != None %}<strong>${{ route.cost|floatformat:0 }}</strong>{% else %}<strong>—</strong>{% endif %}
+              <small>{% if route.cost != None %}reported price{% else %}fare not provided{% endif %}</small>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+      {% else %}
+      <section class="how-it-works">
+        <div class="step"><span class="step-num">01</span><strong>Choose your route</strong><p>Enter departure, destination, date, and travelers.</p></div>
+        <div class="step"><span class="step-num">02</span><strong>Fetch live listings</strong><p>The Django backend calls your scraper functions.</p></div>
+        <div class="step"><span class="step-num">03</span><strong>Compare the results</strong><p>View pricing, travel time, and the comparison algorithm.</p></div>
+      </section>
+      {% endif %}
+    </main>
+    <footer>RouteWise student project <span>·</span> Fare availability and pricing come from external providers.</footer>
+  </div>
+  <script>
+    // Save unsubmitted form changes locally immediately (works offline).
+    // After a short pause, also try saving a server-side draft via Django session.
+    const draftKey = 'routewise_trip_draft_v1';
+    const form = document.getElementById('trip-form');
+    const status = document.getElementById('draft-status');
+    const availableFields = () => [...form.querySelectorAll('input[name]')]
+      .filter(input => input.name !== 'csrfmiddlewaretoken');
+    function snapshot() {
+      const values = {};
+      for (const input of availableFields()) {
+        values[input.name] = input.type === 'checkbox' ? input.checked : input.value;
+      }
+      return values;
+    }
+    function restoreLocalDraft() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(draftKey) || 'null');
+        if (!saved || !saved.values) return;
+        for (const input of availableFields()) {
+          if (Object.prototype.hasOwnProperty.call(saved.values, input.name)) {
+            if (input.type === 'checkbox') input.checked = !!saved.values[input.name];
+            else input.value = saved.values[input.name];
+          }
+        }
+      } catch (error) { /* Storage disabled: use Django server session only. */ }
+    }
+    restoreLocalDraft();
+    let debounce;
+    function saveDraft() {
+      const values = snapshot();
+      try { localStorage.setItem(draftKey, JSON.stringify({values, savedAt: Date.now()})); }
+      catch (error) { /* Private browsing or disabled storage. */ }
+      clearTimeout(debounce);
+      debounce = setTimeout(async () => {
+        const data = new FormData(form);
+        // Disabled optional inputs must also be captured by temporarily
+        // reading the snapshot; blank/nonselected fields are still remembered.
+        for (const [key, value] of Object.entries(values)) {
+          if (typeof value !== 'boolean') data.set(key, value);
+          else if (value) data.set(key, 'on');
+          else data.delete(key);
+        }
+        try {
+          const response = await fetch('{% url "save_draft_api" %}', {
+            method: 'POST', body: data, credentials: 'same-origin'
+          });
+          if (!response.ok) throw new Error('Could not save draft');
+          status.textContent = 'Inputs saved in this browser and on this server.';
+        } catch (error) {
+          status.textContent = 'Inputs saved in this browser. Server connection unavailable; they can be restored when you return.';
+        }
+      }, 650);
+    }
+    form.addEventListener('input', saveDraft);
+    form.addEventListener('change', saveDraft);
+    form.addEventListener('submit', () => {
+      // Save latest draft synchronously before navigating.
+      try { localStorage.setItem(draftKey, JSON.stringify({values: snapshot(), savedAt: Date.now()})); }
+      catch (error) { /* Ignore disabled storage. */ }
+    });
+    document.getElementById('clear-saved-form').addEventListener('submit', () => {
+      try { localStorage.removeItem(draftKey); } catch (error) { /* Ignore */ }
+    });
+
+    // Browser convenience only: Django validates these fields on the server too.
+    const trainToggle = document.getElementById('id_include_train');
+    const trainFields = document.getElementById('train-fields');
+    function updateTrainFields() {
+      trainFields.classList.toggle('inactive', !trainToggle.checked);
+      for (const input of trainFields.querySelectorAll('input')) input.disabled = !trainToggle.checked;
+    }
+    trainToggle.addEventListener('change', updateTrainFields);
+    updateTrainFields();
+    const busToggle = document.getElementById('id_include_bus');
+    const busFields = document.getElementById('bus-fields');
+    function updateBusFields() {
+      busFields.classList.toggle('inactive', !busToggle.checked);
+      for (const input of busFields.querySelectorAll('input')) input.disabled = !busToggle.checked;
+    }
+    busToggle.addEventListener('change', updateBusFields);
+    updateBusFields();
+  </script>
+</body>
+</html>
