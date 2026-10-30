@@ -3,3 +3,4 @@ skeleton/__pycache__
 skeleton/venv
 scripts/api_keys.txt
 scripts/__pycache__
+Docker/.env
