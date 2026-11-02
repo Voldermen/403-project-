@@ -1,0 +1,18 @@
+# Plain HTTP on port 80 (IP-only setup, no domain, no certificates)
+:80 {
+	encode gzip
+
+	# Django isn't configured to collect/serve static files in production,
+	# so Caddy serves them straight from the app's folders:
+	#   /static/routes/style.css -> routes/static/routes/style.css
+	handle /static/* {
+		uri path_regexp ^/static/(.*)$ /routes/static/$1
+		root * /srv/app/transport_aggregator_Backend
+		file_server
+	}
+
+	# Everything else goes to Django (gunicorn)
+	handle {
+		reverse_proxy app:8000
+	}
+}
