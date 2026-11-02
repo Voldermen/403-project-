@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#18294c">
+  <meta name="description" content="Group 3 Travel Aggregator — find ways to get there by car, plane, train, public bus or Greyhound.">
+  <title>{% block title %}Travel Aggregator{% endblock %} · Group 3</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{% static 'planner/css/styles.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="header-inner container">
+        <a class="brand" href="{% url 'planner:home' %}" aria-label="Travel Aggregator — Home">
+          <img src="{% static 'planner/img/Test_logo.png' %}" width="90" height="33" alt="Travel Aggregator logo">
+          <span class="brand-name">travel<span>aggregator</span><small>GROUP 03 · SPRINT 2</small></span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="{% url 'planner:home' %}" class="nav-link {% if active == 'home' %}is-current{% endif %}" {% if active == 'home' %}aria-current="page"{% endif %}>HOME</a>
+          <a href="{% url 'planner:about' %}" class="nav-link {% if active == 'about' %}is-current{% endif %}" {% if active == 'about' %}aria-current="page"{% endif %}>ABOUT</a>
+        </nav>
+        <a href="{% url 'planner:home' %}" class="header-cta">Plan a trip <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div><strong>TRAVEL AGGREGATOR</strong><span> · Built by Group 3</span></div>
+        <div>Plan smarter. Travel further. <span class="footer-dot" aria-hidden="true">✦</span> CSC 4033</div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="{% static 'planner/js/app.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

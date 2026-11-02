@@ -1,0 +1,72 @@
+{% extends 'planner/base.html' %}
+{% load static %}
+{% block title %}Find your way{% endblock %}
+{% block content %}
+<section class="hero hero-home">
+  <div class="hero-route-mark" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><span class="orbit-pin">✦</span></div>
+  <div class="container hero-inner">
+    <div class="eyebrow light-eyebrow"><span class="eyebrow-dash"></span> THE SMART WAY TO GO</div>
+    <h1>Where to <em>next?</em></h1>
+    <p>Every journey has options. Compare the ways to get there and find a route that works for your time, your budget, and your plans.</p>
+    <div class="hero-pills" aria-label="Supported modes"><span>🚗 &nbsp;Drive</span><span>✈️ &nbsp;Fly</span><span>🚆 &nbsp;Rail</span><span>🚌 &nbsp;Bus</span></div>
+  </div>
+</section>
+<section class="main-area container">
+  <div class="page-layout">
+    <div class="primary-column">
+      <section class="search-card elevated" aria-labelledby="search-heading">
+        <div class="card-heading"><div><div class="micro-label">BUILD YOUR JOURNEY</div><h2 id="search-heading">Find your perfect route<span class="heading-spark" aria-hidden="true"> ✳</span></h2><p>Choose which modes you'd like to include in your search.</p></div><span class="heading-icon" aria-hidden="true">↗</span></div>
+        <form id="route-search-form" method="get" action="{% url 'planner:results' %}" novalidate>
+          <fieldset class="mode-fieldset">
+            <legend class="form-label">TRANSPORTATION TYPES</legend>
+            <div class="mode-grid" id="mode-buttons">
+              <button type="button" class="mode-button mode-all is-enabled" data-mode="all" aria-pressed="true"><span class="mode-emoji" aria-hidden="true">✳</span><span>All Types</span><span class="mode-check" aria-hidden="true">✓</span></button>
+              <label class="mode-button is-enabled" data-mode="car"><input type="checkbox" name="modes" value="car" checked><span class="mode-emoji" aria-hidden="true">🚗</span><span>Car</span><span class="mode-check" aria-hidden="true">✓</span></label>
+              <label class="mode-button is-enabled" data-mode="planes"><input type="checkbox" name="modes" value="planes" checked><span class="mode-emoji" aria-hidden="true">✈️</span><span>Planes</span><span class="mode-check" aria-hidden="true">✓</span></label>
+              <label class="mode-button is-enabled" data-mode="trains"><input type="checkbox" name="modes" value="trains" checked><span class="mode-emoji" aria-hidden="true">🚆</span><span>Trains</span><span class="mode-check" aria-hidden="true">✓</span></label>
+              <label class="mode-button is-enabled" data-mode="public_buses"><input type="checkbox" name="modes" value="public_buses" checked><span class="mode-emoji" aria-hidden="true">🚌</span><span>Public Buses</span><span class="mode-check" aria-hidden="true">✓</span></label>
+              <label class="mode-button is-enabled" data-mode="greyhound"><input type="checkbox" name="modes" value="greyhound" checked><span class="mode-emoji" aria-hidden="true">🚌</span><span>Greyhound</span><span class="mode-check" aria-hidden="true">✓</span></label>
+            </div>
+            <p class="field-hint" id="mode-hint">Click a selected option to gray it out and exclude it from route calculations.</p>
+            <p class="form-error" id="mode-error" role="alert" hidden>Select at least one transportation type.</p>
+          </fieldset>
+          <div class="route-inputs">
+            <div class="input-wrap" data-address-field="origin">
+              <label for="origin">ADDRESS A <span class="label-muted">· Starting point</span></label>
+              <div class="input-shell"><span class="location-symbol origin-symbol" aria-hidden="true">●</span><input id="origin" name="origin" type="text" placeholder="City, state or street address" required autocomplete="off" maxlength="180" aria-autocomplete="list" aria-controls="origin-suggestions" aria-expanded="false"><span class="input-location-mark" aria-hidden="true">◎</span></div>
+              <div class="suggestion-list" id="origin-suggestions" role="listbox" hidden></div>
+              <input type="hidden" name="origin_lat" id="origin_lat"><input type="hidden" name="origin_lon" id="origin_lon">
+            </div>
+            <button type="button" class="swap-button" id="swap-addresses" aria-label="Swap starting point and destination" title="Swap addresses">⇄</button>
+            <div class="input-wrap" data-address-field="destination">
+              <label for="destination">ADDRESS B <span class="label-muted">· Destination</span></label>
+              <div class="input-shell"><span class="location-symbol destination-symbol" aria-hidden="true">◆</span><input id="destination" name="destination" type="text" placeholder="Where are you headed?" required autocomplete="off" maxlength="180" aria-autocomplete="list" aria-controls="destination-suggestions" aria-expanded="false"><span class="input-location-mark" aria-hidden="true">◎</span></div>
+              <div class="suggestion-list" id="destination-suggestions" role="listbox" hidden></div>
+              <input type="hidden" name="destination_lat" id="destination_lat"><input type="hidden" name="destination_lon" id="destination_lon">
+            </div>
+          </div>
+          <div class="form-bottom">
+            <div class="optional-inputs"><div class="small-field"><label for="travel_date">DEPARTURE DATE</label><input id="travel_date" name="travel_date" type="date" value="{{ form.travel_date.value|date:'Y-m-d' }}" required></div><div class="small-field"><label for="objective">OPTIMIZE FOR</label><select id="objective" name="objective"><option value="cost">Lowest cost</option><option value="time">Fastest trip</option></select></div></div>
+            <button type="submit" class="primary-button find-button">Find My Route <span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+      </section>
+      <section class="map-card" aria-labelledby="map-heading">
+        <div class="section-heading"><div><div class="micro-label">EXPLORE THE MAP</div><h2 id="map-heading">The open road starts here.</h2></div><div class="map-legend"><span class="legend-dot"></span> UNITED STATES</div></div>
+        <div id="home-map" class="map-surface" role="region" aria-label="Interactive map of the United States"><div class="map-fallback">Interactive U.S. map loads with an internet connection.</div></div>
+        <div class="map-footer"><span>✦ &nbsp; Zoom in, explore, and start planning.</span><span>Map data © OpenStreetMap contributors</span></div>
+      </section>
+    </div>
+    <aside class="sidebar" aria-label="Travel inspiration — future sprint feature">
+      <div class="sidebar-top"><span class="micro-label">THE JOURNEY BOARD</span><span class="mini-star">✦</span></div>
+      <h2>Go places.<br><em>Make memories.</em></h2>
+      <p>New cities. New roads. A world of ways to get there.</p>
+      <div class="destination-illustration"><div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="road-line"></div><span class="city-label">EXPLORE MORE <span aria-hidden="true">↗</span></span></div>
+      <div class="inspiration-entry"><span class="entry-icon">✈</span><div><strong>Fly somewhere new</strong><small>Discover your next destination</small></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+      <div class="inspiration-entry"><span class="entry-icon">⌁</span><div><strong>Take the scenic route</strong><small>There's more than one way</small></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+      <div class="inspiration-entry"><span class="entry-icon">◈</span><div><strong>Travel on your terms</strong><small>Filter your preferred modes</small></div><span class="entry-arrow" aria-hidden="true">↗</span></div>
+      <div class="future-label"><span>◌ &nbsp; Coming in a future sprint</span><p>Photo carousel featuring travel and U.S. destinations.</p></div>
+    </aside>
+  </div>
+</section>
+{% endblock %}
