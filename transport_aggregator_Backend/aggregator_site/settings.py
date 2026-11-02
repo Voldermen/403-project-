@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load project-local environment variables before reading SECRET_KEY.
 # Existing OS environment variables take precedence over values in .env.
 load_dotenv(BASE_DIR / ".env")
-
+CSRF_TRUSTED_ORIGINS = [o for o in os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if o]
 # Never include a real secret key in source code or GitHub.
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 if not SECRET_KEY:
