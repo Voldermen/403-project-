@@ -5,8 +5,6 @@ Dependencies:
 
 Usage:
    python Amtrak_GTFS_Local.py
-
-Note: Prices are estimates derived from travel time; GTFS does not publish ticket fares.
 """
 
 import json
@@ -16,6 +14,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 import gtfs_kit as gk
+import pandas as pd
 
 # Amtrak GTFS official download address
 GTFS_URL = "https://content.amtrak.com/content/gtfs/GTFS.zip"
@@ -42,27 +41,9 @@ STATIONS = {
 
 def check_station(code: str) -> str:
     code = code.strip().upper()
-    # NYC is a common shorthand; NYP is the actual Amtrak station code.
-    code = {"NYC": "NYP"}.get(code, code)
     if not re.fullmatch(r"[A-Z]{3}", code) or code not in STATIONS:
-        raise ValueError(f"Unknown station code: {code!r}. Try NYC, NYP, WAS, BOS, etc.")
+        raise ValueError(f"Unknown station code: {code!r}. Try NYP, WAS, BOS, etc.")
     return code
-
-
-def parse_adult_passengers(text: str) -> int:
-    """Allow Enter for one passenger; otherwise require a positive whole number."""
-    text = text.strip()
-    if not text:
-        return 1
-    if not text.isdecimal() or int(text) < 1:
-        raise ValueError("Adult passengers must be a positive whole number.")
-    return int(text)
-
-
-def calculate_price(duration_minutes: int, adult_passengers: int) -> float:
-    """Estimate price: ((minutes / 60) / 3) * $25 * adult passengers."""
-    travel_time_hours = duration_minutes / 60
-    return round((travel_time_hours / 3) * 25 * adult_passengers, 2)
 
 
 def parse_search_date(text: str) -> date:
@@ -91,14 +72,10 @@ def clock_time(dt: datetime | None) -> str | None:
     return f"{dt.hour}:{dt.minute:02d}"
 
 
-def search_amtrak_gtfs(
-    origin: str, destination: str, travel_date: date, adult_passengers: int
-) -> dict:
-    """Find up to five direct trips and estimate the total price for all adults."""
-    if adult_passengers < 1:
-        raise ValueError("Adult passengers must be at least 1.")
-
+def search_amtrak_gtfs(origin: str, destination: str, travel_date: date, limit: int = 5) -> dict:
+    """Read GTFS locally, find trips between the two stations on the specified date."""
     # 1. Load feed (gtfs_kit will automatically download and parse)
+    print("Loading Amtrak GTFS feed (first run may take a few seconds)...")
     feed = gk.read_feed(GTFS_URL, dist_units="km")
 
     # 2. Find the stop_ids for the two stations
@@ -115,6 +92,7 @@ def search_amtrak_gtfs(
     trips_today = feed.get_trips(date=date_str)
 
     if trips_today.empty:
+        print(f"No service active on {travel_date}.")
         return {"Rides": []}
 
     # 5. Find stop_times for these trips
@@ -131,6 +109,7 @@ def search_amtrak_gtfs(
     ]
 
     if dep_at_origin.empty or arr_at_dest.empty:
+        print(f"No direct trips found from {origin} to {destination} on {travel_date}.")
         return {"Rides": []}
 
     # 6. Match: same trip_id, and departure time < arrival time (ensure correct direction)
@@ -165,7 +144,7 @@ def search_amtrak_gtfs(
 
     # 7. Sort by departure time
     results.sort(key=lambda x: x["dep_dt"])
-    results = results[:5]  # No fabricated routes; fewer are returned if fewer exist.
+    results = results[:limit]
 
     # 8. Build output JSON structure
     rides = []
@@ -174,12 +153,12 @@ def search_amtrak_gtfs(
             "Method": {
                 "Type": "Rail",
                 "Priority": rank,
-                "Cost": calculate_price(r["duration"], adult_passengers),
+                "Cost": None,  # GTFS has no fares
                 "Travel Time (min)": r["duration"],
                 "Departure": clock_time(r["dep_dt"]),
                 "Arrival": clock_time(r["arr_dt"]),
                 "Date": f"{travel_date.month}/{travel_date.day}/{travel_date.year}",
-                "Starting Location": station_location(origin),
+                "Staring Location": station_location(origin),
                 "Destination": station_location(destination),
             }
         })
@@ -189,19 +168,21 @@ def search_amtrak_gtfs(
 
 def main():
     try:
-        origin = check_station(input("Starting station (e.g., NYC): "))
+        print("Amtrak GTFS Local Search\n")
+        origin = check_station(input("Starting station (e.g., NYP): "))
         dest = check_station(input("Destination station (e.g., WAS): "))
         if origin == dest:
             raise ValueError("Origin and destination must differ.")
 
         travel_date = parse_search_date(input("Travel date (YYYY-MM-DD): "))
-        adult_passengers = parse_adult_passengers(input("Adult passengers [1]: "))
+        limit = int(input("Maximum results [5]: ").strip() or "5")
 
-        result = search_amtrak_gtfs(origin, dest, travel_date, adult_passengers)
+        result = search_amtrak_gtfs(origin, dest, travel_date, limit)
 
         output = Path("amtrak.json")
         output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(json.dumps(result, indent=2, ensure_ascii=False))
+        print("\n" + json.dumps(result, indent=2, ensure_ascii=False))
+        print(f"\nSaved {len(result['Rides'])} result(s) to {output.resolve()}")
 
     except (ValueError, LookupError) as exc:
         print(f"Error: {exc}", file=sys.stderr)

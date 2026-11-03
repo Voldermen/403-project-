@@ -30,76 +30,19 @@ class ServiceTests(SimpleTestCase):
         with self.assertRaises(LocationError):
             resolve_location("-20, 10")
 
-def test_excluded_providers_are_not_called(self):
+    def test_excluded_providers_are_not_called(self):
+        record = {"mode": "car", "cost": None, "duration_minutes": 40}
+        with patch("planner.services.PROVIDERS", {
+            "car": lambda *args: [record],
+            "planes": lambda *args: self.fail("disabled provider called"),
+        }):
+            result, notices = search_routes({"lat": 30, "lon": -90}, {"lat": 31, "lon": -90}, date.today(), ["car"])
+        self.assertEqual(result[0]["rank"], 1)
+        self.assertEqual(notices, [])
 
-    # Original Car test data
-    # record = {"mode": "car", "cost": None, "duration_minutes": 40}
-
-    # New Planes test data
-    record = {"mode": "planes", "cost": None, "duration_minutes": 40}
-
-    with patch("planner.services.PROVIDERS", {
-
-        # "car": lambda *args: [record],
-        "planes": lambda *args: [record],
-
-        # "planes": lambda *args: self.fail("disabled provider called"),
-        "trains": lambda *args: self.fail("disabled provider called"),
-
-    }):
-
-        # Original Car search
-        # result, notices = search_routes(
-        #     {"lat": 30, "lon": -90},
-        #     {"lat": 31, "lon": -90},
-        #     date.today(),
-        #     ["car"]
-        # )
-
-        # New Planes search
-        result, notices = search_routes(
-            {"lat": 30, "lon": -90},
-            {"lat": 31, "lon": -90},
-            date.today(),
-            ["planes"]
-        )
-
-    self.assertEqual(result[0]["rank"], 1)
-    self.assertEqual(notices, [])
-
-def test_cost_ranking_puts_missing_prices_last(self):
-
-    # Original Car data
-    # car = {"mode": "car", "cost": None, "duration_minutes": 60}
-
-    # New Train data
-    train = {"mode": "trains", "cost": None, "duration_minutes": 60}
-
-    bus = {"mode": "greyhound", "cost": 29, "duration_minutes": 100}
-
-    with patch("planner.services.PROVIDERS", {
-
-        # "car": lambda *args: [car],
-        "trains": lambda *args: [train],
-
-        "greyhound": lambda *args: [bus]
-
-    }):
-
-        # Original Car search
-        # rows, _ = search_routes({}, {}, date.today(),
-        #                         ["car", "greyhound"], objective="cost")
-
-        # New Train search
-        rows, _ = search_routes(
-            {}, {},
-            date.today(),
-            ["trains", "greyhound"],
-            objective="cost"
-        )
-
-    # Original assertion
-    # self.assertEqual([r["mode"] for r in rows], ["greyhound", "car"])
-
-    # New assertion
-    self.assertEqual([r["mode"] for r in rows], ["greyhound", "trains"])
+    def test_cost_ranking_puts_missing_prices_last(self):
+        car = {"mode": "car", "cost": None, "duration_minutes": 60}
+        bus = {"mode": "greyhound", "cost": 29, "duration_minutes": 100}
+        with patch("planner.services.PROVIDERS", {"car": lambda *args: [car], "greyhound": lambda *args: [bus]}):
+            rows, _ = search_routes({}, {}, date.today(), ["car", "greyhound"], objective="cost")
+        self.assertEqual([r["mode"] for r in rows], ["greyhound", "car"])

@@ -3,7 +3,7 @@ skeleton/__pycache__
 skeleton/venv
 scripts/api_keys.txt
 scripts/__pycache__
-
+Docker.env
 
 # Django secret keys and environment variables
 .env
@@ -27,3 +27,4 @@ venv/
 
 # Generated static files
 staticfiles/
+

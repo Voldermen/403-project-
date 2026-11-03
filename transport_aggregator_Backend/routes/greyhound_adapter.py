@@ -3,6 +3,8 @@
 The provider accepts city UUIDs, not airport codes or names. GPS is unknown
 unless verified coordinates are supplied later. Do not invent coordinates.
 """
+import json
+from pathlib import Path
 from uuid import UUID
 from greyhound_search import fetch_response, convert_response
 
@@ -19,7 +21,20 @@ def search_greyhound(origin_uuid, destination_uuid, travel_date, adults=1):
     except (ValueError, TypeError, AttributeError) as exc:
         raise ValueError("Greyhound city IDs must be valid UUIDs.") from exc
     data = fetch_response(origin_uuid, destination_uuid, travel_date)
-    source_rows = convert_response(data)
+    # Reuse the station-ID mapping supplied with the Greyhound component.
+    backend = Path(__file__).resolve().parent.parent
+    coordinate_paths = (
+        backend / "station_coordinates.json",
+        backend.parent / "greyhound" / "station_coordinates.json",
+    )
+    coordinates = {}
+    for coordinate_path in coordinate_paths:
+        if coordinate_path.is_file():
+            coordinates = json.loads(coordinate_path.read_text(encoding="utf-8-sig"))
+            if not isinstance(coordinates, dict):
+                raise ValueError("Station coordinates must be a station-ID mapping.")
+            break
+    source_rows = convert_response(data, coordinates)
     output = []
     for item in source_rows:
         source = item["method"]

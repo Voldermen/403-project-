@@ -103,6 +103,8 @@ def display_route(row):
         "date": method.get("Date", "—"),
         "start": start.get("Name", "—"),
         "end": end.get("Name", "—"),
+        "start_gps": start.get("GPS") or {},
+        "end_gps": end.get("GPS") or {},
         "start_city": start.get("City", ""),
         "end_city": end.get("City", ""),
     }
