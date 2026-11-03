@@ -156,10 +156,10 @@
     if (!element || typeof window.L === 'undefined') return;
     element.querySelector('.map-fallback')?.remove();
     const map = L.map(element, {scrollWheelZoom: false});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
-      maxZoom: 18,
+    L.maplibreGL({
+      style: 'https://tiles.openfreemap.org/styles/liberty'
     }).addTo(map);
+    
     if (!data || !data.origin || !data.destination) {
       map.setView([39.2, -97.5], 4);
       return;
