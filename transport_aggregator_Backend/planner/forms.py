@@ -3,7 +3,7 @@ from datetime import date
 from django import forms
 
 MODE_CHOICES = [
-    ("car", "Car"),
+    #("car", "Car"),
     ("planes", "Planes"),
     ("trains", "Trains"),
     ("public_buses", "Public Buses"),
