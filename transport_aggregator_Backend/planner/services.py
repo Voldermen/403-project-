@@ -147,18 +147,43 @@ def _airports():
                     and airport.get("scheduled_service") == "yes"
                     and airport.get("type") in ("large_airport", "medium_airport")):
                 try:
-                    airports.append((float(airport["latitude_deg"]), float(airport["longitude_deg"]), airport["iata_code"]))
+                    # Keep the airport size so the search can prefer a major airport
+                    # over a nearby small/limited-service airfield when appropriate.
+                    airports.append((float(airport["latitude_deg"]), float(airport["longitude_deg"]),
+                                     airport["iata_code"], airport["type"]))
                 except (ValueError, TypeError):
                     continue
     return airports
 
 
 def nearest_airport(place, max_miles=150):
-    lat_lon = (place["lat"], place["lon"])
-    selected = min(_airports(), key=lambda ap: _haversine_miles(lat_lon, (ap[0], ap[1])), default=None)
-    if selected and _haversine_miles(lat_lon, selected[:2]) <= max_miles:
-        return selected[2]
-    return None
+    """Prefer a major passenger airport when it is near the closest airport.
+
+    The older version chose only by distance. Downtown Los Angeles is ~10 miles
+    from Hawthorne (HHR), versus ~12 miles from LAX. The CSV flags HHR as
+    'scheduled_service=yes', even though it is not a useful Google Flights
+    passenger-search destination, so the old code sent MSY -> HHR instead of LAX.
+
+    Keep regional airports usable elsewhere: only favor a large airport if it
+    is within 15 miles *additional distance* of the closest listed airport.
+    """
+    point = (place["lat"], place["lon"])
+    nearby = []
+    for airport in _airports():
+        miles = _haversine_miles(point, (airport[0], airport[1]))
+        if miles <= max_miles:
+            nearby.append((miles, airport))
+
+    if not nearby:
+        return None
+
+    closest_miles, closest = min(nearby, key=lambda candidate: candidate[0])
+    # Large-airport preference applies within the *same nearby metro area*,
+    # not to a distant hub that would hide a reasonable regional airport.
+    near_large = [candidate for candidate in nearby
+                  if candidate[1][3] == "large_airport" and candidate[0] <= closest_miles + 15]
+    best = min(near_large or nearby, key=lambda candidate: candidate[0])
+    return best[1][2]
 
 
 def nearest_station(place, max_miles=110):
@@ -265,6 +290,9 @@ def _plane_routes(origin, destination, travel_date, adults=1):
         return [], "No distinct scheduled-service airports were found within 150 miles of both addresses."
     from google_flights_scraper import search_flights
     rows = search_flights(start_code, end_code, travel_date, adults=adults)
+    if not rows:
+        # Show the actual airport codes used so it's easy to debug missing fares.
+        return [], f"No flight itineraries were returned for {start_code} → {end_code} on this date."
     return [normalize_legacy(row, "planes", "Google Flights scraper") for row in rows], None
 
 
