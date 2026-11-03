@@ -1,9 +1,0 @@
--r requirements.txt
-# Used by legacy flight and rail scrapers (install only when enabling these modes).
-airportsdata
-fast-flights
-gtfs-kit
-pandas
-geopy
-# Optional PostgreSQL deployment:
-psycopg[binary]
