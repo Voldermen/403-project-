@@ -75,7 +75,6 @@ def clock_time(dt: datetime | None) -> str | None:
 def search_amtrak_gtfs(origin: str, destination: str, travel_date: date, limit: int = 5) -> dict:
     """Read GTFS locally, find trips between the two stations on the specified date."""
     # 1. Load feed (gtfs_kit will automatically download and parse)
-    print("Loading Amtrak GTFS feed (first run may take a few seconds)...")
     feed = gk.read_feed(GTFS_URL, dist_units="km")
 
     # 2. Find the stop_ids for the two stations

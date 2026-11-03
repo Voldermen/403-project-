@@ -1,41 +1,63 @@
 
 import greyhound.greyhound_search as bus
-from datetime import date
+import Amtrack_Scraper.Amtrak_Data as train
+import flight_scraper.google_flights_scraper as plane
+from datetime import date, timedelta
 import json
 
 
+"""Greyhound assumes one rider the rest can change if want to put that in later"""
 
 
-def fetch_greyhound_info(origin_id, destination_id):
-    today_date = date.today()
-
-    # params = dict(
-    #     from_city_id=origin_id, 
-    #     to_city_id=destination_id,
-    #     departure_date=today_date.strftime('%d.%m.%Y'), # Format required: DD.MM.YYYY
-    #     products=json.dumps({'adult': 1}), 
-    #     currency='USD', 
-    #     locale='en_US',
-    #     search_by=search_by, 
-    #     include_after_midnight_rides='0',
-    #     disable_distribusion_trips='0', 
-    #     disable_global_trips='0',
-    #     disable_trips=json.dumps(['AU'])
-    # )
-    data = bus.fetch_response(origin_id, destination_id, today_date)
-    print(json.dumps(data))
+def fetch_greyhound_info(origin_id, destination_id, date):
+    
+    data = bus.fetch_response(origin_id, destination_id, date)
+   
     final = bus.convert_response(data)
-    print(final)
-
-def fetch_amtrack_info():
-    pass
+    # with open("M_output.json", "w", encoding="utf-8") as f:
+    #     json.dump(final, f, ensure_ascii=False, indent=4)
 
 
-def fetch_plane_info():
-    pass
+
+def fetch_amtrack_info(origin, dest, date):
+    
+    final = train.search_amtrak_gtfs(origin, dest, date)
+    with open("M_output.json", "w", encoding="utf-8") as f:
+        json.dump(final, f, ensure_ascii=False, indent=4)
 
 
-tex = "70fe4a43-595a-4723-8b23-1ed1247b62b1"
-tech  = "ab615f55-9409-4216-a06f-5cf7769812c5"
+def fetch_plane_info(origin, dest, date):
 
-fetch_greyhound_info(tech, tex)
+
+    final = plane.search_flights(origin, dest, date)
+    with open("M_output.json", "w", encoding="utf-8") as f:
+            json.dump(final, f, ensure_ascii=False, indent=4)
+
+
+
+
+
+#######################################################
+#tests
+today = date.today()
+tomorrow = today + timedelta(days=1)
+
+def test_grey():
+    tex = "70fe4a43-595a-4723-8b23-1ed1247b62b1"
+    tech  = "ab615f55-9409-4216-a06f-5cf7769812c5"
+    fetch_greyhound_info(tech, tex, today)
+
+def test_am():
+    New = "NYP"
+    wash = "WAS"
+    fetch_amtrack_info(New, wash, tomorrow)
+
+
+def test_flight():
+    """use IATA codes"""
+    ax = "AEX"
+    at = "ATL"
+    fetch_plane_info(ax, at, tomorrow)
+    
+
+test_flight()
