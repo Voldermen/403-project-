@@ -31,16 +31,22 @@ def fetch_response(origin, destination, travel_date):
     """One network request. Never silently substitute saved data on failure."""
     if origin == destination:
         raise ValueError('Choose different origin and destination cities.')
-    params = dict(from_city_id=origin, to_city_id=destination,
+    params = dict(from_station_id=origin, to_station_id=destination,
                   departure_date=travel_date.strftime('%d.%m.%Y'),
                   products=json.dumps({'adult': 1}), currency='USD', locale='en_US',
-                  search_by='cities', include_after_midnight_rides='0',
+                  search_by='stations', include_after_midnight_rides='0',
                   disable_distribusion_trips='0', disable_global_trips='0',
                   disable_trips=json.dumps(['AU']))
     request = Request(ENDPOINT + '?' + urlencode(params),
                       headers={'Accept': 'application/json'})
-    with urlopen(request, timeout=30) as response:
-        return json.load(response)
+    try:
+        with urlopen(request, timeout=30) as response:
+            return json.load(response)
+
+    except HTTPError as e:
+        error_body = e.read().decode('utf-8')
+        print(f"\n[API Error {e.code}] Server Response:\n{error_body}\n")
+        raise
 
 
 def location(endpoint, data, coordinates):
