@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
   <link rel="stylesheet" href="{% static 'planner/css/styles.css' %}">
   {% block head %}{% endblock %}
 </head>
@@ -19,14 +20,12 @@
     <header class="site-header">
       <div class="header-inner container">
         <a class="brand" href="{% url 'planner:home' %}" aria-label="Travel Aggregator — Home">
-          <img src="{% static 'planner/img/Test_logo.png' %}" width="90" height="33" alt="Travel Aggregator logo">
           <span class="brand-name">travel<span>aggregator</span><small>GROUP 03 · SPRINT 2</small></span>
         </a>
         <nav class="main-nav" aria-label="Main navigation">
           <a href="{% url 'planner:home' %}" class="nav-link {% if active == 'home' %}is-current{% endif %}" {% if active == 'home' %}aria-current="page"{% endif %}>HOME</a>
           <a href="{% url 'planner:about' %}" class="nav-link {% if active == 'about' %}is-current{% endif %}" {% if active == 'about' %}aria-current="page"{% endif %}>ABOUT</a>
         </nav>
-        <a href="{% url 'planner:home' %}" class="header-cta">Plan a trip <span aria-hidden="true">↗</span></a>
       </div>
     </header>
 
@@ -40,6 +39,8 @@
     </footer>
   </div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" defer></script>
+  <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js" defer></script>
   <script src="{% static 'planner/js/app.js' %}" defer></script>
   {% block scripts %}{% endblock %}
 </body>
