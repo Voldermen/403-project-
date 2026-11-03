@@ -1,20 +1,13 @@
-# Transportation Aggregator Django backend (Python 3.12)
-# Install: python -m pip install -r requirements.txt
-
-# Web application, routing, sessions, and SQLite integration.
+# One Django project: supplied Group 3 frontend + original transportation backend.
+# Run: python -m pip install -r requirements.txt
 Django>=5.2,<5.3
-
-# Load local secret keys and configuration from .env.
 python-dotenv>=1.0,<2
-
-# Google Flights scraper and airport metadata.
+requests>=2.31,<3
 fast-flights
 airportsdata
-# Required by some versions of fast-flights (typing.override support).
 typing_extensions
-
-# Amtrak timetable reader and its data processing dependency.
 gtfs-kit
 pandas
-
-# Greyhound script uses Python's standard library; no extra package is required.
+geopy # used by an optional teammate legacy helper
+# Optional public-bus APIs require TRANSIT_API_KEY and TRANSITLAND_API_KEY.
+# Optional PostgreSQL: install psycopg[binary] separately.

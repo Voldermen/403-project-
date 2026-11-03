@@ -70,6 +70,23 @@ class ApiAndPersistenceTests(TestCase):
         self.assertEqual([r["Method"]["Cost"] for r in resp.json()["unmatched_routes"]], [40])
         self.assertEqual(resp.json()["providers"]["buses"]["status"], "different_route")
 
+
+    @patch("routes.services.search_flights")
+    def test_unmatched_amtrak_schedule_still_displays_times(self, flight):
+        # Even if a provider's city name isn't an exact match, the UI must show
+        # the times supplied by the Amtrak GTFS schedule instead of just cities.
+        flight.return_value = [route(cost=200)]
+        train = route(mode="Rail", cost=None, priority=2, end="Chicago Union Station")
+        with patch("routes.services.search_amtrak", return_value=[train]):
+            response = self.client.post(reverse("home"), {**FORM,
+                "include_train": "on", "train_origin": "NOL", "train_destination": "CHI"})
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Other retrieved schedules (not compared)")
+        self.assertContains(response, "Departs 3:15")
+        self.assertContains(response, "Arrives 6:10")
+        self.assertContains(response, "Duration 2h 55m")
+        self.assertContains(response, "fare not provided")
+
     @patch("routes.services.search_flights")
     def test_draft_persists_and_clear_erases_it(self, flight):
         draft = {**FORM, "origin": "DFW", "destination": "IAH"}
