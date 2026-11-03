@@ -15,6 +15,7 @@
 	#   /static/planner/css/styles.css -> staticfiles/planner/css/styles.css
 	handle_path /static/* {
 		root * /srv/app/transport_aggregator_Backend/staticfiles
+		header Cache-Control "no-cache"
 		file_server
 	}
 
