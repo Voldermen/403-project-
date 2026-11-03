@@ -243,7 +243,7 @@ def normalize_legacy(item, mode, source):
 
 
 MODE_LABELS = (
-    ("car", "Car"),
+    #("car", "Car"),
     ("planes", "Planes"),
     ("trains", "Trains"),
     ("public_buses", "Public Buses"),
@@ -251,35 +251,35 @@ MODE_LABELS = (
 )
 
 
-def _car_routes(origin, destination, travel_date, adults=1):
-    """Return driving-route estimates from OSRM; never invent gas/toll prices."""
-    coordinates = f'{origin["lon"]},{origin["lat"]};{destination["lon"]},{destination["lat"]}'
-    response = requests.get(
-        f"{OSRM_ROUTE_URL.rstrip('/')}/{coordinates}",
-        params={"overview": "simplified", "geometries": "geojson", "steps": "false"},
-        headers={"User-Agent": USER_AGENT}, timeout=12,
-    )
-    response.raise_for_status()
-    payload = response.json()
-    routes = payload.get("routes") or []
-    if payload.get("code") != "Ok" or not routes:
-        return []
-    route = routes[0]
-    duration = _numeric(route.get("duration"))
-    distance = _numeric(route.get("distance"))
-    if duration is None or distance is None:
-        return []
-    geometry = (route.get("geometry") or {}).get("coordinates") or []
-    # GeoJSON coords are [longitude, latitude]. Keep this for Leaflet conversion.
-    geometry = geometry[:3000] if len(geometry) <= 3000 else geometry[::max(1, math.ceil(len(geometry) / 3000))]
-    return [{
-        "mode": "car", "mode_label": "Car", "name": "Drive", "source": "OSRM route estimate",
-        "cost": None, "duration_minutes": round(duration / 60),
-        "departure": "", "arrival": "", "date": travel_date.isoformat(),
-        "start_name": origin["label"], "end_name": destination["label"],
-        "distance_miles": round(distance / 1609.344, 1),
-        "geometry": geometry, "estimate": True,
-    }]
+# def _car_routes(origin, destination, travel_date, adults=1):
+#     """Return driving-route estimates from OSRM; never invent gas/toll prices."""
+#     coordinates = f'{origin["lon"]},{origin["lat"]};{destination["lon"]},{destination["lat"]}'
+#     response = requests.get(
+#         f"{OSRM_ROUTE_URL.rstrip('/')}/{coordinates}",
+#         params={"overview": "simplified", "geometries": "geojson", "steps": "false"},
+#         headers={"User-Agent": USER_AGENT}, timeout=12,
+#     )
+#     response.raise_for_status()
+#     payload = response.json()
+#     routes = payload.get("routes") or []
+#     if payload.get("code") != "Ok" or not routes:
+#         return []
+#     route = routes[0]
+#     duration = _numeric(route.get("duration"))
+#     distance = _numeric(route.get("distance"))
+#     if duration is None or distance is None:
+#         return []
+#     geometry = (route.get("geometry") or {}).get("coordinates") or []
+#     # GeoJSON coords are [longitude, latitude]. Keep this for Leaflet conversion.
+#     geometry = geometry[:3000] if len(geometry) <= 3000 else geometry[::max(1, math.ceil(len(geometry) / 3000))]
+#     return [{
+#         "mode": "car", "mode_label": "Car", "name": "Drive", "source": "OSRM route estimate",
+#         "cost": None, "duration_minutes": round(duration / 60),
+#         "departure": "", "arrival": "", "date": travel_date.isoformat(),
+#         "start_name": origin["label"], "end_name": destination["label"],
+#         "distance_miles": round(distance / 1609.344, 1),
+#         "geometry": geometry, "estimate": True,
+#     }]
 
 
 def _plane_routes(origin, destination, travel_date, adults=1):
@@ -355,7 +355,7 @@ def _greyhound_routes(origin, destination, travel_date, adults=1):
 
 
 PROVIDERS = {
-    "car": _car_routes,
+    #"car": _car_routes,
     "planes": _plane_routes,
     "trains": _train_routes,
     "public_buses": _bus_routes,
