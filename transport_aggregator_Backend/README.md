@@ -1,149 +1,175 @@
-# RouteWise — Integrated Django transportation backend
+# Group 3 Travel Aggregator — connected frontend + backend
 
-This project extends your earlier Django prototype. It connects the **three supplied Python modules**: Google Flights, Amtrak_Data.py, and greyhound_search.py. It saves completed JSON and unsubmitted form inputs so a returning browser can resume after a disconnection.
+This project integrates your teammate's **TravelAggregator_Django frontend** with the **transportation Django backend you previously developed**. **The existing frontend HTML/CSS/design is retained** (with a small Travelers field and subtle saved-search links), and the **original backend provider functions, JSON format, priorities, comparison logic, and API views are preserved**.
 
-run python -m pip install -r requirements.txt in terminal
-BEFORE SETUP PLEASE REFER TO SECTION 3 TO MAKE A SECRET KEY!
-## Setup for Windows 10/11 (Python 3.12)
+## Quick start — Windows / VS Code / PowerShell (Python 3.12)
 
-In CMD, open the folder containing `manage.py`, then run:
+1. Extract the ZIP into your team's local Git repository. Open the folder **containing `manage.py`** in VS Code or PowerShell.
+2. (Recommended) Create a virtual environment:
 
-```cmd
-python -m venv .venv
-.venv\Scripts\activate
-python -m pip install -r requirements.txt
-python manage.py migrate
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+   If PowerShell blocks activating the environment, you can use `\.venv\Scripts\python.exe` instead of `python` in the commands below, or choose CMD and run `.venv\Scripts\activate.bat`. You do **not** need a virtual environment to run it, but it helps avoid conflicts.
+
+3. Install all dependencies:
+
+   ```powershell
+   python -m pip install -r requirements.txt
+   ```
+
+4. Generate a **private Django secret key**:
+
+   ```powershell
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
+
+5. Copy `.env.example` to `.env` and replace the placeholder with the generated key. Example:
+
+   ```dotenv
+   DJANGO_SECRET_KEY='PASTE_YOUR_PRIVATE_GENERATED_KEY_HERE'
+   DJANGO_DEBUG=1
+   DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
+   ```
+
+   **Do not upload `.env` or copy its secret to GitHub.** The code loads `.env` automatically using `python-dotenv`, even if your key contains `$`. You do **not** have to reenter `$env:DJANGO_SECRET_KEY` each time the terminal opens. Environment variables already defined in the terminal take precedence over `.env`; if you previously set an old key, use a fresh terminal to avoid confusion.
+
+6. Create database tables and run the website:
+
+   ```powershell
+   python manage.py migrate
+   python manage.py runserver
+   ```
+
+7. Visit <http://127.0.0.1:8000/>. Use **Car, Planes, Trains, Public Buses, or Greyhound** toggles and the address/date/travelers fields. An internet connection is needed for live providers, map tiles, and autocomplete.
+
+### Run tests
+
+```powershell
 python manage.py check
-python manage.py runserver
-```
-after you do all of those commands the next time you use cmd do:
-$env:DJANGO_SECRET_KEY = 'insert key here'
-python manage.py runserver
-
-Visit `http://127.0.0.1:8000/` on the same PC.
-
-**Important: `python manage.py migrate` is mandatory.** It creates the `django_session` SQLite table where Django stores browser sessions and saved search JSON. The `db.sqlite3` file is created on the hosting machine; don't delete it if you want to keep saved results.
-
-## How sources work
-
-- **Google Flights** (`google_flights_scraper.py`): original flight JSON with `Priority=1`, sorted by fare. The scraper may omit available prices or return stale ones.
-- **Amtrak** (`Amtrak_Data.py`, `routes/amtrak_adapter.py`): downloads Amtrak's published GTFS **timetable** to `data_cache/amtrak_gtfs.zip` (24-hour local cache). `Cost` is `null` because GTFS does not contain live fares, availability, or bookability. Its module may fail when the upstream GTFS feed or stop identifiers don't match. The adapter sets rail mode `Priority=2`. It downloads the official GTFS ZIP before asking `gtfs-kit` to read a local path. It uses the teammate's original direct-only itinerary search, which does not build transfers and may exclude valid overnight results.
-- **Greyhound** (`greyhound_search.py`, `routes/greyhound_adapter.py`): uses the teammate's unofficial FlixBus/Greyhound JSON endpoint. **One adult only** in this version, because the supplied code requests one adult. Enter *city UUIDs* rather than station or airport codes. The prefilled IDs are **Dallas → Houston only**. Bus mode `Priority=99` preserves the teammate's stated default. Station coordinates are `null` unless verified values become available (important for geographic route algorithms).
-
-The website asks for airport codes plus optional train station codes or bus city UUIDs. Only results with **the same origin and destination city names** as the flight search enter the main list and comparison algorithm. Mismatched provider results are shown separately under `unmatched_routes` to avoid comparing Dallas → Houston bus trips against New Orleans → Chicago flights. Alias and metropolitan differences may exclude otherwise valid matches until the group adds a validated city mapping. Missing prices appear last; Amtrak never participates in priced recommendations.
-
-## Saved sessions / returning visitors
-
-- When a user types, JavaScript saves the form immediately in browser `localStorage` and also sends a debounced POST to `/api/draft/` to store a server-side draft.
-- When a user runs a successful search, Django saves **the latest three completed searches** (inputs, JSON, provider statuses, comparison output, timestamp) in the **SQLite-backed Django session**. Reopening `/` restores the last result without calling external providers.
-- Django associates the server data with a random **HttpOnly session cookie**, kept for up to **30 days from its last write**. Same browser/profile, same hostname, cookies retained are required. IP address **is not the visitor ID**: shared and changing IPs cannot safely restore data. The direct peer IP (`REMOTE_ADDR`) is stored *only as diagnostic metadata* on saved searches; never displayed or used to retrieve records. Behind a reverse proxy this may be the proxy address. Don't trust X-Forwarded-For without configuring trusted proxies.
-- The button **Clear my saved searches** removes the server session and this website's local draft. Once the cookie is deleted or expires, data cannot be restored. For cross-device recovery, add user accounts or an explicit recovery code.
-- Saved values are historical; restarting a browser does **not** update fares. The user must search again.
-
-## API endpoints (for the frontend teammate)
-
-**GET** `/api/search/?origin=MSY&destination=ORD&travel_date=2026-11-16&adults=1&include_train=on&train_origin=NOL&train_destination=CHI`
-
-Response includes:
-
-```json
-{
-  "routes": [],
-  "unmatched_routes": [],
-  "recommendations": {},
-  "providers": {"flights": {}, "trains": {}, "buses": {}}
-}
-```
-
-(Empty arrays are structural examples; live results depend on providers.)
-
-To search buses, add `include_bus=on`, `bus_origin=<city-uuid>`, and `bus_destination=<city-uuid>`; you'll typically need DFW/IAH as flight airports when testing the prefilled Dallas/Houston bus route, and the same geographic city names.
-
-**GET** `/api/flights/?origin=MSY&destination=ORD&travel_date=2026-11-16&adults=1` — flight array, preserving your original `[{"Method": {...}}]` shape. Each search also saves state.
-
-**GET** `/api/saved/` (or `/api/saved/?index=1` for the second-most-recent result) — return the current session's draft, most recent search JSON, and the three search timestamps/inputs; it does **not** rerun scrapers. Use `credentials: 'same-origin'` in JS fetch requests when hosted under the same origin.
-
-**POST** `/api/draft/` — form-encoded fields (and CSRF token) to save unfinished input.
-
-**POST** `/api/clear/` — delete session data and create a fresh session on the next request (requires CSRF token). HTML POST `/clear-saved/` clears and redirects to `/`.
-
-For frontend on a separate origin/port, coordinate a reverse proxy and CSRF/CORS/cookie settings with the server teammate. Avoid turning off CSRF checks.
-
-## Server handoff / data management
-
-On the hosting machine, keep **one shared** database (`db.sqlite3`) and a stable `DJANGO_SECRET_KEY` across deployments. Make periodic backups of the DB if saved results matter. `python manage.py clearsessions` can remove expired session rows; schedule regular cleanup. Configure HTTPS and `DJANGO_SECURE_COOKIES=1` plus `DJANGO_DEBUG=0` on a production deployment. Never expose Django's development server publicly. Use rate limits, caching, API timeouts and terms-of-service review before production. No account authentication is included; each browser session is isolated.
-
-## Run tests
-
-```cmd
 python manage.py test
 ```
 
-These tests mock external provider network calls; **no live external scraping was verified** in this build. For real integration, test each provider on the local server with working internet access.
+Provider calls are mocked in the automated integration tests; you don't need to pay for fares to run tests. You *will* need working third-party providers for a live search.
 
-`requirements.txt` includes **Django, python-dotenv, fast-flights, airportsdata, typing_extensions, gtfs-kit, and pandas**. Greyhound's Python module uses the standard library and needs no extra package.
+## What changed (and what did not)
 
-## 3 Set up Django's secret key (important)
+- **Preserved:** all original HTML templates, CSS styling, logo, Leaflet map, autocomplete, route cards, About page, car (OSRM) and public bus integrations; the teammate's `legacy/` scripts remain as reference.
+- **Preserved:** the backend files `routes/` (views, services, algorithms, adapters, tests), and its root `google_flights_scraper.py`, `Amtrak_Data.py`, and `greyhound_search.py`. The backend's original APIs remain mapped to their old paths.
+- **Connected:** `planner/services.py` calls the original backend Google Flights function and Amtrak/Greyhound adapters **instead of duplicating those scrapers via `legacy/`**. Greyhound city names now resolve automatically through `planner/greyhound_cities.py` for supported U.S. cities. The frontend still sorts route cards by the user's choice of cost or travel time, independently of the backend's raw JSON.
+- **Small UI changes:** added a Travelers field (1–9), a link to reopen a saved search, and a link to view stored provider JSON. The frontend's primary look and layout were left intact.
+- **Saved state:** completed searches, displayed results, and original provider JSON are saved in Django's **database-backed browser sessions**. When visitors return with the same browser cookie, `/results/` restores the last results without repeating external requests. Browser `localStorage` also saves an unfinished form draft.
+- **Privacy:** a user's IP address is **not** used as an account identifier. This avoids exposing one user's saved searches to other users sharing an IP. The original backend can still record connection IP information internally for diagnostics. Users may clear their saved data using the results page action. Session lifetime is 30 days from the most recent save, subject to cookie availability.
 
-**A secret key is not a Google/Amtrak/Greyhound API key.** Django uses it for cryptographic signing and security-sensitive features such as signed session data. It **does not encrypt your saved JSON or IP addresses**. A key is **not generated or saved to `.env` automatically**.
+## Routes and what each handles
 
-### 3A. Generate a private key
+| URL | What it does |
+| --- | --- |
+| `/` | Teammate's original styled home page with form and map |
+| `/about/` | Original About page |
+| `/results/` | Styled frontend results; submitting a search saves state; opening it later without query parameters restores that state |
+| `/api/addresses/?q=New%20Orleans` | Frontend address autocomplete (Photon) |
+| `/api/planner/saved-results/` | Saved **raw provider Method JSON array** for the last search made from the styled frontend; no new scraper call |
+| `/planner/clear-saved/` | POST only; clears session-based saved data |
+| `/api/search/` | **Unchanged backend** combined transportation JSON API; requires airport codes and optional Amtrak/Greyhound IDs |
+| `/api/flights/` | **Unchanged backend** raw Google Flights JSON array API |
+| `/api/saved/` | **Unchanged backend** saved state from searches made through its own API or backend test page |
+| `/api/draft/` | **Unchanged backend** draft-saving API (POST with CSRF token) |
+| `/api/clear/` | **Unchanged backend** session-clearing API (POST) |
+| `/backend/` | Original backend's own testing search webpage, separate from styled frontend |
 
-Run this command in your project folder:
+`/api/saved/` and `/api/planner/saved-results/` intentionally reflect **different interfaces**: the former is the original backend's saved API workflow; the latter is the styled frontend's provider JSON download. The browser uses the same Django session for both, but the record structures are different.
+
+## How the frontend talks to your backend
+
+The two projects are **one Django site**, so the frontend's server-side `planner.services` imports functions directly from the original backend rather than calling localhost on a second port:
+
+```text
+Browser submits /results/ with address/date/mode selections
+  └─ planner.views.results()
+      ├─ Photon geocodes addresses (or accepts valid selected coordinates)
+      └─ planner.services.search_routes()
+          ├─ car → OSRM (unchanged frontend functionality)
+          ├─ planes → google_flights_scraper.search_flights(...) (existing backend)
+          ├─ trains → routes.amtrak_adapter.search_amtrak(...) (existing backend)
+          ├─ greyhound → routes.greyhound_adapter.search_greyhound(...) (existing backend)
+          └─ public_buses → legacy.transit_route (unchanged frontend functionality)
+      └─ saves displayed routes, inputs, and raw backend JSON to Django session
+```
+
+**Airport codes and station identifiers are not interchangeable.** The styled frontend still finds an airport or station near each submitted address (150 miles for airports, 110 miles for stations), so the route may start at a nearby hub rather than directly at the typed street address. Surface the route provider's station/airport names to the user when planning travel.
+
+The backend's raw flight priority stays **1 for every flight**, and its own `search_flights` continues returning up to five of the retrieved results sorted by fare. Amtrak priority stays 2 with **unknown fares** (`null`); its GTFS feed provides schedules but not live fare quotes. The Greyhound adapter uses its own priority and supports **one adult**. The styled frontend now automatically resolves supported U.S. city names to provider UUIDs using an unofficial FlixBus city-autocomplete endpoint, instead of being limited to Dallas ↔ Houston. The original Greyhound backend remains unchanged and still requires UUIDs for direct API use. Greyhound may return missing station GPS. Don't compare bus itineraries from unrelated city pairs with flights.
+
+The source websites are unofficial/unstable integrations; flight fares can differ from the public website, and a failed source may show a provider notice rather than results.
+
+## Folder layout
+
+```text
+TravelAggregator_Integrated/
+├── .env.example                 # Safe placeholder for secret; copy to private .env
+├── .gitignore                   # Ignores .env, SQLite and temporary files
+├── manage.py
+├── requirements.txt
+├── config/                      # Main Django project and shared settings/URL routing
+├── planner/                     # Styled frontend, bridge, and greyhound_cities.py resolver
+├── routes/                      # Original backend views/JSON API/adapters/algorithms (unchanged)
+├── google_flights_scraper.py    # Original flight code (unchanged)
+├── Amtrak_Data.py               # Original rail code (unchanged)
+├── greyhound_search.py          # Original bus code (unchanged)
+├── legacy/                      # Teammate's original reference scripts (unchanged)
+└── docs/                        # Original frontend/backend READMEs + UI Notes.pdf
+```
+
+## Integrating with your group's GitHub branches
+
+1. Create an integration branch in GitHub Desktop (for example `frontend-backend-integration`).
+2. Copy this project's files into the **local checkout** of the team's repository (do not overwrite any newer teammate changes without reviewing the differences).
+3. Do **not** copy `.env` or `db.sqlite3`. The ZIP intentionally excludes those files; each developer creates their own `.env` and database migrations.
+4. Review GitHub Desktop's Changes tab. Commit the source files, `.gitignore`, `.env.example`, `README.md`, and `requirements.txt` only after checking for credentials.
+5. Publish/push the branch and open a pull request for your teammates to review. The frontend developer should review `planner/` and the server developer should review `config/settings.py`, deployment, and secrets.
+
+## Running on your teammate's local hosting computer
+
+For **LAN testing only**, from the project directory run:
 
 ```powershell
-python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+# Example: update .env with the hosting PC's actual address, not the example below.
+# DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,192.168.1.50
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
 ```
 
-Copy the printed value **privately**. Do not paste it in GitHub issues, group messages, screenshots, or chat. You only need to generate it once for your local setup.
+Other machines on that LAN visit `http://<hosting-computer-IP>:8000/`. The host firewall must permit traffic. **Django's development server is not suitable for a public production website.** For public hosting, disable debug, use HTTPS, a production WSGI server and static-file handling, set a private stable key, and run `python manage.py check --deploy`. The frontend's old `config/settings.py` already contains additional optional PostgreSQL and reverse-proxy configuration.
 
-### 3B. Make `.env` next to `manage.py`
+## Known limits and troubleshooting
 
-Copy `.env.example` to `.env` in VS Code, or run:
+- `KeyError: DJANGO_SECRET_KEY` / `RuntimeError: Missing DJANGO_SECRET_KEY`: create `.env` **beside** `manage.py`, then use a fresh terminal; no need to set a shell variable manually.
+- `ModuleNotFoundError`: run `python -m pip install -r requirements.txt` in the same Python environment that runs Django.
+- `no such table: django_session`: run `python manage.py migrate`.
+- `Invalid HTTP_HOST header`: add the correct host/IP to `DJANGO_ALLOWED_HOSTS` in `.env`.
+- The address autocomplete/map tiles require internet and rely on public low-traffic prototype services.
+- The exact routes and prices returned by external scrapers are **not guaranteed**. Provider failures are shown separately in the results.
+- To use the original backend's `/api/search/`, provide its expected airport, station code and city UUID parameters (see `docs/ORIGINAL_BACKEND_README.md`); it is **not** the same request shape as the styled page's address-based `/results/` URL.
 
-```powershell
-Copy-Item .env.example .env
-```
+### Validation performed for this package
 
-Edit `.env` and replace the placeholder with the key you generated:
+Python source compilation and integrity comparisons against the supplied original backend files succeeded. The added integration tests are designed to check the unchanged backend API, provider wiring, and session restoration with mock data. **Full Django tests and live external-service retrieval could not be executed in the artifact environment because Django and the scraper dependencies could not be installed there.** Run `python manage.py check` and `python manage.py test` after installing dependencies on your computer.
 
-```dotenv
-DJANGO_SECRET_KEY='PASTE_YOUR_REAL_GENERATED_KEY_HERE'
-DJANGO_DEBUG=1
-DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
-DJANGO_SECURE_COOKIES=0
-```
+## Greyhound on the styled frontend
 
-**Why single quotes?** Your key may contain `$`. In a PowerShell command, double-quoted strings can expand `$variables`. Keeping the key in the quoted `.env` value avoids retyping it in the shell. `python-dotenv` reads the literal value. A Django-generated key is suitable to place in this quoted format. This `.env` file is private and is excluded by `.gitignore`.
+The **Greyhound** checkbox is on the main page alongside Car, Planes, Trains and Public Buses. Selecting it sends the **same address, destination and date** through the existing search form. The frontend now:
 
-### 3C. Understand how Django reads it
+1. Extracts each city from the entered or selected U.S. address.
+2. Looks up the city's Greyhound/FlixBus UUID using the unofficial autocomplete endpoint. Dallas/Houston keep the original known city IDs for reliable local tests.
+3. Calls `routes.greyhound_adapter.search_greyhound(...)` (the original backend adapter, unchanged).
+4. Shows a Greyhound result card for returned fares, terminal names, departure and arrival times, and duration. These options are included in the frontend's cheapest/fastest sorting.
+5. Saves the original backend `Method` JSON alongside displayed results in the same Django session as the other modes.
 
-This project already has the following code in `aggregator_site/settings.py`; you **do not need to add it again**:
+**Example to try:** Enter **Dallas, TX** and **Houston, TX**, a future date, select **Greyhound**, and set **Travelers = 1**. The backend's original one-adult limit still applies, and unsupported routes give a notice rather than fabricated fares. An internet connection is required for city autocomplete and the live provider. The search uses an **undocumented endpoint**, which may become unavailable or change. City matching requires a nearby provider city coordinate to prevent selecting a similarly named city far away.
 
-```python
-import os
-from pathlib import Path
-from dotenv import load_dotenv
+**Map limitations:** The map shows the entered route endpoints (and a road route if Car is selected); it does not show a verified Greyhound bus path. Your teammate's Greyhound data often omits bus-station coordinates, so we display station names but do not invent GPS values. The prices are the source's returned one-adult fares; the UI does not assume two-traveler totals.
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / ".env")
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
-if not SECRET_KEY:
-    raise RuntimeError("DJANGO_SECRET_KEY is missing. See README.md.")
-```
-
-The real settings file has a more detailed error message. The order matters: `BASE_DIR`, then `load_dotenv()`, then `SECRET_KEY`. Django reads the key automatically at startup; your scrapers do **not** need it.
-
-**If you used a PowerShell variable earlier:** Existing shell environment variables take precedence over `.env` values by default. To clear an old test value in the current PowerShell terminal, run:
-
-```powershell
-Remove-Item Env:DJANGO_SECRET_KEY -ErrorAction SilentlyContinue
-```
-
-Then run Django normally; it will load `.env`. To set the variable *manually* instead, the correct PowerShell syntax is `$env:DJANGO_SECRET_KEY = 'your-real-key'`, using **single quotes**, but that only lasts for that terminal session. Don't use CMD's `set "DJANGO_SECRET_KEY=..."` in PowerShell.
-
-If the terminal shows `>>`, press **Ctrl+C**. It usually means a quote or bracket was not closed. Avoid printing your real secret while debugging.
-
-### 3D. Different developers vs the hosted server
-
-Each backend developer can generate **their own development key**. The frontend doesn't need any key. **Your server teammate generates one different, stable hosted key** and stores it securely on the server, outside Git. Don't rotate it on every restart: existing signed sessions may be invalidated.
+**Tests:** `python manage.py test planner.tests.test_integration.GreyhoundCityLookupTests`. These tests mock the provider and test city lookup, sorting hand-off, fallback behavior and passenger limits. Live API availability is not tested in this package.
