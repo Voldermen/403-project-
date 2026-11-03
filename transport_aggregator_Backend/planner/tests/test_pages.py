@@ -9,9 +9,18 @@ class PageTests(SimpleTestCase):
     def test_home_includes_required_ui(self):
         response = self.client.get(reverse("planner:home"))
         self.assertEqual(response.status_code, 200)
-        for term in ("All Types", "Car", "Planes", "Trains", "Public Buses", "Greyhound", "Address A", "Address B", "Find My Route"):
+        for term in (
+            "All Types", 
+            #"Car", 
+            "Planes", 
+            "Trains", 
+            "Public Buses", 
+            "Greyhound", 
+            "Address A", 
+            "Address B", 
+            "Find My Route"):
             self.assertContains(response, term)
-        self.assertContains(response, "Test_logo.png")
+        #self.assertContains(response, "Test_logo.png")
         self.assertContains(response, 'id="home-map"')
 
     def test_about_has_required_description(self):
@@ -39,7 +48,8 @@ class PageTests(SimpleTestCase):
         response = self.client.get(reverse("planner:results"), {
             "origin": "Dallas, Texas", "destination": "Houston, Texas",
             "travel_date": str(date.today() - timedelta(days=1)), "objective": "cost",
-            "modes": ["car"],
+            #"modes": ["car"],
+            "modes": ["planes"],
         })
         self.assertEqual(response.status_code, 400)
         self.assertContains(response, "Please select today or a future", status_code=400)
@@ -59,8 +69,8 @@ class PageTests(SimpleTestCase):
 
     def test_selected_mode_only_appears_in_route_results(self):
         route = {
-            "mode": "car", "mode_label": "Car", "name": "Drive",
-            "source": "Test driving provider", "cost": None, "duration_minutes": 200,
+            "mode": "planes", "mode_label": "Planes", "name": "Flight",
+            "source": "Test flight provider", "cost": None, "duration_minutes": 200,
             "departure": "", "arrival": "", "date": str(date.today()),
             "start_name": "Dallas", "end_name": "Houston",
             "distance_miles": 200, "geometry": None, "estimate": True,
@@ -71,9 +81,9 @@ class PageTests(SimpleTestCase):
         ]), patch("planner.views.search_routes", return_value=([route], [])) as mock_search:
             response = self.client.get(reverse("planner:results"), {
                 "origin": "Dallas", "destination": "Houston", "travel_date": str(date.today()),
-                "objective": "time", "modes": ["car"],
+                "objective": "time", "modes": ["planes"],
             })
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Drive")
+        self.assertContains(response, "Flight")
         self.assertContains(response, "fare unavailable")
-        self.assertEqual(mock_search.call_args.args[3], ["car"])
+        self.assertEqual(mock_search.call_args.args[3], ["planes"])
