@@ -13,25 +13,17 @@ def fetch_greyhound_info(origin_id, destination_id, date):
     
     data = bus.fetch_response(origin_id, destination_id, date)
    
-    final = bus.convert_response(data)
-    # with open("M_output.json", "w", encoding="utf-8") as f:
-    #     json.dump(final, f, ensure_ascii=False, indent=4)
-
-
+    return bus.convert_response(data)
+    
 
 def fetch_amtrack_info(origin, dest, date):
     
-    final = train.search_amtrak_gtfs(origin, dest, date)
-    with open("M_output.json", "w", encoding="utf-8") as f:
-        json.dump(final, f, ensure_ascii=False, indent=4)
-
+    return train.search_amtrak_gtfs(origin, dest, date)
+    
 
 def fetch_plane_info(origin, dest, date):
 
-
-    final = plane.search_flights(origin, dest, date)
-    with open("M_output.json", "w", encoding="utf-8") as f:
-            json.dump(final, f, ensure_ascii=False, indent=4)
+    return plane.search_flights(origin, dest, date)
 
 
 
@@ -60,4 +52,6 @@ def test_flight():
     fetch_plane_info(ax, at, tomorrow)
     
 
-test_flight()
+#test_flight()
+#test_am()
+test_grey()

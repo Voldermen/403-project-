@@ -246,10 +246,8 @@ def get_paths(origin_lat, origin_lon, dest_lat, dest_lon):
         mode = leg.get("mode", "unknown")
         grouped_legs[mode].append(leg)
 
-    with open("M_output.json", "w", encoding="utf-8") as f:
-                json.dump(grouped_legs, f, ensure_ascii=False, indent=4)
-
-
+    
+    return grouped_legs
 
 
 
@@ -301,12 +299,16 @@ def main(origin_lat, origin_lon, dest_lat, dest_lon):
 
 if __name__ == "__main__":
     # Example test execution (Ruston, LA to Houston, TX)
+    # get_paths(
+    #     origin_lat=32.5232, origin_lon=-92.6379, 
+    #     dest_lat=29.7604, dest_lon=-95.3698
+    # )
+    # Example test execution (Ruston, LA to katy, TX)
     get_paths(
         origin_lat=32.5232, origin_lon=-92.6379, 
-        dest_lat=29.7604, dest_lon=-95.3698
+        dest_lat=29.7858, dest_lon=-95.8244
     )
-
-
+    print("done")
 
 
 

@@ -9,7 +9,7 @@ find a bus/ train station (using greyhound api) in my city that can get me to or
 near that city
  
 """
-
+import requests
 import pandas as pd
 from math import asin, cos, radians, sin, sqrt
 
@@ -25,6 +25,49 @@ def find_distance(lat1, lon1, lat2, lon2):
     dlmb = radians(lon2 - lon1)
     a = sin(dphi / 2) ** 2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlmb / 2) ** 2
     return 2 * r * asin(sqrt(a))
+
+#also from scripts
+def get_lat_long(street: str, city: str = None, state: str = None, zip_code: str = None) -> tuple:
+
+    url = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
+
+
+
+    address_parts = [street.strip()]
+
+    if city:
+        address_parts.append(city.strip())
+    if state:
+        address_parts.append(state.strip())
+    if zip_code:
+        address_parts.append(str(zip_code).strip())
+
+    combined_address = ", ".join(address_parts)
+
+    params = {
+        "address": combined_address,
+        "benchmark": "4",  # Standard baseline benchmark
+        "format": "json",
+    }
+
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        #print("Got API response")
+        matches = response.json().get("result", {}).get("addressMatches", [])
+        #print("Got coordinate match")
+
+        if matches:
+            coords = matches[0].get("coordinates", {})
+            # y = Latitude, x = Longitude
+            return coords.get("y"), coords.get("x")
+
+    except requests.exceptions.RequestException:
+        print("Error")
+        pass
+
+    return None, None
+
 
 
 

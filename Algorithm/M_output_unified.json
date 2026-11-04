@@ -1,0 +1,1971 @@
+[
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 480,
+                "Departure": "06:05",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 30.47,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 460,
+                "Departure": "06:25",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:25:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Grambling",
+                "State": "LA",
+                "Name": "Grambling (Grambling State Univ)",
+                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 39.97,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 525,
+                "Departure": "05:20",
+                "Arrival": "14:05",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T05:20:00-06:00",
+                "Arrival Timestamp": "2026-11-05T14:05:00-06:00",
+                "Transfers": 1,
+                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:c325c104-a3c2-4512-9321-3c80b258ef11/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:67e60afe-ee19-44f8-9200-2169a0ee6c18"
+            },
+            "starting_location": {
+                "City": "Monroe",
+                "State": "LA",
+                "Name": "Monroe (Quickway)",
+                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Natchitoches",
+                "State": "LA",
+                "Name": "Natchitoches (Bayou Soul)",
+                "Station ID": "c325c104-a3c2-4512-9321-3c80b258ef11",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 58.96,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 740,
+                "Departure": "06:05",
+                "Arrival": "18:25",
+                "Date": "11/05/2026",
+                "Departure Timestamp": "2026-11-05T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-05T18:25:00-06:00",
+                "Transfers": 2,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:9e67280f-1256-42f4-9d1d-701cb6fe6ef5/fa57b445-8bcf-42f6-933e-129b0a8fe08f:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:44f9085d-72f1-40da-8aea-0da1d0a1baef:70fe4a43-595a-4723-8b23-1ed1247b62b1:70fe4a43-595a-4723-8b23-1ed1247b62b1:371f4496-1455-451f-8c77-09a351d31ddc"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "destination": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 332,
+            "Departure": "6:00",
+            "Arrival": "11:32",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 335,
+            "Departure": "10:08",
+            "Arrival": "3:43",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 239,
+            "Departure": "6:40",
+            "Arrival": "10:39",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 507,
+            "Travel Time (min)": 234,
+            "Departure": "6:00",
+            "Arrival": "9:54",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1016,
+            "Travel Time (min)": 345,
+            "Departure": "6:19",
+            "Arrival": "12:04",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 384,
+            "Departure": "10:08",
+            "Arrival": "4:32",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 356,
+            "Departure": "1:43",
+            "Arrival": "7:39",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 276,
+            "Departure": "6:40",
+            "Arrival": "11:16",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1016,
+            "Travel Time (min)": 308,
+            "Departure": "5:55",
+            "Arrival": "11:03",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 470,
+            "Travel Time (min)": 253,
+            "Departure": "6:00",
+            "Arrival": "10:13",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "College Station",
+                "Name": "CLL",
+                "GPS": {
+                    "LAT": 30.588042,
+                    "LONG": -96.362544
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 537,
+            "Travel Time (min)": 245,
+            "Departure": "1:43",
+            "Arrival": "5:48",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "College Station",
+                "Name": "CLL",
+                "GPS": {
+                    "LAT": 30.588042,
+                    "LONG": -96.362544
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 537,
+            "Travel Time (min)": 313,
+            "Departure": "6:40",
+            "Arrival": "11:53",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "College Station",
+                "Name": "CLL",
+                "GPS": {
+                    "LAT": 30.588042,
+                    "LONG": -96.362544
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 427,
+            "Travel Time (min)": 228,
+            "Departure": "7:15",
+            "Arrival": "11:03",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "El Dorado",
+                "Name": "ELD",
+                "GPS": {
+                    "LAT": 33.221238,
+                    "LONG": -92.811749
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 432,
+            "Travel Time (min)": 257,
+            "Departure": "7:15",
+            "Arrival": "11:32",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "El Dorado",
+                "Name": "ELD",
+                "GPS": {
+                    "LAT": 33.221238,
+                    "LONG": -92.811749
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 432,
+            "Travel Time (min)": 221,
+            "Departure": "2:30",
+            "Arrival": "6:11",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "El Dorado",
+                "Name": "ELD",
+                "GPS": {
+                    "LAT": 33.221238,
+                    "LONG": -92.811749
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 432,
+            "Travel Time (min)": 230,
+            "Departure": "7:15",
+            "Arrival": "11:05",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "El Dorado",
+                "Name": "ELD",
+                "GPS": {
+                    "LAT": 33.221238,
+                    "LONG": -92.811749
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 432,
+            "Travel Time (min)": 309,
+            "Departure": "2:30",
+            "Arrival": "7:39",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "El Dorado",
+                "Name": "ELD",
+                "GPS": {
+                    "LAT": 33.221238,
+                    "LONG": -92.811749
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 404,
+            "Travel Time (min)": 345,
+            "Departure": "9:58",
+            "Arrival": "3:43",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 474,
+            "Travel Time (min)": 213,
+            "Departure": "9:58",
+            "Arrival": "1:31",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1062,
+            "Travel Time (min)": 371,
+            "Departure": "11:00",
+            "Arrival": "5:11",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1892,
+            "Travel Time (min)": 362,
+            "Departure": "6:02",
+            "Arrival": "12:04",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 592,
+            "Travel Time (min)": 310,
+            "Departure": "2:29",
+            "Arrival": "7:39",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1062,
+            "Travel Time (min)": 332,
+            "Departure": "11:00",
+            "Arrival": "4:32",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1450,
+            "Travel Time (min)": 305,
+            "Departure": "6:00",
+            "Arrival": "11:05",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 1744,
+            "Travel Time (min)": 219,
+            "Departure": "9:58",
+            "Arrival": "1:37",
+            "Date": "11/5/2026",
+            "Starting Location": {
+                "City": "Shreveport",
+                "Name": "SHV",
+                "GPS": {
+                    "LAT": 32.446515,
+                    "LONG": -93.82604
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "HOU",
+                "GPS": {
+                    "LAT": 29.6458,
+                    "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 1,
+            "Cost": null,
+            "Travel Time (min)": 749,
+            "Departure": "6:31",
+            "Arrival": "19:00",
+            "Date": "11/5/2026",
+            "Staring Location": {
+                "City": null,
+                "Name": "HOP",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "Destination": {
+                "City": null,
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 1,
+            "Cost": null,
+            "Travel Time (min)": 578,
+            "Departure": "9:22",
+            "Arrival": "19:00",
+            "Date": "11/5/2026",
+            "Staring Location": {
+                "City": null,
+                "Name": "MHL",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            },
+            "Destination": {
+                "City": null,
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": null,
+                    "LONG": null
+                }
+            }
+        }
+    }
+]

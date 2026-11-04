@@ -208,7 +208,7 @@
             },
             "next_hop": "TXK",
             "next_hop_type": "airport",
-            "transfer_distance_m": 157806.40026101095
+            "transfer_distance_m": 157806.40026101092
         },
         {
             "leg_type": "origin_feeder",
@@ -608,10 +608,10 @@
                 "type": "bus_station"
             },
             "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
+                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
                 "type": "bus_station"
             },
-            "next_hop": "0edad38b-8446-40ef-bab2-2e268e21dd84",
+            "next_hop": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
             "next_hop_type": "greyhound"
         }
     ],
@@ -624,20 +624,6 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
-                "type": "airport"
-            },
-            "next_hop": "HOU",
-            "next_hop_type": "airport"
-        },
-        {
-            "leg_type": "line_haul",
-            "mode": "flight",
-            "origin": {
-                "name": "MLU",
-                "type": "airport"
-            },
-            "destination": {
                 "name": "IAH",
                 "type": "airport"
             },
@@ -652,24 +638,24 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "BPT",
+                "name": "HOU",
                 "type": "airport"
             },
-            "next_hop": "BPT",
+            "next_hop": "HOU",
             "next_hop_type": "airport"
         },
         {
             "leg_type": "line_haul",
             "mode": "flight",
             "origin": {
-                "name": "ELD",
+                "name": "MLU",
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
+                "name": "CLL",
                 "type": "airport"
             },
-            "next_hop": "HOU",
+            "next_hop": "CLL",
             "next_hop_type": "airport"
         },
         {
@@ -694,24 +680,24 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "BPT",
+                "name": "HOU",
                 "type": "airport"
             },
-            "next_hop": "BPT",
+            "next_hop": "HOU",
             "next_hop_type": "airport"
         },
         {
             "leg_type": "line_haul",
             "mode": "flight",
             "origin": {
-                "name": "SHV",
+                "name": "ELD",
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
+                "name": "CLL",
                 "type": "airport"
             },
-            "next_hop": "HOU",
+            "next_hop": "CLL",
             "next_hop_type": "airport"
         },
         {
@@ -736,10 +722,24 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "BPT",
+                "name": "HOU",
                 "type": "airport"
             },
-            "next_hop": "BPT",
+            "next_hop": "HOU",
+            "next_hop_type": "airport"
+        },
+        {
+            "leg_type": "line_haul",
+            "mode": "flight",
+            "origin": {
+                "name": "SHV",
+                "type": "airport"
+            },
+            "destination": {
+                "name": "CLL",
+                "type": "airport"
+            },
+            "next_hop": "CLL",
             "next_hop_type": "airport"
         }
     ],
@@ -780,10 +780,10 @@
                 "type": "train_station"
             },
             "destination": {
-                "name": "LCH",
+                "name": "TAY",
                 "type": "train_station"
             },
-            "next_hop": "LCH",
+            "next_hop": "TAY",
             "next_hop_type": "amtrak"
         },
         {
@@ -822,10 +822,10 @@
                 "type": "train_station"
             },
             "destination": {
-                "name": "LCH",
+                "name": "TAY",
                 "type": "train_station"
             },
-            "next_hop": "LCH",
+            "next_hop": "TAY",
             "next_hop_type": "amtrak"
         },
         {
@@ -864,10 +864,10 @@
                 "type": "train_station"
             },
             "destination": {
-                "name": "LCH",
+                "name": "TAY",
                 "type": "train_station"
             },
-            "next_hop": "LCH",
+            "next_hop": "TAY",
             "next_hop_type": "amtrak"
         }
     ]
