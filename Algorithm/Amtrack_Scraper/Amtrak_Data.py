@@ -157,7 +157,7 @@ def search_amtrak_gtfs(origin: str, destination: str, travel_date: date, limit: 
                 "Departure": clock_time(r["dep_dt"]),
                 "Arrival": clock_time(r["arr_dt"]),
                 "Date": f"{travel_date.month}/{travel_date.day}/{travel_date.year}",
-                "Staring Location": station_location(origin),
+                "Starting Location": station_location(origin),
                 "Destination": station_location(destination),
             }
         })

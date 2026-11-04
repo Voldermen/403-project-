@@ -12,7 +12,7 @@ import json
 def fetch_greyhound_info(origin_id, destination_id, date):
     
     data = bus.fetch_response(origin_id, destination_id, date)
-   
+    
     return bus.convert_response(data)
     
 

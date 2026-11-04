@@ -70,6 +70,61 @@ def get_lat_long(street: str, city: str = None, state: str = None, zip_code: str
 
 
 
+def get_city(latitude: float, longitude: float) -> str:
+
+    url = "https://nominatim.openstreetmap.org/reverse"
+
+    params = {
+        "lat": latitude,
+        "lon": longitude,
+        "format": "jsonv2",
+        "addressdetails": 1,
+        "zoom": 18,
+    }
+
+    headers = {
+        "User-Agent": "AddressLookupTest"
+    }    
+
+    try:
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+        address = data.get("address", {})
+
+        street = address.get("road")
+        house_number = address.get("house_number")
+
+        # City can have different field names
+        city = (
+            address.get("city")
+            or address.get("town")
+            or address.get("village")
+            or address.get("municipality")
+            or address.get("hamlet")
+        )
+
+        return city
+        
+
+    except requests.exceptions.RequestException as exc:
+        print(f"Geocoding request failed: {exc}")
+        return None
+    except ValueError as exc:
+        print(f"Invalid JSON response: {exc}")
+        return None
+
+    except requests.exceptions.RequestException:
+        print("Error")
+        pass
+
+    return None
+
+
+
+
+
 
 def rank_distance(lat1, lon1, lat2, lon2):
     """take two points dertmine the rank of travel
@@ -162,6 +217,37 @@ def find_nearest_airports(lat,lon,num):
 
     # Sort by distance and return the closest three
     return airport_df.sort_values("distance_m").head(num)
+
+
+
+def get_bus_station_gps(station_id, df):
+    """to get gps for bus stations"""
+    match = df[df['stop_id'] == station_id]
+    if not match.empty:
+        return {
+            "LAT": float(match.iloc[0]['stop_lat']),
+            "LONG": float(match.iloc[0]['stop_lon'])
+        }
+    return {"LAT": None, "LONG": None}
+
+
+
+def get_train_station_gps(station_id, df):
+    """to get gps and city for amtrack stations"""
+    match = df[df['stop_id'] == station_id]
+    if not match.empty:
+        lat = float(match.iloc[0]['stop_lat'])
+        lon = float(match.iloc[0]['stop_lon'])
+        
+        city = get_city(lat, lon)
+        
+        return {
+            "LAT": lat,
+            "LONG": lon,
+            "City": city
+        }
+    return {"LAT": None, "LONG": None, "City": None}
+
 
 
 
