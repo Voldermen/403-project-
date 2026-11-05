@@ -18,7 +18,8 @@ def fetch_greyhound_info(origin_id, destination_id, date):
 
 def fetch_amtrack_info(origin, dest, date):
     
-    return train.search_amtrak_gtfs(origin, dest, date)
+    info = train.search_amtrak_gtfs(origin, dest, date)
+    return info
     
 
 def fetch_plane_info(origin, dest, date):
@@ -40,8 +41,8 @@ def test_grey():
     fetch_greyhound_info(tech, tex, today)
 
 def test_am():
-    New = "NYP"
-    wash = "WAS"
+    New = "BMT"
+    wash = "HOS"
     fetch_amtrack_info(New, wash, tomorrow)
 
 
@@ -51,7 +52,7 @@ def test_flight():
     at = "ATL"
     fetch_plane_info(ax, at, tomorrow)
     
-
-#test_flight()
-#test_am()
-test_grey()
+if __name__ == "__main__":
+    #test_flight()
+    test_am()
+    #test_grey()

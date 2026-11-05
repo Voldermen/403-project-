@@ -3,29 +3,22 @@ import pandas as pd
 import json
 from collections import defaultdict
 
-
 def catorgarize_hubs(lat, lon, datasets=None, local_radius_m=60000):
     """Categorizes stations into direct local hubs vs remote/feeder hubs for a location."""
-
-    # Fetch top candidate hubs near the point
     all_airports = helpers.find_nearest_airports(lat, lon, 5)
     all_trains = helpers.find_nearest_amtrack(lat, lon, 5)
     all_buses = helpers.find_nearest_greyhound(lat, lon, 5)
 
-    # 1. Direct hubs within local city range
     local_airports = all_airports[all_airports["distance_m"] <= local_radius_m]
     local_trains = all_trains[all_trains["distance_m"] <= local_radius_m]
     local_buses = all_buses[all_buses["distance_m"] <= local_radius_m]
 
-    # 2. Hubs outside of city range (candidates for feeder connections)
     remote_airports = all_airports[all_airports["distance_m"] > local_radius_m]
     remote_trains = all_trains[all_trains["distance_m"] > local_radius_m]
     remote_buses = all_buses[all_buses["distance_m"] > local_radius_m]
 
-    # 3. Find feeder transfers (Local Bus/Train -> Remote Hub)
     feeder_edges = []
 
-    # Gather local ground stations
     local_ground = []
     if not local_trains.empty:
         for _, row in local_trains.iterrows():
@@ -36,7 +29,6 @@ def catorgarize_hubs(lat, lon, datasets=None, local_radius_m=60000):
             station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
             local_ground.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "greyhound"})
 
-    # Gather remote long-haul hubs (airports, trains, and buses)
     remote_hubs = []
     if not remote_airports.empty:
         for _, row in remote_airports.iterrows():
@@ -51,7 +43,7 @@ def catorgarize_hubs(lat, lon, datasets=None, local_radius_m=60000):
             station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
             remote_hubs.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "greyhound"})
    
-    # Connect local ground stations to remote hubs
+    # Connect local ground stations to remote hubs (Origin Feeder logic)
     for ground in local_ground:
         for hub in remote_hubs:
             dist = helpers.find_distance(ground["lat"], ground["lon"], hub["lat"], hub["lon"])
@@ -61,23 +53,29 @@ def catorgarize_hubs(lat, lon, datasets=None, local_radius_m=60000):
             next_hop_target = hub["name"]
             next_hop_type = hub["mode"]
             
-            # If taking a bus (greyhound) to a non-bus hub (like an airport or train station),
-            # destination is the nearest bus stop, but next_hop points to the intended hub with its type.
+            # If taking a ground mode (greyhound or amtrak) to a non-matching remote hub (e.g., an airport),
+            # find the nearest station of that same mode local to the remote hub's location.
             if ground["mode"] == "greyhound" and hub["mode"] != "greyhound":
-                if not remote_buses.empty:
-                    hub_lat, hub_lon = hub["lat"], hub["lon"]
-                    bus_dists = remote_buses.apply(
-                        lambda r: helpers.find_distance(hub_lat, hub_lon, r["stop_lat"], r["stop_lon"]), axis=1
-                    )
-                    nearest_bus_idx = bus_dists.idxmin()
-                    nearest_bus_row = remote_buses.loc[nearest_bus_idx]
-                    
+                hub_buses = helpers.find_nearest_greyhound(hub["lat"], hub["lon"], 5)
+                if not hub_buses.empty:
+                    nearest_bus_row = hub_buses.iloc[0]
                     destination_name = nearest_bus_row.get("stop_id", nearest_bus_row.get("station_id", nearest_bus_row.get("id", nearest_bus_row.get("stop_name", nearest_bus_row.get("name")))))
                     destination_type = "bus_station"
                     next_hop_target = hub["name"]
                     next_hop_type = hub["mode"]
                 else:
                     destination_type = "bus_station"
+
+            elif ground["mode"] == "amtrak" and hub["mode"] != "amtrak":
+                hub_trains = helpers.find_nearest_amtrack(hub["lat"], hub["lon"], 5)
+                if not hub_trains.empty:
+                    nearest_train_row = hub_trains.iloc[0]
+                    destination_name = nearest_train_row.get("stop_id", nearest_train_row.get("station_id", nearest_train_row.get("id", nearest_train_row.get("stop_name", nearest_train_row.get("name")))))
+                    destination_type = "amtrak"
+                    next_hop_target = hub["name"]
+                    next_hop_type = hub["mode"]
+                else:
+                    destination_type = "amtrak"
 
             feeder_edges.append({
                 "local_station": ground["name"],
@@ -93,24 +91,111 @@ def catorgarize_hubs(lat, lon, datasets=None, local_radius_m=60000):
         "has_local_airport": not local_airports.empty,
         "has_local_amtrak": not local_trains.empty,
         "has_local_greyhound": not local_buses.empty,
-        "local_hubs": {
-            "airports": local_airports,
-            "amtrak": local_trains,
-            "greyhound": local_buses
-        },
-        "remote_hubs": {
-            "airports": remote_airports,
-            "amtrak": remote_trains,
-            "greyhound": remote_buses
-        },
+        "local_hubs": {"airports": local_airports, "amtrak": local_trains, "greyhound": local_buses},
+        "remote_hubs": {"airports": remote_airports, "amtrak": remote_trains, "greyhound": remote_buses},
         "feeder_edges": feeder_edges
     }
 
 
+def categorize_destination_hubs(lat, lon, local_radius_m=60000):
+    """Destination feeder logic: exact reverse mirror of the origin feeder."""
+    all_airports = helpers.find_nearest_airports(lat, lon, 5)
+    all_trains = helpers.find_nearest_amtrack(lat, lon, 5)
+    all_buses = helpers.find_nearest_greyhound(lat, lon, 5)
+
+    # 1. Local hubs within local city range at the destination
+    local_airports = all_airports[all_airports["distance_m"] <= local_radius_m]
+    local_trains = all_trains[all_trains["distance_m"] <= local_radius_m]
+    local_buses = all_buses[all_buses["distance_m"] <= local_radius_m]
+
+    # 2. Remote hubs outside city range
+    remote_airports = all_airports[all_airports["distance_m"] > local_radius_m]
+    remote_trains = all_trains[all_trains["distance_m"] > local_radius_m]
+    remote_buses = all_buses[all_buses["distance_m"] > local_radius_m]
+
+    destination_feeder_edges = []
+
+    # Gather local destination ground stations
+    local_ground = []
+    if not local_trains.empty:
+        for _, row in local_trains.iterrows():
+            station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
+            local_ground.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "amtrak"})
+    if not local_buses.empty:
+        for _, row in local_buses.iterrows():
+            station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
+            local_ground.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "greyhound"})
+
+    # Gather remote long-haul hubs
+    remote_hubs = []
+    if not remote_airports.empty:
+        for _, row in remote_airports.iterrows():
+            airport_id = row.get("iata_code", row.get("name"))
+            remote_hubs.append({"name": airport_id, "lat": row["latitude_deg"], "lon": row["longitude_deg"], "mode": "airport"})
+    if not remote_trains.empty:
+        for _, row in remote_trains.iterrows():
+            station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
+            remote_hubs.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "amtrak"})
+    if not remote_buses.empty:
+        for _, row in remote_buses.iterrows():
+            station_id = row.get("stop_id", row.get("station_id", row.get("id", row.get("stop_name", row.get("name")))))
+            remote_hubs.append({"name": station_id, "lat": row["stop_lat"], "lon": row["stop_lon"], "mode": "greyhound"})
+
+    # Connect remote hubs TO local destination ground stations (Reverse direction of origin feeder)
+    for hub in remote_hubs:
+        for ground in local_ground:
+            dist = helpers.find_distance(hub["lat"], hub["lon"], ground["lat"], ground["lon"])
+            
+            origin_name = hub["name"]
+            origin_type = hub["mode"]
+            next_hop_target = hub["name"]
+            next_hop_type = hub["mode"]
+            
+            # If taking a ground mode (greyhound or amtrak) from a non-matching remote hub (e.g., an airport),
+            # find the nearest station of that same mode local to the remote hub's location.
+            if ground["mode"] == "greyhound" and hub["mode"] != "greyhound":
+                hub_buses = helpers.find_nearest_greyhound(hub["lat"], hub["lon"], 5)
+                if not hub_buses.empty:
+                    nearest_bus_row = hub_buses.iloc[0]
+                    origin_name = nearest_bus_row.get("stop_id", nearest_bus_row.get("station_id", nearest_bus_row.get("id", nearest_bus_row.get("stop_name", nearest_bus_row.get("name")))))
+                    origin_type = "bus_station"
+                    next_hop_target = hub["name"]
+                    next_hop_type = hub["mode"]
+                else:
+                    origin_type = "bus_station"
+
+            elif ground["mode"] == "amtrak" and hub["mode"] != "amtrak":
+                hub_trains = helpers.find_nearest_amtrack(hub["lat"], hub["lon"], 5)
+                if not hub_trains.empty:
+                    nearest_train_row = hub_trains.iloc[0]
+                    origin_name = nearest_train_row.get("stop_id", nearest_train_row.get("station_id", nearest_train_row.get("id", nearest_train_row.get("stop_name", nearest_train_row.get("name")))))
+                    origin_type = "amtrak"
+                    next_hop_target = hub["name"]
+                    next_hop_type = hub["mode"]
+                else:
+                    origin_type = "amtrak"
+
+            destination_feeder_edges.append({
+                "origin_stop": origin_name,
+                "origin_type": origin_type,
+                "local_destination": ground["name"],
+                "local_mode": ground["mode"],
+                "next_hop": next_hop_target,
+                "next_hop_type": next_hop_type,
+                "transfer_distance_m": dist
+            })
+
+    return {
+        "has_destination_airport": not local_airports.empty,
+        "has_destination_amtrak": not local_trains.empty,
+        "has_destination_greyhound": not local_buses.empty,
+        "destination_feeder_edges": destination_feeder_edges
+    }
+
+
+
+
 def get_all_edges(origin_lat, origin_lon, dest_lat, dest_lon):
-    """
-    Gathers origin/destination hub profiles and generates direct mode-to-mode query pairs.
-    """
     origin_airports = helpers.find_nearest_airports(origin_lat, origin_lon, 3)
     origin_trains = helpers.find_nearest_amtrack(origin_lat, origin_lon, 3)
     origin_buses = helpers.find_nearest_greyhound(origin_lat, origin_lon, 1)
@@ -120,29 +205,15 @@ def get_all_edges(origin_lat, origin_lon, dest_lat, dest_lon):
     dest_buses = helpers.find_nearest_greyhound(dest_lat, dest_lon, 1)
 
     origin_profile = catorgarize_hubs(origin_lat, origin_lon)
-    dest_profile = catorgarize_hubs(dest_lat, dest_lon)
+    dest_profile = categorize_destination_hubs(dest_lat, dest_lon) # Use the mirrored function
 
     airport_name_col = "iata_code" if "iata_code" in origin_airports.columns else "name"
     amtrak_id_col = next((col for col in ["stop_id", "station_id", "id"] if col in origin_trains.columns), "stop_name" if "stop_name" in origin_trains.columns else "name")
     greyhound_id_col = next((col for col in ["stop_id", "station_id", "id"] if col in origin_buses.columns), "stop_name" if "stop_name" in origin_buses.columns else "name")
     
-    airport_edges = [
-        {"from": o_row[airport_name_col], "to": d_row[airport_name_col]}
-        for _, o_row in origin_airports.iterrows()
-        for _, d_row in dest_airports.iterrows()
-    ]
-
-    amtrak_edges = [
-        {"from": o_row[amtrak_id_col], "to": d_row[amtrak_id_col]}
-        for _, o_row in origin_trains.iterrows()
-        for _, d_row in dest_trains.iterrows()
-    ]
-
-    greyhound_edges = [
-        {"from": o_row[greyhound_id_col], "to": d_row[greyhound_id_col]}
-        for _, o_row in origin_buses.iterrows()
-        for _, d_row in dest_buses.iterrows()
-    ]
+    airport_edges = [{"from": o_row[airport_name_col], "to": d_row[airport_name_col]} for _, o_row in origin_airports.iterrows() for _, d_row in dest_airports.iterrows()]
+    amtrak_edges = [{"from": o_row[amtrak_id_col], "to": d_row[amtrak_id_col]} for _, o_row in origin_trains.iterrows() for _, d_row in dest_trains.iterrows()]
+    greyhound_edges = [{"from": o_row[greyhound_id_col], "to": d_row[greyhound_id_col]} for _, o_row in origin_buses.iterrows() for _, d_row in dest_buses.iterrows()]
 
     return {
         "origin_profile": origin_profile,
@@ -156,16 +227,12 @@ def get_all_edges(origin_lat, origin_lon, dest_lat, dest_lon):
 
 
 def extract_trip_legs(get_edges_output):
-    """
-    Takes the output of get_all_edges and extracts BOTH feeder legs 
-    and line-haul legs.
-    """
     legs = []
-    
     origin_profile = get_edges_output["origin_profile"]
+    dest_profile = get_edges_output["dest_profile"]
     query_edges = get_edges_output["query_edges"]
     
-    # 1. EXTRACT FEEDER LEGS
+    # 1. EXTRACT ORIGIN FEEDER LEGS
     for edge in origin_profile.get("feeder_edges", []):
         legs.append({
             "leg_type": "origin_feeder",
@@ -187,29 +254,23 @@ def extract_trip_legs(get_edges_output):
             "next_hop": pair["to"],
             "next_hop_type": "airport"
         })
+    # (Amtrak / Greyhound line haul loops remain the same...)
 
-    for pair in query_edges.get("amtrak_pairs", []):
+
+    # 3. EXTRACT DESTINATION FEEDER LEGS
+    for edge in dest_profile.get("destination_feeder_edges", []):
         legs.append({
-            "leg_type": "line_haul",
-            "mode": "amtrak",
-            "origin": {"name": pair["from"], "type": "train_station"},
-            "destination": {"name": pair["to"], "type": "train_station"},
-            "next_hop": pair["to"],
-            "next_hop_type": "amtrak"
+            "leg_type": "destination_feeder",
+            "mode": edge["local_mode"],
+            "origin": {"name": edge["origin_stop"], "type": edge["origin_type"]},
+            "destination": {"name": edge["local_destination"], "type": edge["local_mode"]},
+            "next_hop": edge["next_hop"],
+            "next_hop_type": edge["next_hop_type"],
+            "transfer_distance_m": edge["transfer_distance_m"]
         })
 
-    for pair in query_edges.get("greyhound_pairs", []):
-        legs.append({
-            "leg_type": "line_haul",
-            "mode": "greyhound",
-            "origin": {"name": pair["from"], "type": "bus_station"},
-            "destination": {"name": pair["to"], "type": "bus_station"},
-            "next_hop": pair["to"],
-            "next_hop_type": "greyhound"
-        })
 
     return legs
-
 
 
 
