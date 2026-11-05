@@ -16,8 +16,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-ALL_ROUTES = Path(__file__).with_name("examples.json")
-
+ALL_ROUTES = Path(__file__).with_name("M_output_unified.json")
 def load_methods(json_path=ALL_ROUTES):
     with open(json_path, "r", encoding="utf-8") as file:
         raw_methods = json.load(file)
@@ -25,13 +24,25 @@ def load_methods(json_path=ALL_ROUTES):
     methods = []
 
     for index, item in enumerate(raw_methods):
-        method = item.get("method", {})
-        info = method.get("info", {})
-        start = method.get("starting_location")
-        destination = method.get("destination")
+        # Support both lowercase "method" and capitalized "Method"
+        method_obj = item.get("method") or item.get("Method", {})
+        
+        # Support structures with an "info" wrapper or flat structures
+        info = method_obj.get("info", method_obj)
+
+        # Support different variations of start/destination keys (snake_case vs Title Case with spaces)
+        start = (
+            method_obj.get("starting_location") 
+            or method_obj.get("Starting Location")
+            or info.get("Starting Location")
+        )
+        destination = (
+            method_obj.get("destination") 
+            or method_obj.get("Destination")
+            or info.get("Destination")
+        )
 
         if not start or not destination:
-            # Skip malformed entries.
             continue
 
         methods.append({
@@ -54,9 +65,68 @@ def load_methods(json_path=ALL_ROUTES):
 
     return methods
 
+def debug_methods(json_path=ALL_ROUTES):
+    with open(json_path, "r", encoding="utf-8") as file:
+        raw_methods = json.load(file)
+
+    total_items = len(raw_methods)
+    valid_count = 0
+    skipped_count = 0
+
+    for index, item in enumerate(raw_methods):
+        method = item.get("method") or item.get("Method", {})
+        info = method.get("info", method) or method.get("Info")
+
+        start = (
+            method.get("starting_location") 
+            or method.get("Starting Location")
+            or info.get("Starting Location")
+        )
+        destination = (
+            method.get("destination") 
+            or method.get("Destination")
+            or info.get("Destination")
+        )
+        if not start or not destination:
+            skipped_count += 1
+            print(f"Skipped index {index}: Missing start or destination")
+            continue
+
+        valid_count += 1
+
+    print(f"Total in JSON: {total_items}")
+    print(f"Valid methods: {valid_count}")
+    print(f"Skipped methods: {skipped_count}")
+    return valid_count
 
 
+def count_methods(json_path=ALL_ROUTES):
+    with open(json_path, "r", encoding="utf-8") as file:
+        raw_methods = json.load(file)
 
+    valid_count = 0
+
+    for item in raw_methods:
+        method_obj = item.get("method") or item.get("Method", {})
+        info = method_obj.get("info", method_obj)
+
+        start = (
+            method_obj.get("starting_location") 
+            or method_obj.get("Starting Location")
+            or info.get("Starting Location")
+        )
+        destination = (
+            method_obj.get("destination") 
+            or method_obj.get("Destination")
+            or info.get("Destination")
+        )
+
+        if not start or not destination:
+            continue
+
+        valid_count += 1
+
+    return valid_count
 
 def time_to_minutes(value):
     """Parse 12-hour, 24-hour, or ISO datetime strings.
@@ -341,20 +411,28 @@ def print_result(full_trip):
 if __name__ == "__main__":
     methods = load_methods()
     #trip test 1 (looking for price)
-    origin = (29.9511, -90.0715)
-    dest = "Chicago Midway International Airport"
+    origin_lat=32.5232 
+    origin_lon=-92.6379
+    dest_lat=29.7858
+    dest_lon=-95.8244
+    main_origin = (32.5232, -92.6379)
+    main_dest = (29.7858, -95.8244)
+    #origin = (29.9511, -90.0715)
+    #dest = "Chicago Midway International Airport"
     start_time = "12:01 am"
-    obj = "cost"
-    print_result(find_lowest_cost_path(methods, origin, dest, start_time, obj))
-
-    print()
-    print()
-    print()
-    
-    #trip test 2 (diff dest looking for time)
-    dest = "MadeUpBusStation" #downtown milwakee
     obj = "time"
-    print_result(find_lowest_cost_path(methods, origin, dest, start_time, obj))
+    print(f"num methods found: {count_methods()}")
+    debug_methods()
+    print_result(find_lowest_cost_path(methods, main_origin, main_dest, start_time, obj))
+
+    # print()
+    # print()
+    # print()
+    
+    # #trip test 2 (diff dest looking for time)
+    # dest = "MadeUpBusStation" #downtown milwakee
+    # obj = "time"
+    # print_result(find_lowest_cost_path(methods, origin, dest, start_time, obj))
 
 """
 add info fucntions like

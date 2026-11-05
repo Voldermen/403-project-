@@ -8,7 +8,7 @@ import copy
 
 
 
-def collect_all_info(paths, travel_date):
+def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_lon):
     greyhound_df = pd.read_csv("../data/greyhound_database/cleaned_greyhound.csv")
     amtrak_df = pd.read_csv("../data/amtrack_database/cleaned_amtrack.csv")
 
@@ -110,7 +110,7 @@ def collect_all_info(paths, travel_date):
     
 
     #add walking stuff
-    master_list = add_walking_connections(master_list, max_distance_meters=25000)
+    master_list = add_walking_connections(master_list, 25000, origin_lat, origin_lon, dest_lat, dest_lon)
     # Save the giant JSON output
     with open("M_output_unified.json", "w", encoding="utf-8") as f:
         json.dump(master_list, f, ensure_ascii=False, indent=4)
@@ -120,28 +120,20 @@ def collect_all_info(paths, travel_date):
 
 
 
-
-def add_walking_connections(master_list, max_distance_meters=20000):
-    """
-    Takes the master list of travel legs, extracts all unique locations (hubs)
-    handling both lowercase and capitalized key formats, computes pairwise distances,
-    and appends synthetic 'walking' connections between hubs within max_distance_meters.
-    """
+def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=None, origin_lon=None, dest_lat=None, dest_lon=None):
+    
     unique_hubs = {}
     
     # 1. Gather all unique stations/hubs (supporting both lowercase and Title Case keys)
     for item in master_list:
-        # Check for either "method" or "Method"
         method_info = item.get("method") or item.get("Method", {})
         
-        # Check for starting location keys
         start_loc = (
             method_info.get("starting_location") or 
             method_info.get("Starting Location") or 
             method_info.get("StartingLocation")
         )
         
-        # Check for destination keys
         dest_loc = (
             method_info.get("destination") or 
             method_info.get("Destination")
@@ -150,7 +142,6 @@ def add_walking_connections(master_list, max_distance_meters=20000):
         for loc in [start_loc, dest_loc]:
             if loc and "GPS" in loc:
                 gps = loc["GPS"]
-                # Handle potential uppercase/lowercase LAT/LONG keys too
                 lat = gps.get("LAT") if gps.get("LAT") is not None else gps.get("Lat")
                 lon = gps.get("LONG") if gps.get("LONG") is not None else (gps.get("Lon") or gps.get("Long"))
                 
@@ -164,6 +155,29 @@ def add_walking_connections(master_list, max_distance_meters=20000):
                             "Station ID": loc.get("Station ID", loc.get("Name", "")),
                             "GPS": {"LAT": lat, "LONG": lon}
                         }
+
+    # Explicitly inject the custom origin and destination into unique_hubs if provided
+    if origin_lat is not None and origin_lon is not None:
+        origin_id = f"{origin_lat},{origin_lon}"
+        if origin_id not in unique_hubs:
+            unique_hubs[origin_id] = {
+                "City": "Origin City",
+                "State": "",
+                "Name": "Trip Origin",
+                "Station ID": origin_id,
+                "GPS": {"LAT": origin_lat, "LONG": origin_lon}
+            }
+
+    if dest_lat is not None and dest_lon is not None:
+        dest_id = f"{dest_lat},{dest_lon}"
+        if dest_id not in unique_hubs:
+            unique_hubs[dest_id] = {
+                "City": "Destination City",
+                "State": "",
+                "Name": "Trip Destination",
+                "Station ID": dest_id,
+                "GPS": {"LAT": dest_lat, "LONG": dest_lon}
+            }
 
     hub_list = list(unique_hubs.values())
     walking_legs = []
@@ -209,6 +223,7 @@ def add_walking_connections(master_list, max_distance_meters=20000):
     master_list.extend(walking_legs)
     return master_list
 
+
 def main_alg(date):
     """take in starting and ending addr and date"""
     #get lat and lon of destinations
@@ -223,7 +238,7 @@ def main_alg(date):
     with open("M_output.json", "w", encoding="utf-8") as f:
         json.dump(paths, f, ensure_ascii=False, indent=4)
     
-    collect_all_info(paths, date)
+    collect_all_info(paths, date,  origin_lat,origin_lon, dest_lat, dest_lon)
 
 
 

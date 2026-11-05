@@ -86,10 +86,17 @@ def convert_response(data, coordinates=None):
             legs = trip.get('legs', [])
             if trip.get('status') != 'available' or not legs or uid in seen:
                 continue
-            if not all(leg.get('means_of_transport') == 'bus' and
-                       brands.get(leg.get('brand_id'), {}).get('name', '').casefold()
-                       == 'greyhound' for leg in legs):
+                
+            allowed_brands = {'greyhound', 'flixbus', 'greyhound express'}
+            
+            # Check all legs properly using the local loop variable inside all()
+            if not all(
+                leg.get('means_of_transport') == 'bus' and 
+                brands.get(leg.get('brand_id'), {}).get('name', '').casefold() in allowed_brands 
+                for leg in legs
+            ):
                 continue
+                
             start = datetime.fromisoformat(trip['departure']['date'])
             end = datetime.fromisoformat(trip['arrival']['date'])
             if start.utcoffset() is None or end.utcoffset() is None:
