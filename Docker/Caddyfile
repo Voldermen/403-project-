@@ -1,0 +1,33 @@
+# Global options: trust the Docker network (cloudflared) so Caddy keeps the
+# original X-Forwarded-Proto: https header that Cloudflare sets.
+{
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+# Plain HTTP inside the Docker network; Cloudflare handles HTTPS for visitors
+:80 {
+	encode gzip
+
+	# Django collects all static files (planner, routes, admin) into
+	# <project>/staticfiles via "collectstatic" at startup. Caddy serves them:
+	#   /static/planner/css/styles.css -> staticfiles/planner/css/styles.css
+	# "no-cache" = browsers re-check with the server each time (cheap 304 if unchanged),
+	# so updated CSS/JS shows up without clearing the cache.
+	handle_path /static/* {
+		root * /srv/app/transport_aggregator_Backend/staticfiles
+		header Cache-Control "no-cache"
+		file_server
+	}
+
+	# Everything else goes to Django (gunicorn)
+	handle {
+		reverse_proxy app:8000 {
+			# Django's default "same-origin" referrer policy stops browsers from
+			# sending a Referer to OpenStreetMap, whose tile servers then answer
+			# 403 "Access blocked". Send the site's origin to other sites instead.
+			header_down Referrer-Policy "strict-origin-when-cross-origin"
+		}
+	}
+}
