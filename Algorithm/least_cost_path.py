@@ -20,7 +20,12 @@ ALL_ROUTES = Path(__file__).with_name("M_output_unified.json")
 def load_methods(json_path=ALL_ROUTES):
     with open(json_path, "r", encoding="utf-8") as file:
         raw_methods = json.load(file)
+    return normalize_methods(raw_methods)
 
+
+def normalize_methods(raw_methods):
+    """Convert raw scraper records (any key variant) into the flat dicts
+    that build_graph / find_lowest_cost_path expect."""
     methods = []
 
     for index, item in enumerate(raw_methods):
@@ -45,6 +50,10 @@ def load_methods(json_path=ALL_ROUTES):
         if not start or not destination:
             continue
 
+        # A present-but-null Cost would crash float(); skip unpriced records.
+        if info.get("Cost") is None:
+            continue
+
         methods.append({
             "id": index,
             "name": (
@@ -56,8 +65,9 @@ def load_methods(json_path=ALL_ROUTES):
             "scope": info.get("Scope", "Unknown"),
             "cost": float(info.get("Cost", 0)),
             "travel_minutes": int(info.get("Travel Time (min)", 0)),
-            "departure": info.get("Departure", "00:00"),
-            "arrival": info.get("Arrival", "00:00"),
+            # None = unscheduled (e.g. walking): can be taken any time.
+            "departure": info.get("Departure"),
+            "arrival": info.get("Arrival"),
             "date": info.get("Date"),
             "start": start,
             "destination": destination,
@@ -166,6 +176,25 @@ def minutes_to_time(value):
     if value>=720: #720 is noon
         suffix = "pm"
     return f"{H}:{M} {suffix}"
+
+def leg_times(method, ready_at):
+    """Return (depart, arrive) in minutes from start-day midnight, or None
+    if the leg can't be taken when ready at `ready_at`.
+
+    Unscheduled legs (walking) depart the moment you're ready. Scheduled legs
+    whose arrival clock time is before departure arrive the next day.
+    """
+    if method.get("departure") is None or method.get("arrival") is None:
+        return ready_at, ready_at + method.get("travel_minutes", 0)
+
+    depart = time_to_minutes(method["departure"])
+    if depart < ready_at:
+        return None  # it left before you got there
+    arrive = time_to_minutes(method["arrival"])
+    if arrive < depart:
+        arrive += 24 * 60  # overnight arrival
+    return depart, arrive
+
 
 def get_method_duration(method):
     arrive = time_to_minutes(method.get("arrival"))
@@ -302,6 +331,7 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
     best = {(start_key, start_time): 0.0}#initialze best as start to start with 0 time spent
     queue = [(0.0, start_time, start_key)]
     previous = {}
+    labels = {start_key: [(0.0, start_time)]}  # node -> non-dominated (cost, time)
     #best_state_for_location = {start_key: (0.0, start_time)}
 
     while queue:
@@ -316,16 +346,15 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
         #looks at all possible next nodes
         for next_node, method in graph.get(node, []):
                         
-            depart_time = time_to_minutes(method.get("departure"))
-            arrive_time = time_to_minutes(method.get("arrival"))
-
+            times = leg_times(method, ready_at)
             # You cannot take a connection that leaves before you arrive.
-            if depart_time < ready_at:
+            if times is None:
                 continue
+            depart_time, arrive_time = times
 
             if Time:
                 # Time spent traveling
-                travel_duration = get_method_duration(method)
+                travel_duration = arrive_time - depart_time
 
                 # Time spent waiting for this connection
                 wait_duration = depart_time - ready_at
@@ -335,6 +364,16 @@ def find_lowest_cost_path(methods, origin, destination, startTime, objective):
                 new_cost = cost_so_far + method["cost"]
 
             state = (next_node, arrive_time)
+
+            # Skip if this node was already reached at least as cheaply AND
+            # at least as early. Without this, zero-cost walking loops
+            # (A->B->A) create endless later-time states.
+            if any(c <= new_cost and t <= arrive_time for c, t in labels.get(next_node, [])):
+                continue
+            labels[next_node] = [
+                (c, t) for c, t in labels.get(next_node, [])
+                if not (new_cost <= c and arrive_time <= t)
+            ] + [(new_cost, arrive_time)]
 
             if new_cost < best.get(state, math.inf):
                 best[state] = new_cost

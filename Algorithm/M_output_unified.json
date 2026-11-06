@@ -85,7 +85,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 11.98,
+                "Cost": 13.48,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 15,
@@ -245,7 +245,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 20.48,
+                "Cost": 22.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 80,
@@ -405,206 +405,6 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 22.48,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 95,
-                "Departure": "06:05",
-                "Arrival": "07:40",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T06:05:00-06:00",
-                "Arrival Timestamp": "2026-11-06T07:40:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:1506cb88-4e69-453b-9845-3a6f7c77ee67:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 22.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 80,
-                "Departure": "11:15",
-                "Arrival": "12:35",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T11:15:00-06:00",
-                "Arrival Timestamp": "2026-11-06T12:35:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:a6582271-b993-4412-bcec-746bd38d1402:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 20.48,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 80,
-                "Departure": "14:55",
-                "Arrival": "16:15",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T14:55:00-06:00",
-                "Arrival Timestamp": "2026-11-06T16:15:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:cce39b2c-6f40-446e-82bc-d1ca425b331d:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 21.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 90,
-                "Departure": "16:35",
-                "Arrival": "18:05",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:35:00-06:00",
-                "Arrival Timestamp": "2026-11-06T18:05:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:f4cd9c82-4c58-47f4-942c-96483cbe0442:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 45.97,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 335,
-                "Departure": "16:35",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:35:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
                 "Cost": 37.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
@@ -685,47 +485,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 45.97,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 335,
-                "Departure": "16:35",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:35:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Ruston",
-                "State": "LA",
-                "Name": "Ruston (Tech Mart)",
-                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
-                "GPS": {
-                    "LAT": 32.523736,
-                    "LONG": -92.648286
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 55.97,
+                "Cost": 50.97,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 480,
@@ -845,7 +605,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 18.98,
+                "Cost": 21.48,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 65,
@@ -1005,206 +765,6 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 20.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 75,
-                "Departure": "06:25",
-                "Arrival": "07:40",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T06:25:00-06:00",
-                "Arrival Timestamp": "2026-11-06T07:40:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:1506cb88-4e69-453b-9845-3a6f7c77ee67:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 21.48,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 65,
-                "Departure": "11:30",
-                "Arrival": "12:35",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T11:30:00-06:00",
-                "Arrival Timestamp": "2026-11-06T12:35:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:a6582271-b993-4412-bcec-746bd38d1402:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 18.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 65,
-                "Departure": "15:10",
-                "Arrival": "16:15",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T15:10:00-06:00",
-                "Arrival Timestamp": "2026-11-06T16:15:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:cce39b2c-6f40-446e-82bc-d1ca425b331d:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 18.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 70,
-                "Departure": "16:55",
-                "Arrival": "18:05",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:55:00-06:00",
-                "Arrival Timestamp": "2026-11-06T18:05:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:f4cd9c82-4c58-47f4-942c-96483cbe0442:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 46.47,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 315,
-                "Departure": "16:55",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:55:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
                 "Cost": 35.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
@@ -1285,47 +845,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 46.47,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 315,
-                "Departure": "16:55",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T16:55:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Grambling",
-                "State": "LA",
-                "Name": "Grambling (Grambling State Univ)",
-                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
-                "GPS": {
-                    "LAT": 32.52217,
-                    "LONG": -92.7145
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 55.47,
+                "Cost": 51.47,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 460,
@@ -1365,7 +885,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 10.98,
+                "Cost": 12.48,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 50,
@@ -1405,7 +925,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 29.98,
+                "Cost": 34.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 115,
@@ -1475,46 +995,6 @@
                 "GPS": {
                     "LAT": 31.365819,
                     "LONG": -92.586833
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 29.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 115,
-                "Departure": "14:20",
-                "Arrival": "16:15",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T14:20:00-06:00",
-                "Arrival Timestamp": "2026-11-06T16:15:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:cce39b2c-6f40-446e-82bc-d1ca425b331d:3613fa7a-5b8c-4486-8f2a-d24c9ce8eb7e:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Jonesboro",
-                "State": "LA",
-                "Name": "Jonesboro (Super Save#2-Chevron)",
-                "Station ID": "3613fa7a-5b8c-4486-8f2a-d24c9ce8eb7e",
-                "GPS": {
-                    "LAT": 32.255509,
-                    "LONG": -92.723566
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
                 }
             }
         }
@@ -1765,7 +1245,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 73.97,
+                "Cost": 69.97,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 580,
@@ -1835,166 +1315,6 @@
                 "GPS": {
                     "LAT": 31.365819,
                     "LONG": -92.586833
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 58.97,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 380,
-                "Departure": "15:50",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T15:50:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Monroe",
-                "State": "LA",
-                "Name": "Monroe (Quickway)",
-                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
-                "GPS": {
-                    "LAT": 32.47467,
-                    "LONG": -92.08177
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 24.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 140,
-                "Departure": "05:20",
-                "Arrival": "07:40",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T05:20:00-06:00",
-                "Arrival Timestamp": "2026-11-06T07:40:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:1506cb88-4e69-453b-9845-3a6f7c77ee67:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Monroe",
-                "State": "LA",
-                "Name": "Monroe (Quickway)",
-                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
-                "GPS": {
-                    "LAT": 32.47467,
-                    "LONG": -92.08177
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 25.48,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 125,
-                "Departure": "10:30",
-                "Arrival": "12:35",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T10:30:00-06:00",
-                "Arrival Timestamp": "2026-11-06T12:35:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:a6582271-b993-4412-bcec-746bd38d1402:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Monroe",
-                "State": "LA",
-                "Name": "Monroe (Quickway)",
-                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
-                "GPS": {
-                    "LAT": 32.47467,
-                    "LONG": -92.08177
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 25.48,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 135,
-                "Departure": "15:50",
-                "Arrival": "18:05",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T15:50:00-06:00",
-                "Arrival Timestamp": "2026-11-06T18:05:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:f4cd9c82-4c58-47f4-942c-96483cbe0442:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:b987d31c-d740-4ae0-a011-3f64e753e768"
-            },
-            "starting_location": {
-                "City": "Monroe",
-                "State": "LA",
-                "Name": "Monroe (Quickway)",
-                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
-                "GPS": {
-                    "LAT": 32.47467,
-                    "LONG": -92.08177
-                }
-            },
-            "destination": {
-                "City": "Shreveport",
-                "State": "LA",
-                "Name": "Shreveport Bus Station",
-                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
-                "GPS": {
-                    "LAT": 32.499524,
-                    "LONG": -93.756625
                 }
             }
         }
@@ -2125,46 +1445,6 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 58.97,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 380,
-                "Departure": "15:50",
-                "Arrival": "22:10",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T15:50:00-06:00",
-                "Arrival Timestamp": "2026-11-06T22:10:00-06:00",
-                "Transfers": 1,
-                "Trip ID": "ic:9c52c9c0-f4ff-450e-83c0-cdf54baf65f6:01284e68-b526-4198-9881-a13c5c79f65d/f4cd9c82-4c58-47f4-942c-96483cbe0442:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:860b9bd0-8e91-4db5-9373-d7be741003e1"
-            },
-            "starting_location": {
-                "City": "Monroe",
-                "State": "LA",
-                "Name": "Monroe (Quickway)",
-                "Station ID": "9c52c9c0-f4ff-450e-83c0-cdf54baf65f6",
-                "GPS": {
-                    "LAT": 32.47467,
-                    "LONG": -92.08177
-                }
-            },
-            "destination": {
-                "City": "Texarkana",
-                "State": "TX",
-                "Name": "Texarkana (Travel Stop)",
-                "Station ID": "01284e68-b526-4198-9881-a13c5c79f65d",
-                "GPS": {
-                    "LAT": 33.39446,
-                    "LONG": -94.09948
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
                 "Cost": 166.97,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
@@ -2205,7 +1485,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 63.97,
+                "Cost": 60.97,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 525,
@@ -2235,6 +1515,46 @@
                 "GPS": {
                     "LAT": 31.76728,
                     "LONG": -93.091345
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Bus",
+                "Name": "Greyhound",
+                "Scope": "Interstate",
+                "Cost": 68.96,
+                "Currency": "USD",
+                "Price Basis": "total_with_platform_fee",
+                "Travel Time (min)": 740,
+                "Departure": "06:05",
+                "Arrival": "18:25",
+                "Date": "11/06/2026",
+                "Departure Timestamp": "2026-11-06T06:05:00-06:00",
+                "Arrival Timestamp": "2026-11-06T18:25:00-06:00",
+                "Transfers": 2,
+                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:9e67280f-1256-42f4-9d1d-701cb6fe6ef5/1506cb88-4e69-453b-9845-3a6f7c77ee67:b987d31c-d740-4ae0-a011-3f64e753e768:b987d31c-d740-4ae0-a011-3f64e753e768:fe1807f3-895a-4435-8ef1-a4f490923f08:70fe4a43-595a-4723-8b23-1ed1247b62b1:70fe4a43-595a-4723-8b23-1ed1247b62b1:b4903edd-99a2-412a-baf7-5d9a61fcce61"
+            },
+            "starting_location": {
+                "City": "Ruston",
+                "State": "LA",
+                "Name": "Ruston (Tech Mart)",
+                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                "GPS": {
+                    "LAT": 32.523736,
+                    "LONG": -92.648286
+                }
+            },
+            "destination": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": 29.784433,
+                    "LONG": -95.820967
                 }
             }
         }
@@ -2445,7 +1765,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 63.47,
+                "Cost": 62.47,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 456,
@@ -2565,7 +1885,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 24.98,
+                "Cost": 27.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 100,
@@ -2605,7 +1925,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 77.47,
+                "Cost": 82.47,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 365,
@@ -2685,7 +2005,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 84.46,
+                "Cost": 70.46,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 360,
@@ -2725,17 +2045,17 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 92.97,
+                "Cost": 100.97,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 260,
+                "Travel Time (min)": 405,
                 "Departure": "12:45",
-                "Arrival": "17:05",
+                "Arrival": "19:30",
                 "Date": "11/06/2026",
                 "Departure Timestamp": "2026-11-06T12:45:00-06:00",
-                "Arrival Timestamp": "2026-11-06T17:05:00-06:00",
+                "Arrival Timestamp": "2026-11-06T19:30:00-06:00",
                 "Transfers": 1,
-                "Trip ID": "ic:f7359ec6-4709-4a77-b833-69b7378fa3ec:0edad38b-8446-40ef-bab2-2e268e21dd84/e140db07-1319-4860-ab53-e444d23c7659:a494ea0b-1589-4225-97c4-875445c67896:a494ea0b-1589-4225-97c4-875445c67896:09cf2cc6-a9dc-4e5b-a69f-223879a078aa"
+                "Trip ID": "ic:f7359ec6-4709-4a77-b833-69b7378fa3ec:0edad38b-8446-40ef-bab2-2e268e21dd84/e140db07-1319-4860-ab53-e444d23c7659:a494ea0b-1589-4225-97c4-875445c67896:a494ea0b-1589-4225-97c4-875445c67896:75f06550-a7cb-45a6-9869-12fb634f05b4"
             },
             "starting_location": {
                 "City": "Georgetown",
@@ -2765,7 +2085,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 66.98,
+                "Cost": 75.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 170,
@@ -2805,7 +2125,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 58.98,
+                "Cost": 86.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 155,
@@ -2925,7 +2245,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 36.98,
+                "Cost": 50.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 170,
@@ -2965,7 +2285,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 58.98,
+                "Cost": 86.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 175,
@@ -3005,47 +2325,7 @@
                 "Type": "Bus",
                 "Name": "Greyhound",
                 "Scope": "Interstate",
-                "Cost": 73.98,
-                "Currency": "USD",
-                "Price Basis": "total_with_platform_fee",
-                "Travel Time (min)": 180,
-                "Departure": "14:05",
-                "Arrival": "17:05",
-                "Date": "11/06/2026",
-                "Departure Timestamp": "2026-11-06T14:05:00-06:00",
-                "Arrival Timestamp": "2026-11-06T17:05:00-06:00",
-                "Transfers": 0,
-                "Trip ID": "direct:09cf2cc6-a9dc-4e5b-a69f-223879a078aa:2e38f968-c026-4cf0-8d99-e1d4f13375b9:0edad38b-8446-40ef-bab2-2e268e21dd84"
-            },
-            "starting_location": {
-                "City": "Austin",
-                "State": "TX",
-                "Name": "Downtown Austin",
-                "Station ID": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "GPS": {
-                    "LAT": 30.268572,
-                    "LONG": -97.734262
-                }
-            },
-            "destination": {
-                "City": "Houston",
-                "State": "TX",
-                "Name": "Downtown Houston",
-                "Station ID": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "GPS": {
-                    "LAT": 29.75093,
-                    "LONG": -95.37448
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Bus",
-                "Name": "Greyhound",
-                "Scope": "Interstate",
-                "Cost": 73.98,
+                "Cost": 92.98,
                 "Currency": "USD",
                 "Price Basis": "total_with_platform_fee",
                 "Travel Time (min)": 210,
@@ -3203,10 +2483,64 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 268,
+            "Departure": "13:43",
+            "Arrival": "18:11",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
+            "Cost": 483,
+            "Travel Time (min)": 239,
+            "Departure": "18:40",
+            "Arrival": "22:39",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Monroe",
+                "Name": "MLU",
+                "GPS": {
+                    "LAT": 32.510556,
+                    "LONG": -92.036134
+                }
+            },
+            "Destination": {
+                "City": "Houston",
+                "Name": "IAH",
+                "GPS": {
+                    "LAT": 29.984435,
+                    "LONG": -95.341442
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Air",
+            "Priority": 1,
             "Cost": 1021,
             "Travel Time (min)": 360,
-            "Departure": "5:55",
-            "Arrival": "11:55",
+            "Departure": "17:55",
+            "Arrival": "23:55",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Monroe",
@@ -3230,37 +2564,10 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 1192,
+            "Cost": 1717,
             "Travel Time (min)": 234,
-            "Departure": "6:00",
-            "Arrival": "9:54",
-            "Date": "11/6/2026",
-            "Starting Location": {
-                "City": "Monroe",
-                "Name": "MLU",
-                "GPS": {
-                    "LAT": 32.510556,
-                    "LONG": -92.036134
-                }
-            },
-            "Destination": {
-                "City": "Houston",
-                "Name": "IAH",
-                "GPS": {
-                    "LAT": 29.984435,
-                    "LONG": -95.341442
-                }
-            }
-        }
-    },
-    {
-        "Method": {
-            "Type": "Air",
-            "Priority": 1,
-            "Cost": 1777,
-            "Travel Time (min)": 345,
-            "Departure": "6:19",
-            "Arrival": "12:04",
+            "Departure": "06:00",
+            "Arrival": "09:54",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Monroe",
@@ -3286,8 +2593,8 @@
             "Priority": 1,
             "Cost": 1021,
             "Travel Time (min)": 308,
-            "Departure": "5:55",
-            "Arrival": "11:03",
+            "Departure": "17:55",
+            "Arrival": "23:03",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Monroe",
@@ -3311,9 +2618,9 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 1192,
+            "Cost": 1717,
             "Travel Time (min)": 305,
-            "Departure": "6:00",
+            "Departure": "06:00",
             "Arrival": "11:05",
             "Date": "11/6/2026",
             "Starting Location": {
@@ -3340,8 +2647,8 @@
             "Priority": 1,
             "Cost": 470,
             "Travel Time (min)": 245,
-            "Departure": "1:43",
-            "Arrival": "5:48",
+            "Departure": "13:43",
+            "Arrival": "17:48",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Monroe",
@@ -3367,8 +2674,8 @@
             "Priority": 1,
             "Cost": 491,
             "Travel Time (min)": 313,
-            "Departure": "6:40",
-            "Arrival": "11:53",
+            "Departure": "18:40",
+            "Arrival": "23:53",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Monroe",
@@ -3392,36 +2699,9 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 1351,
-            "Travel Time (min)": 418,
-            "Departure": "6:00",
-            "Arrival": "12:58",
-            "Date": "11/6/2026",
-            "Starting Location": {
-                "City": "Monroe",
-                "Name": "MLU",
-                "GPS": {
-                    "LAT": 32.510556,
-                    "LONG": -92.036134
-                }
-            },
-            "Destination": {
-                "City": "College Station",
-                "Name": "CLL",
-                "GPS": {
-                    "LAT": 30.588042,
-                    "LONG": -96.362544
-                }
-            }
-        }
-    },
-    {
-        "Method": {
-            "Type": "Air",
-            "Priority": 1,
-            "Cost": 1373,
+            "Cost": 1495,
             "Travel Time (min)": 253,
-            "Departure": "6:00",
+            "Departure": "06:00",
             "Arrival": "10:13",
             "Date": "11/6/2026",
             "Starting Location": {
@@ -3448,8 +2728,8 @@
             "Priority": 1,
             "Cost": 582,
             "Travel Time (min)": 387,
-            "Departure": "2:30",
-            "Arrival": "8:57",
+            "Departure": "14:30",
+            "Arrival": "20:57",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "El Dorado",
@@ -3473,10 +2753,10 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 928,
+            "Cost": 1079,
             "Travel Time (min)": 500,
-            "Departure": "7:15",
-            "Arrival": "3:35",
+            "Departure": "07:15",
+            "Arrival": "15:35",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "El Dorado",
@@ -3502,8 +2782,8 @@
             "Priority": 1,
             "Cost": 1037,
             "Travel Time (min)": 1953,
-            "Departure": "2:30",
-            "Arrival": "11:03",
+            "Departure": "14:30",
+            "Arrival": "23:03",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "El Dorado",
@@ -3529,8 +2809,8 @@
             "Priority": 1,
             "Cost": 592,
             "Travel Time (min)": 213,
-            "Departure": "9:58",
-            "Arrival": "1:31",
+            "Departure": "09:58",
+            "Arrival": "13:31",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Shreveport",
@@ -3554,10 +2834,10 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 1417,
-            "Travel Time (min)": 399,
-            "Departure": "8:20",
-            "Arrival": "2:59",
+            "Cost": 1307,
+            "Travel Time (min)": 475,
+            "Departure": "16:00",
+            "Arrival": "23:55",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Shreveport",
@@ -3583,7 +2863,7 @@
             "Priority": 1,
             "Cost": 2092,
             "Travel Time (min)": 362,
-            "Departure": "6:02",
+            "Departure": "06:02",
             "Arrival": "12:04",
             "Date": "11/6/2026",
             "Starting Location": {
@@ -3608,10 +2888,10 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 474,
+            "Cost": 404,
             "Travel Time (min)": 394,
-            "Departure": "9:58",
-            "Arrival": "4:32",
+            "Departure": "09:58",
+            "Arrival": "16:32",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Shreveport",
@@ -3635,9 +2915,9 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 506,
+            "Cost": 474,
             "Travel Time (min)": 305,
-            "Departure": "6:00",
+            "Departure": "06:00",
             "Arrival": "11:05",
             "Date": "11/6/2026",
             "Starting Location": {
@@ -3662,10 +2942,10 @@
         "Method": {
             "Type": "Air",
             "Priority": 1,
-            "Cost": 698,
+            "Cost": 592,
             "Travel Time (min)": 219,
-            "Departure": "9:58",
-            "Arrival": "1:37",
+            "Departure": "09:58",
+            "Arrival": "13:37",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Shreveport",
@@ -3692,7 +2972,7 @@
             "Cost": 1067,
             "Travel Time (min)": 332,
             "Departure": "11:00",
-            "Arrival": "4:32",
+            "Arrival": "16:32",
             "Date": "11/6/2026",
             "Starting Location": {
                 "City": "Shreveport",
@@ -3708,6 +2988,122 @@
                 "GPS": {
                     "LAT": 29.6458,
                     "LONG": -95.277232
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 1,
+            "Cost": 70.69,
+            "Currency": "USD",
+            "Price Basis": "estimated",
+            "Travel Time (min)": 749,
+            "Departure": "6:31",
+            "Arrival": "19:00",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Hope",
+                "Name": "HOP",
+                "GPS": {
+                    "LAT": 33.668913,
+                    "LONG": -93.592247
+                }
+            },
+            "Destination": {
+                "City": "Taylor",
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": 30.567667,
+                    "LONG": -97.407763
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 2,
+            "Cost": 70.69,
+            "Currency": "USD",
+            "Price Basis": "estimated",
+            "Travel Time (min)": 749,
+            "Departure": "6:31",
+            "Arrival": "19:00",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Hope",
+                "Name": "HOP",
+                "GPS": {
+                    "LAT": 33.668913,
+                    "LONG": -93.592247
+                }
+            },
+            "Destination": {
+                "City": "Taylor",
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": 30.567667,
+                    "LONG": -97.407763
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 1,
+            "Cost": 55.58,
+            "Currency": "USD",
+            "Price Basis": "estimated",
+            "Travel Time (min)": 578,
+            "Departure": "9:22",
+            "Arrival": "19:00",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Marshall",
+                "Name": "MHL",
+                "GPS": {
+                    "LAT": 32.551549,
+                    "LONG": -94.366995
+                }
+            },
+            "Destination": {
+                "City": "Taylor",
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": 30.567667,
+                    "LONG": -97.407763
+                }
+            }
+        }
+    },
+    {
+        "Method": {
+            "Type": "Rail",
+            "Priority": 2,
+            "Cost": 55.58,
+            "Currency": "USD",
+            "Price Basis": "estimated",
+            "Travel Time (min)": 578,
+            "Departure": "9:22",
+            "Arrival": "19:00",
+            "Date": "11/6/2026",
+            "Starting Location": {
+                "City": "Marshall",
+                "Name": "MHL",
+                "GPS": {
+                    "LAT": 32.551549,
+                    "LONG": -94.366995
+                }
+            },
+            "Destination": {
+                "City": "Taylor",
+                "Name": "TAY",
+                "GPS": {
+                    "LAT": 30.567667,
+                    "LONG": -97.407763
                 }
             }
         }
@@ -4009,6 +3405,78 @@
                 "Cost": 0.0,
                 "Currency": "USD",
                 "Price Basis": "free",
+                "Travel Time (min)": 82,
+                "Distance (meters)": 6906.01,
+                "Transfers": 0,
+                "Trip ID": "walking:7beab911-2c38-4cb4-935d-05162a5b3074:MHL"
+            },
+            "starting_location": {
+                "City": "Marshall",
+                "State": "TX",
+                "Name": "Marshall (Pony Express Travel Ctr)",
+                "Station ID": "7beab911-2c38-4cb4-935d-05162a5b3074",
+                "GPS": {
+                    "LAT": 32.490326,
+                    "LONG": -94.35461
+                }
+            },
+            "destination": {
+                "City": "Marshall",
+                "State": "",
+                "Name": "MHL",
+                "Station ID": "MHL",
+                "GPS": {
+                    "LAT": 32.551549,
+                    "LONG": -94.366995
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
+                "Travel Time (min)": 82,
+                "Distance (meters)": 6906.01,
+                "Transfers": 0,
+                "Trip ID": "walking:MHL:7beab911-2c38-4cb4-935d-05162a5b3074"
+            },
+            "starting_location": {
+                "City": "Marshall",
+                "State": "",
+                "Name": "MHL",
+                "Station ID": "MHL",
+                "GPS": {
+                    "LAT": 32.551549,
+                    "LONG": -94.366995
+                }
+            },
+            "destination": {
+                "City": "Marshall",
+                "State": "TX",
+                "Name": "Marshall (Pony Express Travel Ctr)",
+                "Station ID": "7beab911-2c38-4cb4-935d-05162a5b3074",
+                "GPS": {
+                    "LAT": 32.490326,
+                    "LONG": -94.35461
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
                 "Travel Time (min)": 70,
                 "Distance (meters)": 5851.7,
                 "Transfers": 0,
@@ -4081,6 +3549,150 @@
                 "Cost": 0.0,
                 "Currency": "USD",
                 "Price Basis": "free",
+                "Travel Time (min)": 15,
+                "Distance (meters)": 1295.74,
+                "Transfers": 0,
+                "Trip ID": "walking:9e67280f-1256-42f4-9d1d-701cb6fe6ef5:56ede5dc-5956-47c7-a986-59b620150e95"
+            },
+            "starting_location": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": 29.784433,
+                    "LONG": -95.820967
+                }
+            },
+            "destination": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy",
+                "Station ID": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "GPS": {
+                    "LAT": 29.772928,
+                    "LONG": -95.818835
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
+                "Travel Time (min)": 15,
+                "Distance (meters)": 1295.74,
+                "Transfers": 0,
+                "Trip ID": "walking:56ede5dc-5956-47c7-a986-59b620150e95:9e67280f-1256-42f4-9d1d-701cb6fe6ef5"
+            },
+            "starting_location": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy",
+                "Station ID": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "GPS": {
+                    "LAT": 29.772928,
+                    "LONG": -95.818835
+                }
+            },
+            "destination": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": 29.784433,
+                    "LONG": -95.820967
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
+                "Travel Time (min)": 4,
+                "Distance (meters)": 364.51,
+                "Transfers": 0,
+                "Trip ID": "walking:9e67280f-1256-42f4-9d1d-701cb6fe6ef5:29.7858,-95.8244"
+            },
+            "starting_location": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": 29.784433,
+                    "LONG": -95.820967
+                }
+            },
+            "destination": {
+                "City": "Destination City",
+                "State": "",
+                "Name": "Trip Destination",
+                "Station ID": "29.7858,-95.8244",
+                "GPS": {
+                    "LAT": 29.7858,
+                    "LONG": -95.8244
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
+                "Travel Time (min)": 4,
+                "Distance (meters)": 364.51,
+                "Transfers": 0,
+                "Trip ID": "walking:29.7858,-95.8244:9e67280f-1256-42f4-9d1d-701cb6fe6ef5"
+            },
+            "starting_location": {
+                "City": "Destination City",
+                "State": "",
+                "Name": "Trip Destination",
+                "Station ID": "29.7858,-95.8244",
+                "GPS": {
+                    "LAT": 29.7858,
+                    "LONG": -95.8244
+                }
+            },
+            "destination": {
+                "City": "Katy",
+                "State": "TX",
+                "Name": "Katy (Food Mart)",
+                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "GPS": {
+                    "LAT": 29.784433,
+                    "LONG": -95.820967
+                }
+            }
+        }
+    },
+    {
+        "method": {
+            "info": {
+                "Type": "Walking",
+                "Name": "Walking Transfer",
+                "Scope": "Local",
+                "Cost": 0.0,
+                "Currency": "USD",
+                "Price Basis": "free",
                 "Travel Time (min)": 61,
                 "Distance (meters)": 5113.46,
                 "Transfers": 0,
@@ -4140,78 +3752,6 @@
                 "GPS": {
                     "LAT": 30.61827,
                     "LONG": -96.32228
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Walking",
-                "Name": "Walking Transfer",
-                "Scope": "Local",
-                "Cost": 0.0,
-                "Currency": "USD",
-                "Price Basis": "free",
-                "Travel Time (min)": 15,
-                "Distance (meters)": 1295.74,
-                "Transfers": 0,
-                "Trip ID": "walking:56ede5dc-5956-47c7-a986-59b620150e95:9e67280f-1256-42f4-9d1d-701cb6fe6ef5"
-            },
-            "starting_location": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy",
-                "Station ID": "56ede5dc-5956-47c7-a986-59b620150e95",
-                "GPS": {
-                    "LAT": 29.772928,
-                    "LONG": -95.818835
-                }
-            },
-            "destination": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy (Food Mart)",
-                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "GPS": {
-                    "LAT": 29.784433,
-                    "LONG": -95.820967
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Walking",
-                "Name": "Walking Transfer",
-                "Scope": "Local",
-                "Cost": 0.0,
-                "Currency": "USD",
-                "Price Basis": "free",
-                "Travel Time (min)": 15,
-                "Distance (meters)": 1295.74,
-                "Transfers": 0,
-                "Trip ID": "walking:9e67280f-1256-42f4-9d1d-701cb6fe6ef5:56ede5dc-5956-47c7-a986-59b620150e95"
-            },
-            "starting_location": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy (Food Mart)",
-                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "GPS": {
-                    "LAT": 29.784433,
-                    "LONG": -95.820967
-                }
-            },
-            "destination": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy",
-                "Station ID": "56ede5dc-5956-47c7-a986-59b620150e95",
-                "GPS": {
-                    "LAT": 29.772928,
-                    "LONG": -95.818835
                 }
             }
         }
@@ -4428,78 +3968,6 @@
                 "GPS": {
                     "LAT": 29.75093,
                     "LONG": -95.37448
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Walking",
-                "Name": "Walking Transfer",
-                "Scope": "Local",
-                "Cost": 0.0,
-                "Currency": "USD",
-                "Price Basis": "free",
-                "Travel Time (min)": 4,
-                "Distance (meters)": 364.51,
-                "Transfers": 0,
-                "Trip ID": "walking:9e67280f-1256-42f4-9d1d-701cb6fe6ef5:29.7858,-95.8244"
-            },
-            "starting_location": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy (Food Mart)",
-                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "GPS": {
-                    "LAT": 29.784433,
-                    "LONG": -95.820967
-                }
-            },
-            "destination": {
-                "City": "Destination City",
-                "State": "",
-                "Name": "Trip Destination",
-                "Station ID": "29.7858,-95.8244",
-                "GPS": {
-                    "LAT": 29.7858,
-                    "LONG": -95.8244
-                }
-            }
-        }
-    },
-    {
-        "method": {
-            "info": {
-                "Type": "Walking",
-                "Name": "Walking Transfer",
-                "Scope": "Local",
-                "Cost": 0.0,
-                "Currency": "USD",
-                "Price Basis": "free",
-                "Travel Time (min)": 4,
-                "Distance (meters)": 364.51,
-                "Transfers": 0,
-                "Trip ID": "walking:29.7858,-95.8244:9e67280f-1256-42f4-9d1d-701cb6fe6ef5"
-            },
-            "starting_location": {
-                "City": "Destination City",
-                "State": "",
-                "Name": "Trip Destination",
-                "Station ID": "29.7858,-95.8244",
-                "GPS": {
-                    "LAT": 29.7858,
-                    "LONG": -95.8244
-                }
-            },
-            "destination": {
-                "City": "Katy",
-                "State": "TX",
-                "Name": "Katy (Food Mart)",
-                "Station ID": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "GPS": {
-                    "LAT": 29.784433,
-                    "LONG": -95.820967
                 }
             }
         }

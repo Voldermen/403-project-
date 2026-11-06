@@ -66,14 +66,36 @@ def location(endpoint, data, coordinates):
             'GPS': {'LAT': gps.get('LAT'), 'LONG': gps.get('LONG')}}
 
 
+ALLOWED_BRANDS = {'greyhound', 'flixbus', 'greyhound express'}
+
+
+def _trip_cost(trip, data):
+    """Return (cost, basis) or None if the price is missing/invalid."""
+    price = trip.get('price', {})
+    cost, basis = price.get('total_with_platform_fee'), 'total_with_platform_fee'
+    if cost is None:
+        if data.get('platform_fee_in_price_required'):
+            return None
+        cost, basis = price.get('total'), 'total'
+    try:
+        cost = float(cost)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(cost) or cost < 0:
+        return None
+    return cost, basis
+
+
 def convert_response(data, coordinates=None):
     """Keep available itineraries whose every leg is a Greyhound-branded bus.
 
-    Retain complete timestamps as extra fields so overnight/time-zone data is
-    not lost, while 24-hour Departure/Arrival match the existing loader.
+    Malformed trips (bad timestamps/prices) are skipped rather than failing
+    the whole search. Complete timestamps are retained as extra fields so
+    overnight/time-zone data is not lost, while 24-hour Departure/Arrival
+    match the existing loader.
     """
     if not isinstance(data, dict) or not isinstance(data.get('trips'), list):
-        raise ValueError('Expected a search response containing a trips list.')
+        return []
     coordinates = coordinates or {}
     brands = data.get('brands', {})
     records = []
@@ -81,39 +103,29 @@ def convert_response(data, coordinates=None):
     for group in data['trips']:
         results = group.get('results', {})
         if not isinstance(results, dict):
-            raise ValueError('Unexpected results format; expected an object.')
+            continue
         for uid, trip in results.items():
             legs = trip.get('legs', [])
             if trip.get('status') != 'available' or not legs or uid in seen:
                 continue
-                
-            allowed_brands = {'greyhound', 'flixbus', 'greyhound express'}
-            
-            # Check all legs properly using the local loop variable inside all()
-            if not all(
-                leg.get('means_of_transport') == 'bus' and 
-                brands.get(leg.get('brand_id'), {}).get('name', '').casefold() in allowed_brands 
-                for leg in legs
-            ):
+            if not all(leg.get('means_of_transport') == 'bus'
+                       and brands.get(leg.get('brand_id'), {}).get('name', '').casefold() in ALLOWED_BRANDS
+                       for leg in legs):
                 continue
-                
-            start = datetime.fromisoformat(trip['departure']['date'])
-            end = datetime.fromisoformat(trip['arrival']['date'])
+            try:
+                start = datetime.fromisoformat(trip['departure']['date'])
+                end = datetime.fromisoformat(trip['arrival']['date'])
+            except (KeyError, TypeError, ValueError):
+                continue
             if start.utcoffset() is None or end.utcoffset() is None:
-                raise ValueError('Trip timestamps must include UTC offsets.')
+                continue
             minutes = (end.astimezone(timezone.utc) - start.astimezone(timezone.utc)).total_seconds() / 60
             if minutes < 0:
-                raise ValueError('Arrival precedes departure.')
-            price = trip['price']
-            cost = price.get('total_with_platform_fee')
-            basis = 'total_with_platform_fee'
-            if cost is None:
-                if data.get('platform_fee_in_price_required'):
-                    raise ValueError('Required platform-fee-inclusive price missing.')
-                cost, basis = price['total'], 'total'
-            cost = float(cost)
-            if not math.isfinite(cost) or cost < 0:
-                raise ValueError('Invalid price.')
+                continue
+            priced = _trip_cost(trip, data)
+            if priced is None:
+                continue
+            cost, basis = priced
             records.append({'method': {
                 'info': {'Type': 'Bus', 'Name': 'Greyhound', 'Scope': 'Interstate',
                          'Cost': cost, 'Currency': 'USD', 'Price Basis': basis,

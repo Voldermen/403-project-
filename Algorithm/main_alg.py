@@ -2,6 +2,7 @@ from datetime import date, timedelta
 from helpers import get_lat_long, get_bus_station_gps, get_train_station_gps, find_distance
 from process import get_paths
 from aggregator import fetch_greyhound_info, fetch_amtrack_info, fetch_plane_info
+from least_cost_path import find_lowest_cost_path, normalize_methods, print_result
 import json
 import pandas as pd
 import copy
@@ -48,7 +49,8 @@ def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_
                     master_list.append(items[0])
                     
             except Exception as e:
-                print(f"Error fetching Greyhound info for {origin_id} -> {dest_id}: {e}")
+                pass
+                #print(f"Error fetching Greyhound info for {origin_id} -> {dest_id}: {e}")
    
     # 2. Process Flight paths
     if "flight" in paths:
@@ -62,7 +64,8 @@ def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_
                 else:
                     master_list.append(flight_data)
             except Exception as e:
-                print(f"Error fetching Flight info for {origin_iata} -> {dest_iata}: {e}")
+                pass
+                #print(f"Error fetching Flight info for {origin_iata} -> {dest_iata}: {e}")
 
     # 3. Process Amtrak paths
     if "amtrak" in paths:
@@ -106,7 +109,8 @@ def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_
                             dest_loc["City"] = station_data["City"]
                 master_list.extend(items)
             except Exception as e:
-                print(f"Error fetching Amtrak info for {origin_station} -> {dest_station}: {e}")
+                pass
+                #print(f"Error fetching Amtrak info for {origin_station} -> {dest_station}: {e}")
     
 
     #add walking stuff
@@ -224,21 +228,43 @@ def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=N
     return master_list
 
 
-def main_alg(date):
-    """take in starting and ending addr and date"""
+
+
+
+
+
+
+
+
+
+def main_alg(date, start_time="12:01 am"):
+    """take in starting and ending addr, travel date, and earliest start time"""
     #get lat and lon of destinations
     #hardcoded for now Ruston to Katy TX
     origin_lat=32.5232 
     origin_lon=-92.6379
     dest_lat=29.7858
     dest_lon=-95.8244
+    origin = (origin_lat,origin_lon)
+    destination = (dest_lat, dest_lon)
+    objective = "cost"
 
     #get the possible paths
     paths = get_paths(origin_lat, origin_lon, dest_lat, dest_lon)
     with open("M_output.json", "w", encoding="utf-8") as f:
         json.dump(paths, f, ensure_ascii=False, indent=4)
     
-    collect_all_info(paths, date,  origin_lat,origin_lon, dest_lat, dest_lon)
+    all_legs = collect_all_info(paths, date,  origin_lat,origin_lon, dest_lat, dest_lon)
+
+    # Raw scraper records must be normalized before graph building
+    methods = normalize_methods(all_legs)
+    result = find_lowest_cost_path(methods, origin, destination, start_time, objective)
+    print_result(result)
+    return result
+
+
+
+    
 
 
 

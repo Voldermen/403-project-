@@ -254,8 +254,24 @@ def extract_trip_legs(get_edges_output):
             "next_hop": pair["to"],
             "next_hop_type": "airport"
         })
-    # (Amtrak / Greyhound line haul loops remain the same...)
-
+    for pair in query_edges.get("amtrak_pairs", []):
+        legs.append({
+            "leg_type": "line_haul",
+            "mode": "amtrak",
+            "origin": {"name": pair["from"], "type": "amtrak"},
+            "destination": {"name": pair["to"], "type": "amtrak"},
+            "next_hop": pair["to"],
+            "next_hop_type": "amtrak"
+        })
+    for pair in query_edges.get("greyhound_pairs", []):
+        legs.append({
+            "leg_type": "line_haul",
+            "mode": "greyhound",
+            "origin": {"name": pair["from"], "type": "greyhound"},
+            "destination": {"name": pair["to"], "type": "greyhound"},
+            "next_hop": pair["to"],
+            "next_hop_type": "greyhound"
+        })
 
     # 3. EXTRACT DESTINATION FEEDER LEGS
     for edge in dest_profile.get("destination_feeder_edges", []):
@@ -269,8 +285,29 @@ def extract_trip_legs(get_edges_output):
             "transfer_distance_m": edge["transfer_distance_m"]
         })
 
+    return dedupe_legs(legs)
 
-    return legs
+
+def dedupe_legs(legs):
+    """Drop legs that would produce a redundant or invalid API query.
+
+    The scrapers only look at (mode, origin, destination), so legs that differ
+    only in next_hop metadata are duplicates. Self-legs (origin == destination)
+    and legs with missing station IDs are skipped.
+    """
+    unique = []
+    seen = set()
+    for leg in legs:
+        origin = leg["origin"]["name"]
+        dest = leg["destination"]["name"]
+        if pd.isna(origin) or pd.isna(dest) or origin == dest:
+            continue
+        key = (leg["mode"], origin, dest)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(leg)
+    return unique
 
 
 

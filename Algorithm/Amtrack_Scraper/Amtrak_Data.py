@@ -8,6 +8,7 @@ Usage:
 """
 
 import json
+import math
 import re
 import sys
 from datetime import date, datetime, timedelta
@@ -37,6 +38,25 @@ STATIONS = {
     "MEM": ("Memphis", 35.1495, -90.0490),
     # You can add more station codes according to the stops.txt in the GTFS
 }
+
+FARE_BASE_USD = 15.00        # fixed per-ticket component
+FARE_PER_MILE_USD = 0.15     # coach-class rate per rail mile
+RAIL_CIRCUITY = 1.2          # rail miles ~= straight-line miles * this factor
+
+
+def haversine_miles(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    r = 3958.8  # Earth radius in miles
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = p2 - p1, math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def estimate_fare(origin_row, dest_row) -> float:
+    """Rough coach fare from GTFS stop coordinates (not a real quote)."""
+    miles = haversine_miles(float(origin_row["stop_lat"]), float(origin_row["stop_lon"]),
+                            float(dest_row["stop_lat"]), float(dest_row["stop_lon"]))
+    return round(FARE_BASE_USD + FARE_PER_MILE_USD * miles * RAIL_CIRCUITY, 2)
 
 
 def check_station(code: str) -> str:
@@ -146,13 +166,16 @@ def search_amtrak_gtfs(origin: str, destination: str, travel_date: date, limit: 
     results = results[:limit]
 
     # 8. Build output JSON structure
+    fare = estimate_fare(origin_rows.iloc[0], dest_rows.iloc[0])
     rides = []
     for rank, r in enumerate(results, start=1):
         rides.append({
             "Method": {
                 "Type": "Rail",
                 "Priority": rank,
-                "Cost": None,  # GTFS has no fares
+                "Cost": fare,  # GTFS has no fares; distance-based estimate
+                "Currency": "USD",
+                "Price Basis": "estimated",
                 "Travel Time (min)": r["duration"],
                 "Departure": clock_time(r["dep_dt"]),
                 "Arrival": clock_time(r["arr_dt"]),
