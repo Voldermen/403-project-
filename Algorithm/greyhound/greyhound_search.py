@@ -44,6 +44,7 @@ def fetch_response(origin, destination, travel_date):
             return json.load(response)
 
     except HTTPError as e:
+        pass
         error_body = e.read().decode('utf-8')
         print(f"\n[API Error {e.code}] Server Response:\n{error_body}\n")
         raise

@@ -4,9 +4,14 @@ from process import get_paths
 from aggregator import fetch_greyhound_info, fetch_amtrack_info, fetch_plane_info
 from least_cost_path import find_lowest_cost_path, normalize_methods, print_result
 import json
+import re
 import pandas as pd
 import copy
 
+
+
+
+""" THE main algorithm only looks at trips on the given day after the start time"""
 
 
 def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_lon):
@@ -237,17 +242,48 @@ def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=N
 
 
 
-def main_alg(date, start_time="12:01 am"):
+def parse_address(address):
+    """Split a one-line US address into (street, city, state, zip).
+
+    Accepts e.g. "123 Main St, Ruston, LA 71270" or "123 Main St, Ruston, LA, 71270".
+    Missing city/state/zip come back as None so get_lat_long can skip them.
+    """
+    parts = [p.strip() for p in address.split(",") if p.strip()]
+    if not parts:
+        raise ValueError("Address is empty.")
+
+    street = parts[0]
+    city = parts[1] if len(parts) > 1 else None
+    state = zip_code = None
+
+    # Remaining text holds state and/or zip: "LA 71270", "LA", or "LA", "71270"
+    tail = " ".join(parts[2:]).split()
+    for token in tail:
+        if re.fullmatch(r"\d{5}(-\d{4})?", token):
+            zip_code = token
+        elif re.fullmatch(r"[A-Za-z]{2}", token):
+            state = token.upper()
+
+    return street, city, state, zip_code
+
+
+def main_alg(add1, add2, date, objective="cost", start_time="12:01 am"):
     """take in starting and ending addr, travel date, and earliest start time"""
-    #get lat and lon of destinations
-    #hardcoded for now Ruston to Katy TX
-    origin_lat=32.5232 
-    origin_lon=-92.6379
-    dest_lat=29.7858
-    dest_lon=-95.8244
+    #get lat and lon of origin and destination
+    origin_street, origin_city, origin_state, origin_zip = parse_address(add1)
+    dest_street, dest_city, dest_state, dest_zip = parse_address(add2)
+
+    origin_lat, origin_lon = get_lat_long(origin_street, origin_city, origin_state, origin_zip)
+    dest_lat, dest_lon = get_lat_long(dest_street, dest_city, dest_state, dest_zip)
+    ########################
+    #some test coords
+    # origin_lat=32.5232 
+    # origin_lon=-92.6379
+    # dest_lat=29.7858
+    # dest_lon=-95.8244
+
     origin = (origin_lat,origin_lon)
     destination = (dest_lat, dest_lon)
-    objective = "cost"
 
     #get the possible paths
     paths = get_paths(origin_lat, origin_lon, dest_lat, dest_lon)
@@ -272,7 +308,12 @@ if __name__ == "__main__":
     today = date.today()
     tomorrow = today + timedelta(days=1)
 
-    main_alg(tomorrow)
+    colorado_addr = "1301 Pennsylvania St Denver, CO 80203"
+
+    ruston_addr = "1000 E Georgia Ave Ruston, LA 71272"
+    #currently planes lose on time since walk from denver airport to dest is too long
+    #and if fly into the other aiports you miss the last bus to denver
+    main_alg(ruston_addr, colorado_addr, tomorrow, "time")
     """
     get_paths(
             origin_lat=32.5232, origin_lon=-92.6379, 

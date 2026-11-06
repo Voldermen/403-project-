@@ -413,536 +413,206 @@
                 "type": "greyhound"
             },
             "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+            "next_hop": "55b07fb1-b6da-4069-975d-e69d4278391a",
             "next_hop_type": "greyhound"
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "9b6a920f-3ecb-11ea-8017-02437075395e",
+                "name": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "CLL",
+            "next_hop": "COS",
             "next_hop_type": "airport",
-            "transfer_distance_m": 103527.5127419868
+            "transfer_distance_m": 108544.27427244131
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "9b6a920f-3ecb-11ea-8017-02437075395e",
+                "name": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "greyhound"
             },
-            "next_hop": "CLL",
+            "next_hop": "COS",
             "next_hop_type": "airport",
-            "transfer_distance_m": 104738.30573021232
+            "transfer_distance_m": 125665.90085965036
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "9b6a920f-3ecb-11ea-8017-02437075395e",
+                "name": "2b13d9da-74d0-45db-83f9-de26fb3eccba",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "CLL",
+            "next_hop": "CYS",
             "next_hop_type": "airport",
-            "transfer_distance_m": 127650.95529576117
+            "transfer_distance_m": 156689.93691930355
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "9b6a920f-3ecb-11ea-8017-02437075395e",
+                "name": "2b13d9da-74d0-45db-83f9-de26fb3eccba",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "greyhound"
             },
-            "next_hop": "CLL",
+            "next_hop": "CYS",
             "next_hop_type": "airport",
-            "transfer_distance_m": 67509.79879354863
+            "transfer_distance_m": 168230.88158840468
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "9b6a920f-3ecb-11ea-8017-02437075395e",
+                "name": "397957ea-3fab-4a77-94a1-0c1a44e21b70",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "CLL",
+            "next_hop": "EGE",
             "next_hop_type": "airport",
-            "transfer_distance_m": 133118.95046156796
+            "transfer_distance_m": 164463.66206628212
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "3824c851-3630-433f-980e-d9d44e951ff1",
+                "name": "397957ea-3fab-4a77-94a1-0c1a44e21b70",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "greyhound"
             },
-            "next_hop": "VCT",
+            "next_hop": "EGE",
             "next_hop_type": "airport",
-            "transfer_distance_m": 148520.24562900598
+            "transfer_distance_m": 120182.49433882361
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "3824c851-3630-433f-980e-d9d44e951ff1",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "VCT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 147784.012934722
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "3824c851-3630-433f-980e-d9d44e951ff1",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
-                "type": "greyhound"
-            },
-            "next_hop": "VCT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 167893.98769166414
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "3824c851-3630-433f-980e-d9d44e951ff1",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
-                "type": "greyhound"
-            },
-            "next_hop": "VCT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 162655.1187052409
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "3824c851-3630-433f-980e-d9d44e951ff1",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "type": "greyhound"
-            },
-            "next_hop": "VCT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 179980.72044891177
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f533901d-4a8f-4bda-a817-703a5a48289b",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "type": "greyhound"
-            },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 174573.37583765577
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f533901d-4a8f-4bda-a817-703a5a48289b",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
-                "type": "greyhound"
-            },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 174519.23601677277
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f533901d-4a8f-4bda-a817-703a5a48289b",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
-                "type": "greyhound"
-            },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 144967.77872243847
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f533901d-4a8f-4bda-a817-703a5a48289b",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
-                "type": "greyhound"
-            },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 190321.34907150667
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f533901d-4a8f-4bda-a817-703a5a48289b",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "type": "greyhound"
-            },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 132438.5559389832
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2ee15b3c-b634-460e-a52e-197edba390d8",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "type": "greyhound"
-            },
-            "next_hop": "BMT",
+            "next_hop": "WPS",
             "next_hop_type": "amtrak",
-            "transfer_distance_m": 166401.05560816213
+            "transfer_distance_m": 66553.34727184646
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "2ee15b3c-b634-460e-a52e-197edba390d8",
+                "name": "a487e4e5-26a8-4073-a68d-d3868a835a15",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
                 "type": "greyhound"
             },
-            "next_hop": "BMT",
+            "next_hop": "FMG",
             "next_hop_type": "amtrak",
-            "transfer_distance_m": 166463.43877624127
+            "transfer_distance_m": 115871.04350212117
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "2ee15b3c-b634-460e-a52e-197edba390d8",
+                "name": "a487e4e5-26a8-4073-a68d-d3868a835a15",
                 "type": "bus_station"
             },
             "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "greyhound"
             },
-            "next_hop": "BMT",
+            "next_hop": "FMG",
             "next_hop_type": "amtrak",
-            "transfer_distance_m": 138149.62152694975
+            "transfer_distance_m": 156647.6573937692
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "2ee15b3c-b634-460e-a52e-197edba390d8",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
+                "name": "9edd92b9-b546-4e1d-b1db-4834d04879ac",
                 "type": "greyhound"
             },
-            "next_hop": "BMT",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 179451.60915611478
+            "destination": {
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                "type": "greyhound"
+            },
+            "next_hop": "9edd92b9-b546-4e1d-b1db-4834d04879ac",
+            "next_hop_type": "greyhound",
+            "transfer_distance_m": 95602.38546897116
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "2ee15b3c-b634-460e-a52e-197edba390d8",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
+                "name": "9edd92b9-b546-4e1d-b1db-4834d04879ac",
                 "type": "greyhound"
             },
-            "next_hop": "BMT",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 125529.46900960807
+            "destination": {
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
+                "type": "greyhound"
+            },
+            "next_hop": "9edd92b9-b546-4e1d-b1db-4834d04879ac",
+            "next_hop_type": "greyhound",
+            "transfer_distance_m": 52318.019781053394
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "f7359ec6-4709-4a77-b833-69b7378fa3ec",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
+                "name": "8794ab17-6e3c-46cf-a6af-0214b80caa22",
                 "type": "greyhound"
             },
-            "next_hop": "TAY",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 175642.0652045486
+            "destination": {
+                "name": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                "type": "greyhound"
+            },
+            "next_hop": "8794ab17-6e3c-46cf-a6af-0214b80caa22",
+            "next_hop_type": "greyhound",
+            "transfer_distance_m": 105523.9172612936
         },
         {
             "leg_type": "destination_feeder",
             "mode": "greyhound",
             "origin": {
-                "name": "f7359ec6-4709-4a77-b833-69b7378fa3ec",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
+                "name": "8794ab17-6e3c-46cf-a6af-0214b80caa22",
                 "type": "greyhound"
             },
-            "next_hop": "TAY",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 176464.91071213814
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f7359ec6-4709-4a77-b833-69b7378fa3ec",
-                "type": "bus_station"
-            },
             "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
+                "name": "d3fe1a76-8aa7-43b3-ae72-d29ca1601bd7",
                 "type": "greyhound"
             },
-            "next_hop": "TAY",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 206436.80070524503
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f7359ec6-4709-4a77-b833-69b7378fa3ec",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
-                "type": "greyhound"
-            },
-            "next_hop": "TAY",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 146571.90368361582
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "f7359ec6-4709-4a77-b833-69b7378fa3ec",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "type": "greyhound"
-            },
-            "next_hop": "TAY",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 215545.6099839162
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "type": "greyhound"
-            },
-            "next_hop": "AUS",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 194021.82666637824
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
-                "type": "greyhound"
-            },
-            "next_hop": "AUS",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 194588.4403050163
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
-                "type": "greyhound"
-            },
-            "next_hop": "AUS",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 225915.25890658583
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
-                "type": "greyhound"
-            },
-            "next_hop": "AUS",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 171034.75470076918
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "2e38f968-c026-4cf0-8d99-e1d4f13375b9",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "type": "greyhound"
-            },
-            "next_hop": "AUS",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 236530.79018913634
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "0e7db49b-404a-475c-944f-1689c1326fe0",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "9e67280f-1256-42f4-9d1d-701cb6fe6ef5",
-                "type": "greyhound"
-            },
-            "next_hop": "SMC",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 204760.2223217648
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "0e7db49b-404a-475c-944f-1689c1326fe0",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "56ede5dc-5956-47c7-a986-59b620150e95",
-                "type": "greyhound"
-            },
-            "next_hop": "SMC",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 205045.29481995368
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "0e7db49b-404a-475c-944f-1689c1326fe0",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "99e122a6-9b48-445f-a6be-d50f107314a4",
-                "type": "greyhound"
-            },
-            "next_hop": "SMC",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 236272.49825289313
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "0e7db49b-404a-475c-944f-1689c1326fe0",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "e7654862-221a-4bc4-85e2-de959a02599c",
-                "type": "greyhound"
-            },
-            "next_hop": "SMC",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 188972.24875041808
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "greyhound",
-            "origin": {
-                "name": "0e7db49b-404a-475c-944f-1689c1326fe0",
-                "type": "bus_station"
-            },
-            "destination": {
-                "name": "0edad38b-8446-40ef-bab2-2e268e21dd84",
-                "type": "greyhound"
-            },
-            "next_hop": "SMC",
-            "next_hop_type": "amtrak",
-            "transfer_distance_m": 248005.65416579833
+            "next_hop": "8794ab17-6e3c-46cf-a6af-0214b80caa22",
+            "next_hop_type": "greyhound",
+            "transfer_distance_m": 119179.22926601351
         }
     ],
     "flight": [
@@ -954,10 +624,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "IAH",
+                "name": "BJC",
                 "type": "airport"
             },
-            "next_hop": "IAH",
+            "next_hop": "BJC",
             "next_hop_type": "airport"
         },
         {
@@ -968,10 +638,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
+                "name": "DEN",
                 "type": "airport"
             },
-            "next_hop": "HOU",
+            "next_hop": "DEN",
             "next_hop_type": "airport"
         },
         {
@@ -982,10 +652,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "CLL",
+                "name": "COS",
                 "type": "airport"
             },
-            "next_hop": "CLL",
+            "next_hop": "COS",
             "next_hop_type": "airport"
         },
         {
@@ -996,10 +666,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "IAH",
+                "name": "BJC",
                 "type": "airport"
             },
-            "next_hop": "IAH",
+            "next_hop": "BJC",
             "next_hop_type": "airport"
         },
         {
@@ -1010,10 +680,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
+                "name": "DEN",
                 "type": "airport"
             },
-            "next_hop": "HOU",
+            "next_hop": "DEN",
             "next_hop_type": "airport"
         },
         {
@@ -1024,10 +694,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "CLL",
+                "name": "COS",
                 "type": "airport"
             },
-            "next_hop": "CLL",
+            "next_hop": "COS",
             "next_hop_type": "airport"
         },
         {
@@ -1038,10 +708,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "IAH",
+                "name": "BJC",
                 "type": "airport"
             },
-            "next_hop": "IAH",
+            "next_hop": "BJC",
             "next_hop_type": "airport"
         },
         {
@@ -1052,10 +722,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "HOU",
+                "name": "DEN",
                 "type": "airport"
             },
-            "next_hop": "HOU",
+            "next_hop": "DEN",
             "next_hop_type": "airport"
         },
         {
@@ -1066,10 +736,10 @@
                 "type": "airport"
             },
             "destination": {
-                "name": "CLL",
+                "name": "COS",
                 "type": "airport"
             },
-            "next_hop": "CLL",
+            "next_hop": "COS",
             "next_hop_type": "airport"
         }
     ],
@@ -1082,10 +752,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "HOS",
+            "next_hop": "DEN",
             "next_hop_type": "amtrak"
         },
         {
@@ -1096,10 +766,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "BMT",
+                "name": "WPS",
                 "type": "amtrak"
             },
-            "next_hop": "BMT",
+            "next_hop": "WPS",
             "next_hop_type": "amtrak"
         },
         {
@@ -1110,10 +780,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "TAY",
+                "name": "WIP",
                 "type": "amtrak"
             },
-            "next_hop": "TAY",
+            "next_hop": "WIP",
             "next_hop_type": "amtrak"
         },
         {
@@ -1124,10 +794,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "HOS",
+            "next_hop": "DEN",
             "next_hop_type": "amtrak"
         },
         {
@@ -1138,10 +808,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "BMT",
+                "name": "WPS",
                 "type": "amtrak"
             },
-            "next_hop": "BMT",
+            "next_hop": "WPS",
             "next_hop_type": "amtrak"
         },
         {
@@ -1152,10 +822,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "TAY",
+                "name": "WIP",
                 "type": "amtrak"
             },
-            "next_hop": "TAY",
+            "next_hop": "WIP",
             "next_hop_type": "amtrak"
         },
         {
@@ -1166,10 +836,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "HOS",
+            "next_hop": "DEN",
             "next_hop_type": "amtrak"
         },
         {
@@ -1180,10 +850,10 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "BMT",
+                "name": "WPS",
                 "type": "amtrak"
             },
-            "next_hop": "BMT",
+            "next_hop": "WPS",
             "next_hop_type": "amtrak"
         },
         {
@@ -1194,71 +864,86 @@
                 "type": "amtrak"
             },
             "destination": {
-                "name": "TAY",
+                "name": "WIP",
                 "type": "amtrak"
             },
-            "next_hop": "TAY",
+            "next_hop": "WIP",
             "next_hop_type": "amtrak"
         },
         {
             "leg_type": "destination_feeder",
             "mode": "amtrak",
             "origin": {
-                "name": "TAY",
+                "name": "FMG",
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "CLL",
+            "next_hop": "CYS",
             "next_hop_type": "airport",
-            "transfer_distance_m": 132333.22534370085
+            "transfer_distance_m": 156786.08436899248
         },
         {
             "leg_type": "destination_feeder",
             "mode": "amtrak",
             "origin": {
-                "name": "SMC",
+                "name": "GSC",
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "VCT",
+            "next_hop": "EGE",
             "next_hop_type": "airport",
-            "transfer_distance_m": 181541.97984619025
+            "transfer_distance_m": 164557.54846306826
         },
         {
             "leg_type": "destination_feeder",
             "mode": "amtrak",
             "origin": {
-                "name": "BMT",
+                "name": "WPS",
                 "type": "amtrak"
             },
             "destination": {
-                "name": "HOS",
+                "name": "DEN",
                 "type": "amtrak"
             },
-            "next_hop": "BPT",
-            "next_hop_type": "airport",
-            "transfer_distance_m": 131473.20364865675
-        },
-        {
-            "leg_type": "destination_feeder",
-            "mode": "amtrak",
-            "origin": {
-                "name": "AUS",
-                "type": "amtrak"
-            },
-            "destination": {
-                "name": "HOS",
-                "type": "amtrak"
-            },
-            "next_hop": "AUS",
+            "next_hop": "WPS",
             "next_hop_type": "amtrak",
-            "transfer_distance_m": 236727.43384621508
+            "transfer_distance_m": 66675.47422246095
+        },
+        {
+            "leg_type": "destination_feeder",
+            "mode": "amtrak",
+            "origin": {
+                "name": "WIP",
+                "type": "amtrak"
+            },
+            "destination": {
+                "name": "DEN",
+                "type": "amtrak"
+            },
+            "next_hop": "WIP",
+            "next_hop_type": "amtrak",
+            "transfer_distance_m": 73061.57348361996
+        },
+        {
+            "leg_type": "destination_feeder",
+            "mode": "amtrak",
+            "origin": {
+                "name": "GRA",
+                "type": "amtrak"
+            },
+            "destination": {
+                "name": "DEN",
+                "type": "amtrak"
+            },
+            "next_hop": "GRA",
+            "next_hop_type": "amtrak",
+            "transfer_distance_m": 87877.38605566764
         }
     ]
 }

@@ -190,6 +190,10 @@ def leg_times(method, ready_at):
     depart = time_to_minutes(method["departure"])
     if depart < ready_at:
         return None  # it left before you got there
+    # Prefer the scraper's duration: it is computed from full timestamps, so it
+    # handles multi-day trips and time-zone changes that clock times can't.
+    if method.get("travel_minutes", 0) > 0:
+        return depart, depart + method["travel_minutes"]
     arrive = time_to_minutes(method["arrival"])
     if arrive < depart:
         arrive += 24 * 60  # overnight arrival
