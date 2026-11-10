@@ -1,8 +1,8 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 from helpers import get_lat_long, get_bus_station_gps, get_train_station_gps, find_distance
 from process import get_paths
 from aggregator import fetch_greyhound_info, fetch_amtrack_info, fetch_plane_info
-from least_cost_path import find_lowest_cost_path, normalize_methods, print_result
+from least_cost_path import find_n_lowest_cost_paths, normalize_methods, leg_times
 import json
 import re
 import pandas as pd
@@ -267,8 +267,107 @@ def parse_address(address):
     return street, city, state, zip_code
 
 
-def main_alg(add1, add2, date, objective="cost", start_time="12:01 am"):
-    """take in starting and ending addr, travel date, and earliest start time"""
+# Exclude keywords -> the key used in get_paths' output
+MODE_ALIASES = {
+    "plane": "flight",
+    "train": "amtrak",
+    "bus": "greyhound",
+}
+
+
+def filter_paths(paths, exclude=None):
+    """Return a copy of `paths` without the excluded modes.
+
+    `exclude` may be a single keyword or a list of them: "plane", "train", "bus"
+    (e.g. "plane" or ["bus", "train"]). Walking can't be excluded:
+    it's needed to connect the trip origin/destination to the hubs.
+    """
+    if not exclude:
+        return paths
+    if isinstance(exclude, str):
+        exclude = [exclude]
+
+    excluded_modes = set()
+    for name in exclude:
+        mode = MODE_ALIASES.get(str(name).strip().lower())
+        if mode is None:
+            raise ValueError(
+                f"Unknown travel method {name!r}. Use one of: {sorted(MODE_ALIASES)}"
+            )
+        excluded_modes.add(mode)
+
+    return {mode: legs for mode, legs in paths.items() if mode not in excluded_modes}
+
+
+def _to_datetime_str(travel_date, minutes):
+    """Minutes from travel-day midnight -> 'YYYY-MM-DDTHH:MM' (rolls into later days)."""
+    if isinstance(travel_date, str):
+        travel_date = date.fromisoformat(travel_date)
+    day_start = datetime.combine(travel_date, datetime.min.time())
+    return (day_start + timedelta(minutes=minutes)).strftime("%Y-%m-%dT%H:%M")
+
+
+def build_route(result, raw_legs, travel_date):
+    """Turn one search result into a JSON-ready route dict with full leg details."""
+    path = result["path"]
+
+    # Clock times (minutes from travel-day midnight) for each leg
+    times = []
+    for (_, ready_at), (_, arrive_time), method in path:
+        depart_time, _ = leg_times(method, ready_at)
+        times.append([depart_time, arrive_time])
+
+    # Unscheduled legs (walking) are computed as leaving the moment you're ready,
+    # which puts the first walk at the search start time (e.g. 12:01 am) and a
+    # long wait at the station. Shift leading walks to arrive just in time.
+    first_scheduled = next(
+        (i for i, (_, _, m) in enumerate(path) if m.get("departure") is not None), None
+    )
+    if first_scheduled is not None:
+        for i in range(first_scheduled - 1, -1, -1):
+            duration = times[i][1] - times[i][0]
+            times[i][1] = times[i + 1][0]
+            times[i][0] = times[i][1] - duration
+
+    legs = []
+    for i, ((_, _, method), (depart, arrive)) in enumerate(zip(path, times)):
+        legs.append({
+            "leg_number": i + 1,
+            "type": method["type"],
+            "name": method["name"],
+            "scope": method["scope"],
+            "cost": method["cost"],
+            "departure": _to_datetime_str(travel_date, depart),
+            "arrival": _to_datetime_str(travel_date, arrive),
+            "duration_min": arrive - depart,
+            "wait_before_min": 0 if i == 0 else depart - times[i - 1][1],
+            "from": method["start"],
+            "to": method["destination"],
+            # Everything the scraper returned for this leg, untouched
+            "source_record": raw_legs[method["id"]],
+        })
+
+    trip_start, trip_end = times[0][0], times[-1][1]
+    return {
+        "total_cost": round(sum(leg["cost"] for leg in legs), 2),
+        "currency": "USD",
+        "total_time_min": trip_end - trip_start,
+        "departure": _to_datetime_str(travel_date, trip_start),
+        "arrival": _to_datetime_str(travel_date, trip_end),
+        "num_legs": len(legs),
+        "modes": [leg["type"] for leg in legs],
+        "legs": legs,
+    }
+
+
+def main_alg(add1, add2, date, objective="cost", start_time="12:01 am", exclude=None, num_paths=1):
+    """take in starting and ending addr, travel date, and earliest start time.
+    `exclude` is one or more travel methods to leave out, e.g. "plane" or ["bus", "train"]
+    `num_paths` is how many routes to return, best first.
+    `objective` is "cost" (cheapest), "arrival" (earliest arrival; "time" also
+    works), or "duration" (least time commuting, door to door).
+    `rank` is the order for that objective (1 = best)."""
+    travel_date = date
     #get lat and lon of origin and destination
     origin_street, origin_city, origin_state, origin_zip = parse_address(add1)
     dest_street, dest_city, dest_state, dest_zip = parse_address(add2)
@@ -286,7 +385,7 @@ def main_alg(add1, add2, date, objective="cost", start_time="12:01 am"):
     destination = (dest_lat, dest_lon)
 
     #get the possible paths
-    paths = get_paths(origin_lat, origin_lon, dest_lat, dest_lon)
+    paths = filter_paths(get_paths(origin_lat, origin_lon, dest_lat, dest_lon), exclude)
     with open("M_output.json", "w", encoding="utf-8") as f:
         json.dump(paths, f, ensure_ascii=False, indent=4)
     
@@ -294,9 +393,32 @@ def main_alg(add1, add2, date, objective="cost", start_time="12:01 am"):
 
     # Raw scraper records must be normalized before graph building
     methods = normalize_methods(all_legs)
-    result = find_lowest_cost_path(methods, origin, destination, start_time, objective)
-    print_result(result)
-    return result
+    results = find_n_lowest_cost_paths(methods, origin, destination, start_time, objective, num_paths)
+
+    return format_routes(results, all_legs, travel_date, {
+        "origin_address": add1,
+        "destination_address": add2,
+        "origin": {"LAT": origin_lat, "LONG": origin_lon},
+        "destination": {"LAT": dest_lat, "LONG": dest_lon},
+        "date": str(travel_date),
+        "start_time": start_time,
+        "objective": objective,
+        "excluded": exclude,
+        "num_paths_requested": num_paths,
+    })
+
+
+def format_routes(results, raw_legs, travel_date, query, out_path="M_routes.json"):
+    """Build the final ranked-routes dict from search results and save it."""
+    routes = [build_route(r, raw_legs, travel_date) for r in results]
+
+    # results already come back best-first for the chosen objective
+    routes = [{"rank": rank, **route} for rank, route in enumerate(routes, start=1)]
+    output = {"query": query, "num_routes": len(routes), "routes": routes}
+
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=4, default=str)
+    return output
 
 
 
@@ -313,7 +435,12 @@ if __name__ == "__main__":
     ruston_addr = "1000 E Georgia Ave Ruston, LA 71272"
     #currently planes lose on time since walk from denver airport to dest is too long
     #and if fly into the other aiports you miss the last bus to denver
-    main_alg(ruston_addr, colorado_addr, tomorrow, "time")
+    routes = main_alg(ruston_addr, colorado_addr, tomorrow, "time", num_paths=3)
+    print("full details in M_routes.json")
+    # e.g. skip flights and buses:
+    # main_alg(ruston_addr, colorado_addr, tomorrow, "time", exclude=["plane", "bus"])
+    # e.g. top 3 routes:
+
     """
     get_paths(
             origin_lat=32.5232, origin_lon=-92.6379, 

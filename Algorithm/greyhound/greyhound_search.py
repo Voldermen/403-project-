@@ -45,9 +45,9 @@ def fetch_response(origin, destination, travel_date):
 
     except HTTPError as e:
         pass
-        error_body = e.read().decode('utf-8')
-        print(f"\n[API Error {e.code}] Server Response:\n{error_body}\n")
-        raise
+        # error_body = e.read().decode('utf-8')
+        # print(f"\n[API Error {e.code}] Server Response:\n{error_body}\n")
+        # raise
 
 
 def location(endpoint, data, coordinates):

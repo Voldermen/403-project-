@@ -128,7 +128,7 @@ def search_amtrak_gtfs(origin: str, destination: str, travel_date: date, limit: 
     ]
 
     if dep_at_origin.empty or arr_at_dest.empty:
-        print(f"No direct trips found from {origin} to {destination} on {travel_date}.")
+        #print(f"No direct trips found from {origin} to {destination} on {travel_date}.")
         return {"Rides": []}
 
     # 6. Match: same trip_id, and departure time < arrival time (ensure correct direction)

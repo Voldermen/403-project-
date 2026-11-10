@@ -1,0 +1,464 @@
+{
+    "query": {
+        "origin_address": "1000 E Georgia Ave Ruston, LA 71272",
+        "destination_address": "1301 Pennsylvania St Denver, CO 80203",
+        "origin": {
+            "LAT": 32.532913738876,
+            "LONG": -92.625979223732
+        },
+        "destination": {
+            "LAT": 39.736940847614,
+            "LONG": -104.981170751416
+        },
+        "date": "2026-11-10",
+        "start_time": "12:01 am",
+        "objective": "time",
+        "excluded": null,
+        "num_paths_requested": 3
+    },
+    "num_routes": 2,
+    "routes": [
+        {
+            "rank": 1,
+            "total_cost": 192.97,
+            "currency": "USD",
+            "total_time_min": 1747,
+            "departure": "2026-11-10T05:38",
+            "arrival": "2026-11-11T10:45",
+            "num_legs": 3,
+            "modes": [
+                "Walking",
+                "Bus",
+                "Walking"
+            ],
+            "legs": [
+                {
+                    "leg_number": 1,
+                    "type": "Walking",
+                    "name": "Walking Transfer",
+                    "scope": "Local",
+                    "cost": 0.0,
+                    "departure": "2026-11-10T05:38",
+                    "arrival": "2026-11-10T06:05",
+                    "duration_min": 27,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Origin City",
+                        "State": "",
+                        "Name": "Trip Origin",
+                        "Station ID": "32.532913738876,-92.625979223732",
+                        "GPS": {
+                            "LAT": 32.532913738876,
+                            "LONG": -92.625979223732
+                        }
+                    },
+                    "to": {
+                        "City": "Ruston",
+                        "State": "LA",
+                        "Name": "Ruston (Tech Mart)",
+                        "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                        "GPS": {
+                            "LAT": 32.523736,
+                            "LONG": -92.648286
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Walking",
+                                "Name": "Walking Transfer",
+                                "Scope": "Local",
+                                "Cost": 0.0,
+                                "Currency": "USD",
+                                "Price Basis": "free",
+                                "Travel Time (min)": 27,
+                                "Distance (meters)": 2327.0,
+                                "Transfers": 0,
+                                "Trip ID": "walking:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
+                            },
+                            "starting_location": {
+                                "City": "Origin City",
+                                "State": "",
+                                "Name": "Trip Origin",
+                                "Station ID": "32.532913738876,-92.625979223732",
+                                "GPS": {
+                                    "LAT": 32.532913738876,
+                                    "LONG": -92.625979223732
+                                }
+                            },
+                            "destination": {
+                                "City": "Ruston",
+                                "State": "LA",
+                                "Name": "Ruston (Tech Mart)",
+                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "GPS": {
+                                    "LAT": 32.523736,
+                                    "LONG": -92.648286
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 2,
+                    "type": "Bus",
+                    "name": "Greyhound",
+                    "scope": "Interstate",
+                    "cost": 192.97,
+                    "departure": "2026-11-10T06:05",
+                    "arrival": "2026-11-11T10:15",
+                    "duration_min": 1690,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Ruston",
+                        "State": "LA",
+                        "Name": "Ruston (Tech Mart)",
+                        "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                        "GPS": {
+                            "LAT": 32.523736,
+                            "LONG": -92.648286
+                        }
+                    },
+                    "to": {
+                        "City": "Denver",
+                        "State": "CO",
+                        "Name": "Denver Union Station Bus Concourse",
+                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "GPS": {
+                            "LAT": 39.75392,
+                            "LONG": -105.00111
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Bus",
+                                "Name": "Greyhound",
+                                "Scope": "Interstate",
+                                "Cost": 192.97,
+                                "Currency": "USD",
+                                "Price Basis": "total_with_platform_fee",
+                                "Travel Time (min)": 1690,
+                                "Departure": "06:05",
+                                "Arrival": "09:15",
+                                "Date": "11/10/2026",
+                                "Departure Timestamp": "2026-11-10T06:05:00-06:00",
+                                "Arrival Timestamp": "2026-11-11T09:15:00-07:00",
+                                "Transfers": 1,
+                                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:55b07fb1-b6da-4069-975d-e69d4278391a/8090ed83-b746-4067-969e-495484028969:ab615f55-9409-4216-a06f-5cf7769812c5:ab615f55-9409-4216-a06f-5cf7769812c5:616c8e5b-8fcb-4c47-a9e0-22472b75793f"
+                            },
+                            "starting_location": {
+                                "City": "Ruston",
+                                "State": "LA",
+                                "Name": "Ruston (Tech Mart)",
+                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "GPS": {
+                                    "LAT": 32.523736,
+                                    "LONG": -92.648286
+                                }
+                            },
+                            "destination": {
+                                "City": "Denver",
+                                "State": "CO",
+                                "Name": "Denver Union Station Bus Concourse",
+                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "GPS": {
+                                    "LAT": 39.75392,
+                                    "LONG": -105.00111
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 3,
+                    "type": "Walking",
+                    "name": "Walking Transfer",
+                    "scope": "Local",
+                    "cost": 0.0,
+                    "departure": "2026-11-11T10:15",
+                    "arrival": "2026-11-11T10:45",
+                    "duration_min": 30,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Denver",
+                        "State": "CO",
+                        "Name": "Denver Union Station Bus Concourse",
+                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "GPS": {
+                            "LAT": 39.75392,
+                            "LONG": -105.00111
+                        }
+                    },
+                    "to": {
+                        "City": "Destination City",
+                        "State": "",
+                        "Name": "Trip Destination",
+                        "Station ID": "39.736940847614,-104.981170751416",
+                        "GPS": {
+                            "LAT": 39.736940847614,
+                            "LONG": -104.981170751416
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Walking",
+                                "Name": "Walking Transfer",
+                                "Scope": "Local",
+                                "Cost": 0.0,
+                                "Currency": "USD",
+                                "Price Basis": "free",
+                                "Travel Time (min)": 30,
+                                "Distance (meters)": 2543.75,
+                                "Transfers": 0,
+                                "Trip ID": "walking:55b07fb1-b6da-4069-975d-e69d4278391a:39.736940847614,-104.981170751416"
+                            },
+                            "starting_location": {
+                                "City": "Denver",
+                                "State": "CO",
+                                "Name": "Denver Union Station Bus Concourse",
+                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "GPS": {
+                                    "LAT": 39.75392,
+                                    "LONG": -105.00111
+                                }
+                            },
+                            "destination": {
+                                "City": "Destination City",
+                                "State": "",
+                                "Name": "Trip Destination",
+                                "Station ID": "39.736940847614,-104.981170751416",
+                                "GPS": {
+                                    "LAT": 39.736940847614,
+                                    "LONG": -104.981170751416
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "rank": 2,
+            "total_cost": 182.97,
+            "currency": "USD",
+            "total_time_min": 1522,
+            "departure": "2026-11-10T16:08",
+            "arrival": "2026-11-11T17:30",
+            "num_legs": 3,
+            "modes": [
+                "Walking",
+                "Bus",
+                "Walking"
+            ],
+            "legs": [
+                {
+                    "leg_number": 1,
+                    "type": "Walking",
+                    "name": "Walking Transfer",
+                    "scope": "Local",
+                    "cost": 0.0,
+                    "departure": "2026-11-10T16:08",
+                    "arrival": "2026-11-10T16:35",
+                    "duration_min": 27,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Origin City",
+                        "State": "",
+                        "Name": "Trip Origin",
+                        "Station ID": "32.532913738876,-92.625979223732",
+                        "GPS": {
+                            "LAT": 32.532913738876,
+                            "LONG": -92.625979223732
+                        }
+                    },
+                    "to": {
+                        "City": "Ruston",
+                        "State": "LA",
+                        "Name": "Ruston (Tech Mart)",
+                        "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                        "GPS": {
+                            "LAT": 32.523736,
+                            "LONG": -92.648286
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Walking",
+                                "Name": "Walking Transfer",
+                                "Scope": "Local",
+                                "Cost": 0.0,
+                                "Currency": "USD",
+                                "Price Basis": "free",
+                                "Travel Time (min)": 27,
+                                "Distance (meters)": 2327.0,
+                                "Transfers": 0,
+                                "Trip ID": "walking:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
+                            },
+                            "starting_location": {
+                                "City": "Origin City",
+                                "State": "",
+                                "Name": "Trip Origin",
+                                "Station ID": "32.532913738876,-92.625979223732",
+                                "GPS": {
+                                    "LAT": 32.532913738876,
+                                    "LONG": -92.625979223732
+                                }
+                            },
+                            "destination": {
+                                "City": "Ruston",
+                                "State": "LA",
+                                "Name": "Ruston (Tech Mart)",
+                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "GPS": {
+                                    "LAT": 32.523736,
+                                    "LONG": -92.648286
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 2,
+                    "type": "Bus",
+                    "name": "Greyhound",
+                    "scope": "Interstate",
+                    "cost": 182.97,
+                    "departure": "2026-11-10T16:35",
+                    "arrival": "2026-11-11T17:00",
+                    "duration_min": 1465,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Ruston",
+                        "State": "LA",
+                        "Name": "Ruston (Tech Mart)",
+                        "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                        "GPS": {
+                            "LAT": 32.523736,
+                            "LONG": -92.648286
+                        }
+                    },
+                    "to": {
+                        "City": "Denver",
+                        "State": "CO",
+                        "Name": "Denver Union Station Bus Concourse",
+                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "GPS": {
+                            "LAT": 39.75392,
+                            "LONG": -105.00111
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Bus",
+                                "Name": "Greyhound",
+                                "Scope": "Interstate",
+                                "Cost": 182.97,
+                                "Currency": "USD",
+                                "Price Basis": "total_with_platform_fee",
+                                "Travel Time (min)": 1465,
+                                "Departure": "16:35",
+                                "Arrival": "16:00",
+                                "Date": "11/10/2026",
+                                "Departure Timestamp": "2026-11-10T16:35:00-06:00",
+                                "Arrival Timestamp": "2026-11-11T16:00:00-07:00",
+                                "Transfers": 1,
+                                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:55b07fb1-b6da-4069-975d-e69d4278391a/3abb83f9-0f66-4c89-8918-d8b0ed0ff45e:ab615f55-9409-4216-a06f-5cf7769812c5:ab615f55-9409-4216-a06f-5cf7769812c5:3f72e6a0-43c9-4bb6-8882-360f4c1bc812"
+                            },
+                            "starting_location": {
+                                "City": "Ruston",
+                                "State": "LA",
+                                "Name": "Ruston (Tech Mart)",
+                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "GPS": {
+                                    "LAT": 32.523736,
+                                    "LONG": -92.648286
+                                }
+                            },
+                            "destination": {
+                                "City": "Denver",
+                                "State": "CO",
+                                "Name": "Denver Union Station Bus Concourse",
+                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "GPS": {
+                                    "LAT": 39.75392,
+                                    "LONG": -105.00111
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 3,
+                    "type": "Walking",
+                    "name": "Walking Transfer",
+                    "scope": "Local",
+                    "cost": 0.0,
+                    "departure": "2026-11-11T17:00",
+                    "arrival": "2026-11-11T17:30",
+                    "duration_min": 30,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Denver",
+                        "State": "CO",
+                        "Name": "Denver Union Station Bus Concourse",
+                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "GPS": {
+                            "LAT": 39.75392,
+                            "LONG": -105.00111
+                        }
+                    },
+                    "to": {
+                        "City": "Destination City",
+                        "State": "",
+                        "Name": "Trip Destination",
+                        "Station ID": "39.736940847614,-104.981170751416",
+                        "GPS": {
+                            "LAT": 39.736940847614,
+                            "LONG": -104.981170751416
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Walking",
+                                "Name": "Walking Transfer",
+                                "Scope": "Local",
+                                "Cost": 0.0,
+                                "Currency": "USD",
+                                "Price Basis": "free",
+                                "Travel Time (min)": 30,
+                                "Distance (meters)": 2543.75,
+                                "Transfers": 0,
+                                "Trip ID": "walking:55b07fb1-b6da-4069-975d-e69d4278391a:39.736940847614,-104.981170751416"
+                            },
+                            "starting_location": {
+                                "City": "Denver",
+                                "State": "CO",
+                                "Name": "Denver Union Station Bus Concourse",
+                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "GPS": {
+                                    "LAT": 39.75392,
+                                    "LONG": -105.00111
+                                }
+                            },
+                            "destination": {
+                                "City": "Destination City",
+                                "State": "",
+                                "Name": "Trip Destination",
+                                "Station ID": "39.736940847614,-104.981170751416",
+                                "GPS": {
+                                    "LAT": 39.736940847614,
+                                    "LONG": -104.981170751416
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
