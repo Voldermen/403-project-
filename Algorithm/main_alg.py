@@ -360,7 +360,7 @@ def build_route(result, raw_legs, travel_date):
     }
 
 
-def main_alg(add1, add2, date, objective="cost", start_time="12:01 am", exclude=None, num_paths=1):
+def main_alg(add1, add2, date, objective="cost", start_time="12:01 am", exclude=None, num_paths=3):
     """take in starting and ending addr, travel date, and earliest start time.
     `exclude` is one or more travel methods to leave out, e.g. "plane" or ["bus", "train"]
     `num_paths` is how many routes to return, best first.
