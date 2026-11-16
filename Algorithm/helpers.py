@@ -26,6 +26,37 @@ def find_distance(lat1, lon1, lat2, lon2):
     a = sin(dphi / 2) ** 2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlmb / 2) ** 2
     return 2 * r * asin(sqrt(a))
 
+
+# Uber (UberX) estimate constants. These are rough US averages, not live quotes;
+# real fares vary by city, time of day, and surge pricing.
+UBER_BASE_FARE = 2.50        # flat charge per ride
+UBER_BOOKING_FEE = 2.75      # service/booking fee per ride
+UBER_PER_MILE = 1.25         # charge per road mile
+UBER_PER_MINUTE = 0.30       # charge per minute in the car
+UBER_MIN_FARE = 8.00         # no ride costs less than this
+UBER_ROAD_CIRCUITY = 1.3     # road distance ~= straight-line distance * this
+UBER_AVG_SPEED_MPH = 30      # average driving speed (mix of city and highway)
+UBER_PICKUP_WAIT_MIN = 5     # time waiting for the driver to arrive
+
+METERS_PER_MILE = 1609.344
+
+
+def estimate_uber(distance_m):
+    """Estimate an Uber ride between two points.
+
+    takes the straight-line distance in meters between the points,
+    returns (travel_time_min, cost_usd). Travel time includes the pickup wait.
+    """
+    road_miles = distance_m * UBER_ROAD_CIRCUITY / METERS_PER_MILE
+    drive_min = road_miles / UBER_AVG_SPEED_MPH * 60
+    travel_time_min = max(1, round(UBER_PICKUP_WAIT_MIN + drive_min))
+
+    fare = (UBER_BASE_FARE + UBER_BOOKING_FEE
+            + UBER_PER_MILE * road_miles
+            + UBER_PER_MINUTE * drive_min)
+    cost = round(max(UBER_MIN_FARE, fare), 2)
+    return travel_time_min, cost
+
 #also from scripts
 def get_lat_long(street: str, city: str = None, state: str = None, zip_code: str = None) -> tuple:
 

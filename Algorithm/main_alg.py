@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from helpers import get_lat_long, get_bus_station_gps, get_train_station_gps, find_distance
+from helpers import get_lat_long, get_bus_station_gps, get_train_station_gps, find_distance, estimate_uber
 from process import get_paths
 from aggregator import fetch_greyhound_info, fetch_amtrack_info, fetch_plane_info
 from least_cost_path import find_n_lowest_cost_paths, normalize_methods, leg_times
@@ -118,8 +118,8 @@ def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_
                 #print(f"Error fetching Amtrak info for {origin_station} -> {dest_station}: {e}")
     
 
-    #add walking stuff
-    master_list = add_walking_connections(master_list, 25000, origin_lat, origin_lon, dest_lat, dest_lon)
+    #add uber connections between hubs
+    master_list = add_uber_connections(master_list, 30000, origin_lat, origin_lon, dest_lat, dest_lon)
     # Save the giant JSON output
     with open("M_output_unified.json", "w", encoding="utf-8") as f:
         json.dump(master_list, f, ensure_ascii=False, indent=4)
@@ -129,7 +129,7 @@ def collect_all_info(paths, travel_date, origin_lat, origin_lon, dest_lat, dest_
 
 
 
-def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=None, origin_lon=None, dest_lat=None, dest_lon=None):
+def add_uber_connections(master_list, max_distance_meters=20000, origin_lat=None, origin_lon=None, dest_lat=None, dest_lon=None):
     
     unique_hubs = {}
     
@@ -189,7 +189,7 @@ def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=N
             }
 
     hub_list = list(unique_hubs.values())
-    walking_legs = []
+    uber_legs = []
 
     # 2. Compare every unique hub against every other unique hub
     for i in range(len(hub_list)):
@@ -203,34 +203,49 @@ def add_walking_connections(master_list, max_distance_meters=20000, origin_lat=N
             distance = find_distance(lat1, lon1, lat2, lon2)
             
             if distance <= max_distance_meters:
-                walking_speed_mps = 83.3 / 60  # ~1.39 m/s (~5 km/h)
-                travel_time_min = max(1, int(distance / walking_speed_mps / 60))
-                
-                # Create bidirectional walking links
-                for origin, dest in [(hub_a, hub_b), (hub_b, hub_a)]:
-                    walking_leg = {
-                        "method": {
-                            "info": {
-                                "Type": "Walking",
-                                "Name": "Walking Transfer",
-                                "Scope": "Local",
-                                "Cost": 0.0,
-                                "Currency": "USD",
-                                "Price Basis": "free",
-                                "Travel Time (min)": travel_time_min,
-                                "Distance (meters)": round(distance, 2),
-                                "Transfers": 0,
-                                "Trip ID": f"walking:{origin.get('Station ID')}:{dest.get('Station ID')}"
-                            },
-                            "starting_location": copy.deepcopy(origin),
-                            "destination": copy.deepcopy(dest)
-                        }
-                    }
-                    walking_legs.append(walking_leg)
+                # Create bidirectional uber links
+                uber_legs.append(make_uber_leg(hub_a, hub_b, distance))
+                uber_legs.append(make_uber_leg(hub_b, hub_a, distance))
 
-    # 3. Append the new walking connections to the master list
-    master_list.extend(walking_legs)
+    # 3. Fallback: always add a direct uber from the trip origin to the trip
+    # destination, ignoring max_distance_meters. This guarantees a route exists
+    # even when every travel mode is excluded or no scraper returns results.
+    # It is a normal edge, so the search only picks it if it actually wins.
+    # (If origin and destination are within max_distance_meters, step 2 already added it.)
+    if None not in (origin_lat, origin_lon, dest_lat, dest_lon):
+        trip_origin = unique_hubs[f"{origin_lat},{origin_lon}"]
+        trip_dest = unique_hubs[f"{dest_lat},{dest_lon}"]
+        distance = find_distance(origin_lat, origin_lon, dest_lat, dest_lon)
+        if distance > max_distance_meters:
+            uber_legs.append(make_uber_leg(trip_origin, trip_dest, distance, scope="Direct"))
+
+    # 4. Append the new uber connections to the master list
+    master_list.extend(uber_legs)
     return master_list
+
+
+def make_uber_leg(origin, dest, distance, scope="Local"):
+    """Build one uber leg record from origin hub to dest hub.
+    distance is the straight-line distance in meters; time and cost come from estimate_uber."""
+    travel_time_min, cost = estimate_uber(distance)
+    return {
+        "method": {
+            "info": {
+                "Type": "Uber",
+                "Name": "Uber Ride",
+                "Scope": scope,
+                "Cost": cost,
+                "Currency": "USD",
+                "Price Basis": "estimated",
+                "Travel Time (min)": travel_time_min,
+                "Distance (meters)": round(distance, 2),
+                "Transfers": 0,
+                "Trip ID": f"uber:{origin.get('Station ID')}:{dest.get('Station ID')}"
+            },
+            "starting_location": copy.deepcopy(origin),
+            "destination": copy.deepcopy(dest)
+        }
+    }
 
 
 
@@ -279,7 +294,7 @@ def filter_paths(paths, exclude=None):
     """Return a copy of `paths` without the excluded modes.
 
     `exclude` may be a single keyword or a list of them: "plane", "train", "bus"
-    (e.g. "plane" or ["bus", "train"]). Walking can't be excluded:
+    (e.g. "plane" or ["bus", "train"]). Uber can't be excluded:
     it's needed to connect the trip origin/destination to the hubs.
     """
     if not exclude:
@@ -317,9 +332,9 @@ def build_route(result, raw_legs, travel_date):
         depart_time, _ = leg_times(method, ready_at)
         times.append([depart_time, arrive_time])
 
-    # Unscheduled legs (walking) are computed as leaving the moment you're ready,
-    # which puts the first walk at the search start time (e.g. 12:01 am) and a
-    # long wait at the station. Shift leading walks to arrive just in time.
+    # Unscheduled legs (uber) are computed as leaving the moment you're ready,
+    # which puts the first ride at the search start time (e.g. 12:01 am) and a
+    # long wait at the station. Shift leading rides to arrive just in time.
     first_scheduled = next(
         (i for i, (_, _, m) in enumerate(path) if m.get("departure") is not None), None
     )
@@ -433,10 +448,10 @@ if __name__ == "__main__":
     colorado_addr = "1301 Pennsylvania St Denver, CO 80203"
 
     ruston_addr = "1000 E Georgia Ave Ruston, LA 71272"
-    #currently planes lose on time since walk from denver airport to dest is too long
+    #currently planes lose on time since uber from denver airport to dest is too long
     #and if fly into the other aiports you miss the last bus to denver
     routes = main_alg(ruston_addr, colorado_addr, tomorrow, "time", num_paths=3)
-    print("full details in M_routes.json")
+    #print("full details in M_routes.json")
     # e.g. skip flights and buses:
     # main_alg(ruston_addr, colorado_addr, tomorrow, "time", exclude=["plane", "bus"])
     # e.g. top 3 routes:

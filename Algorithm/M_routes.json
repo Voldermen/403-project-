@@ -10,37 +10,39 @@
             "LAT": 39.736940847614,
             "LONG": -104.981170751416
         },
-        "date": "2026-11-15",
+        "date": "2026-11-17",
         "start_time": "12:01 am",
         "objective": "time",
         "excluded": null,
         "num_paths_requested": 3
     },
-    "num_routes": 2,
+    "num_routes": 3,
     "routes": [
         {
             "rank": 1,
-            "total_cost": 190.97,
+            "total_cost": 668.29,
             "currency": "USD",
-            "total_time_min": 1747,
-            "departure": "2026-11-15T05:38",
-            "arrival": "2026-11-16T10:45",
-            "num_legs": 3,
+            "total_time_min": 556,
+            "departure": "2026-11-17T05:56",
+            "arrival": "2026-11-17T15:12",
+            "num_legs": 5,
             "modes": [
-                "Walking",
+                "Uber",
                 "Bus",
-                "Walking"
+                "Uber",
+                "Air",
+                "Uber"
             ],
             "legs": [
                 {
                     "leg_number": 1,
-                    "type": "Walking",
-                    "name": "Walking Transfer",
+                    "type": "Uber",
+                    "name": "Uber Ride",
                     "scope": "Local",
-                    "cost": 0.0,
-                    "departure": "2026-11-15T05:38",
-                    "arrival": "2026-11-15T06:05",
-                    "duration_min": 27,
+                    "cost": 8.73,
+                    "departure": "2026-11-17T05:56",
+                    "arrival": "2026-11-17T06:05",
+                    "duration_min": 9,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Origin City",
@@ -65,16 +67,16 @@
                     "source_record": {
                         "method": {
                             "info": {
-                                "Type": "Walking",
-                                "Name": "Walking Transfer",
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
                                 "Scope": "Local",
-                                "Cost": 0.0,
+                                "Cost": 8.73,
                                 "Currency": "USD",
-                                "Price Basis": "free",
-                                "Travel Time (min)": 27,
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 9,
                                 "Distance (meters)": 2327.0,
                                 "Transfers": 0,
-                                "Trip ID": "walking:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
+                                "Trip ID": "uber:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
                             },
                             "starting_location": {
                                 "City": "Origin City",
@@ -104,10 +106,10 @@
                     "type": "Bus",
                     "name": "Greyhound",
                     "scope": "Interstate",
-                    "cost": 190.97,
-                    "departure": "2026-11-15T06:05",
-                    "arrival": "2026-11-16T10:15",
-                    "duration_min": 1690,
+                    "cost": 22.48,
+                    "departure": "2026-11-17T06:05",
+                    "arrival": "2026-11-17T07:40",
+                    "duration_min": 95,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Ruston",
@@ -120,13 +122,13 @@
                         }
                     },
                     "to": {
-                        "City": "Denver",
-                        "State": "CO",
-                        "Name": "Denver Union Station Bus Concourse",
-                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
                         "GPS": {
-                            "LAT": 39.75392,
-                            "LONG": -105.00111
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
                         }
                     },
                     "source_record": {
@@ -135,17 +137,17 @@
                                 "Type": "Bus",
                                 "Name": "Greyhound",
                                 "Scope": "Interstate",
-                                "Cost": 190.97,
+                                "Cost": 22.48,
                                 "Currency": "USD",
                                 "Price Basis": "total_with_platform_fee",
-                                "Travel Time (min)": 1690,
+                                "Travel Time (min)": 95,
                                 "Departure": "06:05",
-                                "Arrival": "09:15",
-                                "Date": "11/15/2026",
-                                "Departure Timestamp": "2026-11-15T06:05:00-06:00",
-                                "Arrival Timestamp": "2026-11-16T09:15:00-07:00",
-                                "Transfers": 1,
-                                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:55b07fb1-b6da-4069-975d-e69d4278391a/e0454b35-2dc9-4016-ac56-027f18195569:ab615f55-9409-4216-a06f-5cf7769812c5:ab615f55-9409-4216-a06f-5cf7769812c5:b2828c30-50cd-4e45-9cee-e1415f5b2b7f"
+                                "Arrival": "07:40",
+                                "Date": "11/17/2026",
+                                "Departure Timestamp": "2026-11-17T06:05:00-06:00",
+                                "Arrival Timestamp": "2026-11-17T07:40:00-06:00",
+                                "Transfers": 0,
+                                "Trip ID": "direct:d31d31f0-a182-4e75-9134-9969980760ca:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
                             },
                             "starting_location": {
                                 "City": "Ruston",
@@ -158,13 +160,13 @@
                                 }
                             },
                             "destination": {
-                                "City": "Denver",
-                                "State": "CO",
-                                "Name": "Denver Union Station Bus Concourse",
-                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
                                 "GPS": {
-                                    "LAT": 39.75392,
-                                    "LONG": -105.00111
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
                                 }
                             }
                         }
@@ -172,22 +174,143 @@
                 },
                 {
                     "leg_number": 3,
-                    "type": "Walking",
-                    "name": "Walking Transfer",
+                    "type": "Uber",
+                    "name": "Uber Ride",
                     "scope": "Local",
-                    "cost": 0.0,
-                    "departure": "2026-11-16T10:15",
-                    "arrival": "2026-11-16T10:45",
-                    "duration_min": 30,
+                    "cost": 18.38,
+                    "departure": "2026-11-17T07:40",
+                    "arrival": "2026-11-17T07:59",
+                    "duration_min": 19,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                        "GPS": {
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
+                        }
+                    },
+                    "to": {
+                        "City": "Shreveport",
+                        "State": "",
+                        "Name": "SHV",
+                        "Station ID": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 18.38,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 19,
+                                "Distance (meters)": 8783.28,
+                                "Transfers": 0,
+                                "Trip ID": "uber:b987d31c-d740-4ae0-a011-3f64e753e768:SHV"
+                            },
+                            "starting_location": {
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                                "GPS": {
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
+                                }
+                            },
+                            "destination": {
+                                "City": "Shreveport",
+                                "State": "",
+                                "Name": "SHV",
+                                "Station ID": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 4,
+                    "type": "Air",
+                    "name": "Air option 54",
+                    "scope": "Unknown",
+                    "cost": 569.0,
+                    "departure": "2026-11-17T08:20",
+                    "arrival": "2026-11-17T14:19",
+                    "duration_min": 359,
+                    "wait_before_min": 21,
+                    "from": {
+                        "City": "Shreveport",
+                        "Name": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "to": {
+                        "City": "Denver",
+                        "Name": "DEN",
+                        "GPS": {
+                            "LAT": 39.861667,
+                            "LONG": -104.673167
+                        }
+                    },
+                    "source_record": {
+                        "Method": {
+                            "Type": "Air",
+                            "Priority": 1,
+                            "Cost": 569,
+                            "Travel Time (min)": 359,
+                            "Departure": "08:20",
+                            "Arrival": "13:19",
+                            "Date": "11/17/2026",
+                            "Starting Location": {
+                                "City": "Shreveport",
+                                "Name": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            },
+                            "Destination": {
+                                "City": "Denver",
+                                "Name": "DEN",
+                                "GPS": {
+                                    "LAT": 39.861667,
+                                    "LONG": -104.673167
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 5,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 49.7,
+                    "departure": "2026-11-17T14:19",
+                    "arrival": "2026-11-17T15:12",
+                    "duration_min": 53,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Denver",
-                        "State": "CO",
-                        "Name": "Denver Union Station Bus Concourse",
-                        "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                        "State": "",
+                        "Name": "DEN",
+                        "Station ID": "DEN",
                         "GPS": {
-                            "LAT": 39.75392,
-                            "LONG": -105.00111
+                            "LAT": 39.861667,
+                            "LONG": -104.673167
                         }
                     },
                     "to": {
@@ -203,25 +326,25 @@
                     "source_record": {
                         "method": {
                             "info": {
-                                "Type": "Walking",
-                                "Name": "Walking Transfer",
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
                                 "Scope": "Local",
-                                "Cost": 0.0,
+                                "Cost": 49.7,
                                 "Currency": "USD",
-                                "Price Basis": "free",
-                                "Travel Time (min)": 30,
-                                "Distance (meters)": 2543.75,
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 53,
+                                "Distance (meters)": 29744.04,
                                 "Transfers": 0,
-                                "Trip ID": "walking:55b07fb1-b6da-4069-975d-e69d4278391a:39.736940847614,-104.981170751416"
+                                "Trip ID": "uber:DEN:39.736940847614,-104.981170751416"
                             },
                             "starting_location": {
                                 "City": "Denver",
-                                "State": "CO",
-                                "Name": "Denver Union Station Bus Concourse",
-                                "Station ID": "55b07fb1-b6da-4069-975d-e69d4278391a",
+                                "State": "",
+                                "Name": "DEN",
+                                "Station ID": "DEN",
                                 "GPS": {
-                                    "LAT": 39.75392,
-                                    "LONG": -105.00111
+                                    "LAT": 39.861667,
+                                    "LONG": -104.673167
                                 }
                             },
                             "destination": {
@@ -241,27 +364,375 @@
         },
         {
             "rank": 2,
-            "total_cost": 144.97,
+            "total_cost": 676.34,
             "currency": "USD",
-            "total_time_min": 1522,
-            "departure": "2026-11-15T16:08",
-            "arrival": "2026-11-16T17:30",
-            "num_legs": 3,
+            "total_time_min": 546,
+            "departure": "2026-11-17T06:06",
+            "arrival": "2026-11-17T15:12",
+            "num_legs": 5,
             "modes": [
-                "Walking",
+                "Uber",
                 "Bus",
-                "Walking"
+                "Uber",
+                "Air",
+                "Uber"
             ],
             "legs": [
                 {
                     "leg_number": 1,
-                    "type": "Walking",
-                    "name": "Walking Transfer",
+                    "type": "Uber",
+                    "name": "Uber Ride",
                     "scope": "Local",
-                    "cost": 0.0,
-                    "departure": "2026-11-15T16:08",
-                    "arrival": "2026-11-15T16:35",
-                    "duration_min": 27,
+                    "cost": 17.78,
+                    "departure": "2026-11-17T06:06",
+                    "arrival": "2026-11-17T06:25",
+                    "duration_min": 19,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Origin City",
+                        "State": "",
+                        "Name": "Trip Origin",
+                        "Station ID": "32.532913738876,-92.625979223732",
+                        "GPS": {
+                            "LAT": 32.532913738876,
+                            "LONG": -92.625979223732
+                        }
+                    },
+                    "to": {
+                        "City": "Grambling",
+                        "State": "LA",
+                        "Name": "Grambling (Grambling State Univ)",
+                        "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                        "GPS": {
+                            "LAT": 32.52217,
+                            "LONG": -92.7145
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 17.78,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 19,
+                                "Distance (meters)": 8384.55,
+                                "Transfers": 0,
+                                "Trip ID": "uber:32.532913738876,-92.625979223732:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77"
+                            },
+                            "starting_location": {
+                                "City": "Origin City",
+                                "State": "",
+                                "Name": "Trip Origin",
+                                "Station ID": "32.532913738876,-92.625979223732",
+                                "GPS": {
+                                    "LAT": 32.532913738876,
+                                    "LONG": -92.625979223732
+                                }
+                            },
+                            "destination": {
+                                "City": "Grambling",
+                                "State": "LA",
+                                "Name": "Grambling (Grambling State Univ)",
+                                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                                "GPS": {
+                                    "LAT": 32.52217,
+                                    "LONG": -92.7145
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 2,
+                    "type": "Bus",
+                    "name": "Greyhound",
+                    "scope": "Interstate",
+                    "cost": 21.48,
+                    "departure": "2026-11-17T06:25",
+                    "arrival": "2026-11-17T07:40",
+                    "duration_min": 75,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Grambling",
+                        "State": "LA",
+                        "Name": "Grambling (Grambling State Univ)",
+                        "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                        "GPS": {
+                            "LAT": 32.52217,
+                            "LONG": -92.7145
+                        }
+                    },
+                    "to": {
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                        "GPS": {
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Bus",
+                                "Name": "Greyhound",
+                                "Scope": "Interstate",
+                                "Cost": 21.48,
+                                "Currency": "USD",
+                                "Price Basis": "total_with_platform_fee",
+                                "Travel Time (min)": 75,
+                                "Departure": "06:25",
+                                "Arrival": "07:40",
+                                "Date": "11/17/2026",
+                                "Departure Timestamp": "2026-11-17T06:25:00-06:00",
+                                "Arrival Timestamp": "2026-11-17T07:40:00-06:00",
+                                "Transfers": 0,
+                                "Trip ID": "direct:d31d31f0-a182-4e75-9134-9969980760ca:f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77:b987d31c-d740-4ae0-a011-3f64e753e768"
+                            },
+                            "starting_location": {
+                                "City": "Grambling",
+                                "State": "LA",
+                                "Name": "Grambling (Grambling State Univ)",
+                                "Station ID": "f91f00d5-e8f6-4774-8f9a-dfd7b3e1af77",
+                                "GPS": {
+                                    "LAT": 32.52217,
+                                    "LONG": -92.7145
+                                }
+                            },
+                            "destination": {
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                                "GPS": {
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 3,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 18.38,
+                    "departure": "2026-11-17T07:40",
+                    "arrival": "2026-11-17T07:59",
+                    "duration_min": 19,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                        "GPS": {
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
+                        }
+                    },
+                    "to": {
+                        "City": "Shreveport",
+                        "State": "",
+                        "Name": "SHV",
+                        "Station ID": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 18.38,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 19,
+                                "Distance (meters)": 8783.28,
+                                "Transfers": 0,
+                                "Trip ID": "uber:b987d31c-d740-4ae0-a011-3f64e753e768:SHV"
+                            },
+                            "starting_location": {
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                                "GPS": {
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
+                                }
+                            },
+                            "destination": {
+                                "City": "Shreveport",
+                                "State": "",
+                                "Name": "SHV",
+                                "Station ID": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 4,
+                    "type": "Air",
+                    "name": "Air option 54",
+                    "scope": "Unknown",
+                    "cost": 569.0,
+                    "departure": "2026-11-17T08:20",
+                    "arrival": "2026-11-17T14:19",
+                    "duration_min": 359,
+                    "wait_before_min": 21,
+                    "from": {
+                        "City": "Shreveport",
+                        "Name": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "to": {
+                        "City": "Denver",
+                        "Name": "DEN",
+                        "GPS": {
+                            "LAT": 39.861667,
+                            "LONG": -104.673167
+                        }
+                    },
+                    "source_record": {
+                        "Method": {
+                            "Type": "Air",
+                            "Priority": 1,
+                            "Cost": 569,
+                            "Travel Time (min)": 359,
+                            "Departure": "08:20",
+                            "Arrival": "13:19",
+                            "Date": "11/17/2026",
+                            "Starting Location": {
+                                "City": "Shreveport",
+                                "Name": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            },
+                            "Destination": {
+                                "City": "Denver",
+                                "Name": "DEN",
+                                "GPS": {
+                                    "LAT": 39.861667,
+                                    "LONG": -104.673167
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 5,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 49.7,
+                    "departure": "2026-11-17T14:19",
+                    "arrival": "2026-11-17T15:12",
+                    "duration_min": 53,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Denver",
+                        "State": "",
+                        "Name": "DEN",
+                        "Station ID": "DEN",
+                        "GPS": {
+                            "LAT": 39.861667,
+                            "LONG": -104.673167
+                        }
+                    },
+                    "to": {
+                        "City": "Destination City",
+                        "State": "",
+                        "Name": "Trip Destination",
+                        "Station ID": "39.736940847614,-104.981170751416",
+                        "GPS": {
+                            "LAT": 39.736940847614,
+                            "LONG": -104.981170751416
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 49.7,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 53,
+                                "Distance (meters)": 29744.04,
+                                "Transfers": 0,
+                                "Trip ID": "uber:DEN:39.736940847614,-104.981170751416"
+                            },
+                            "starting_location": {
+                                "City": "Denver",
+                                "State": "",
+                                "Name": "DEN",
+                                "Station ID": "DEN",
+                                "GPS": {
+                                    "LAT": 39.861667,
+                                    "LONG": -104.673167
+                                }
+                            },
+                            "destination": {
+                                "City": "Destination City",
+                                "State": "",
+                                "Name": "Trip Destination",
+                                "Station ID": "39.736940847614,-104.981170751416",
+                                "GPS": {
+                                    "LAT": 39.736940847614,
+                                    "LONG": -104.981170751416
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "rank": 3,
+            "total_cost": 693.35,
+            "currency": "USD",
+            "total_time_min": 613,
+            "departure": "2026-11-17T05:56",
+            "arrival": "2026-11-17T16:09",
+            "num_legs": 7,
+            "modes": [
+                "Uber",
+                "Bus",
+                "Uber",
+                "Air",
+                "Uber",
+                "Bus",
+                "Uber"
+            ],
+            "legs": [
+                {
+                    "leg_number": 1,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 8.73,
+                    "departure": "2026-11-17T05:56",
+                    "arrival": "2026-11-17T06:05",
+                    "duration_min": 9,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Origin City",
@@ -286,16 +757,16 @@
                     "source_record": {
                         "method": {
                             "info": {
-                                "Type": "Walking",
-                                "Name": "Walking Transfer",
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
                                 "Scope": "Local",
-                                "Cost": 0.0,
+                                "Cost": 8.73,
                                 "Currency": "USD",
-                                "Price Basis": "free",
-                                "Travel Time (min)": 27,
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 9,
                                 "Distance (meters)": 2327.0,
                                 "Transfers": 0,
-                                "Trip ID": "walking:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
+                                "Trip ID": "uber:32.532913738876,-92.625979223732:55f80be3-5546-4095-8675-d79b5cbaa2b4"
                             },
                             "starting_location": {
                                 "City": "Origin City",
@@ -325,10 +796,10 @@
                     "type": "Bus",
                     "name": "Greyhound",
                     "scope": "Interstate",
-                    "cost": 144.97,
-                    "departure": "2026-11-15T16:35",
-                    "arrival": "2026-11-16T17:00",
-                    "duration_min": 1465,
+                    "cost": 22.48,
+                    "departure": "2026-11-17T06:05",
+                    "arrival": "2026-11-17T07:40",
+                    "duration_min": 95,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Ruston",
@@ -338,6 +809,265 @@
                         "GPS": {
                             "LAT": 32.523736,
                             "LONG": -92.648286
+                        }
+                    },
+                    "to": {
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                        "GPS": {
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Bus",
+                                "Name": "Greyhound",
+                                "Scope": "Interstate",
+                                "Cost": 22.48,
+                                "Currency": "USD",
+                                "Price Basis": "total_with_platform_fee",
+                                "Travel Time (min)": 95,
+                                "Departure": "06:05",
+                                "Arrival": "07:40",
+                                "Date": "11/17/2026",
+                                "Departure Timestamp": "2026-11-17T06:05:00-06:00",
+                                "Arrival Timestamp": "2026-11-17T07:40:00-06:00",
+                                "Transfers": 0,
+                                "Trip ID": "direct:d31d31f0-a182-4e75-9134-9969980760ca:55f80be3-5546-4095-8675-d79b5cbaa2b4:b987d31c-d740-4ae0-a011-3f64e753e768"
+                            },
+                            "starting_location": {
+                                "City": "Ruston",
+                                "State": "LA",
+                                "Name": "Ruston (Tech Mart)",
+                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "GPS": {
+                                    "LAT": 32.523736,
+                                    "LONG": -92.648286
+                                }
+                            },
+                            "destination": {
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                                "GPS": {
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 3,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 18.38,
+                    "departure": "2026-11-17T07:40",
+                    "arrival": "2026-11-17T07:59",
+                    "duration_min": 19,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Shreveport",
+                        "State": "LA",
+                        "Name": "Shreveport Bus Station",
+                        "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                        "GPS": {
+                            "LAT": 32.499524,
+                            "LONG": -93.756625
+                        }
+                    },
+                    "to": {
+                        "City": "Shreveport",
+                        "State": "",
+                        "Name": "SHV",
+                        "Station ID": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 18.38,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 19,
+                                "Distance (meters)": 8783.28,
+                                "Transfers": 0,
+                                "Trip ID": "uber:b987d31c-d740-4ae0-a011-3f64e753e768:SHV"
+                            },
+                            "starting_location": {
+                                "City": "Shreveport",
+                                "State": "LA",
+                                "Name": "Shreveport Bus Station",
+                                "Station ID": "b987d31c-d740-4ae0-a011-3f64e753e768",
+                                "GPS": {
+                                    "LAT": 32.499524,
+                                    "LONG": -93.756625
+                                }
+                            },
+                            "destination": {
+                                "City": "Shreveport",
+                                "State": "",
+                                "Name": "SHV",
+                                "Station ID": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 4,
+                    "type": "Air",
+                    "name": "Air option 60",
+                    "scope": "Unknown",
+                    "cost": 598.0,
+                    "departure": "2026-11-17T08:42",
+                    "arrival": "2026-11-17T13:21",
+                    "duration_min": 279,
+                    "wait_before_min": 43,
+                    "from": {
+                        "City": "Shreveport",
+                        "Name": "SHV",
+                        "GPS": {
+                            "LAT": 32.446515,
+                            "LONG": -93.82604
+                        }
+                    },
+                    "to": {
+                        "City": "Colorado Springs",
+                        "Name": "COS",
+                        "GPS": {
+                            "LAT": 38.805817,
+                            "LONG": -104.700776
+                        }
+                    },
+                    "source_record": {
+                        "Method": {
+                            "Type": "Air",
+                            "Priority": 1,
+                            "Cost": 598,
+                            "Travel Time (min)": 279,
+                            "Departure": "08:42",
+                            "Arrival": "12:21",
+                            "Date": "11/17/2026",
+                            "Starting Location": {
+                                "City": "Shreveport",
+                                "Name": "SHV",
+                                "GPS": {
+                                    "LAT": 32.446515,
+                                    "LONG": -93.82604
+                                }
+                            },
+                            "Destination": {
+                                "City": "Colorado Springs",
+                                "Name": "COS",
+                                "GPS": {
+                                    "LAT": 38.805817,
+                                    "LONG": -104.700776
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 5,
+                    "type": "Uber",
+                    "name": "Uber Ride",
+                    "scope": "Local",
+                    "cost": 19.23,
+                    "departure": "2026-11-17T13:21",
+                    "arrival": "2026-11-17T13:41",
+                    "duration_min": 20,
+                    "wait_before_min": 0,
+                    "from": {
+                        "City": "Colorado Springs",
+                        "State": "",
+                        "Name": "COS",
+                        "Station ID": "COS",
+                        "GPS": {
+                            "LAT": 38.805817,
+                            "LONG": -104.700776
+                        }
+                    },
+                    "to": {
+                        "City": "Colorado Springs",
+                        "State": "CO",
+                        "Name": "Colorado Springs (7-Eleven)",
+                        "Station ID": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
+                        "GPS": {
+                            "LAT": 38.767733,
+                            "LONG": -104.797007
+                        }
+                    },
+                    "source_record": {
+                        "method": {
+                            "info": {
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
+                                "Scope": "Local",
+                                "Cost": 19.23,
+                                "Currency": "USD",
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 20,
+                                "Distance (meters)": 9354.23,
+                                "Transfers": 0,
+                                "Trip ID": "uber:COS:5551ac2c-e500-43d8-8105-93e8c2c8adda"
+                            },
+                            "starting_location": {
+                                "City": "Colorado Springs",
+                                "State": "",
+                                "Name": "COS",
+                                "Station ID": "COS",
+                                "GPS": {
+                                    "LAT": 38.805817,
+                                    "LONG": -104.700776
+                                }
+                            },
+                            "destination": {
+                                "City": "Colorado Springs",
+                                "State": "CO",
+                                "Name": "Colorado Springs (7-Eleven)",
+                                "Station ID": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
+                                "GPS": {
+                                    "LAT": 38.767733,
+                                    "LONG": -104.797007
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "leg_number": 6,
+                    "type": "Bus",
+                    "name": "Greyhound",
+                    "scope": "Interstate",
+                    "cost": 17.48,
+                    "departure": "2026-11-17T14:20",
+                    "arrival": "2026-11-17T16:00",
+                    "duration_min": 100,
+                    "wait_before_min": 39,
+                    "from": {
+                        "City": "Colorado Springs",
+                        "State": "CO",
+                        "Name": "Colorado Springs (7-Eleven)",
+                        "Station ID": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
+                        "GPS": {
+                            "LAT": 38.767733,
+                            "LONG": -104.797007
                         }
                     },
                     "to": {
@@ -356,26 +1086,26 @@
                                 "Type": "Bus",
                                 "Name": "Greyhound",
                                 "Scope": "Interstate",
-                                "Cost": 144.97,
+                                "Cost": 17.48,
                                 "Currency": "USD",
                                 "Price Basis": "total_with_platform_fee",
-                                "Travel Time (min)": 1465,
-                                "Departure": "16:35",
+                                "Travel Time (min)": 100,
+                                "Departure": "14:20",
                                 "Arrival": "16:00",
-                                "Date": "11/15/2026",
-                                "Departure Timestamp": "2026-11-15T16:35:00-06:00",
-                                "Arrival Timestamp": "2026-11-16T16:00:00-07:00",
-                                "Transfers": 1,
-                                "Trip ID": "ic:55f80be3-5546-4095-8675-d79b5cbaa2b4:55b07fb1-b6da-4069-975d-e69d4278391a/c1c15a3b-3758-436a-b40b-0c3f921722a7:ab615f55-9409-4216-a06f-5cf7769812c5:ab615f55-9409-4216-a06f-5cf7769812c5:3b1496dc-69af-4857-9342-0a594286c558"
+                                "Date": "11/17/2026",
+                                "Departure Timestamp": "2026-11-17T14:20:00-07:00",
+                                "Arrival Timestamp": "2026-11-17T16:00:00-07:00",
+                                "Transfers": 0,
+                                "Trip ID": "direct:b204ce14-3320-457f-a2e2-2066c034cab5:5551ac2c-e500-43d8-8105-93e8c2c8adda:55b07fb1-b6da-4069-975d-e69d4278391a"
                             },
                             "starting_location": {
-                                "City": "Ruston",
-                                "State": "LA",
-                                "Name": "Ruston (Tech Mart)",
-                                "Station ID": "55f80be3-5546-4095-8675-d79b5cbaa2b4",
+                                "City": "Colorado Springs",
+                                "State": "CO",
+                                "Name": "Colorado Springs (7-Eleven)",
+                                "Station ID": "5551ac2c-e500-43d8-8105-93e8c2c8adda",
                                 "GPS": {
-                                    "LAT": 32.523736,
-                                    "LONG": -92.648286
+                                    "LAT": 38.767733,
+                                    "LONG": -104.797007
                                 }
                             },
                             "destination": {
@@ -392,14 +1122,14 @@
                     }
                 },
                 {
-                    "leg_number": 3,
-                    "type": "Walking",
-                    "name": "Walking Transfer",
+                    "leg_number": 7,
+                    "type": "Uber",
+                    "name": "Uber Ride",
                     "scope": "Local",
-                    "cost": 0.0,
-                    "departure": "2026-11-16T17:00",
-                    "arrival": "2026-11-16T17:30",
-                    "duration_min": 30,
+                    "cost": 9.05,
+                    "departure": "2026-11-17T16:00",
+                    "arrival": "2026-11-17T16:09",
+                    "duration_min": 9,
                     "wait_before_min": 0,
                     "from": {
                         "City": "Denver",
@@ -424,16 +1154,16 @@
                     "source_record": {
                         "method": {
                             "info": {
-                                "Type": "Walking",
-                                "Name": "Walking Transfer",
+                                "Type": "Uber",
+                                "Name": "Uber Ride",
                                 "Scope": "Local",
-                                "Cost": 0.0,
+                                "Cost": 9.05,
                                 "Currency": "USD",
-                                "Price Basis": "free",
-                                "Travel Time (min)": 30,
+                                "Price Basis": "estimated",
+                                "Travel Time (min)": 9,
                                 "Distance (meters)": 2543.75,
                                 "Transfers": 0,
-                                "Trip ID": "walking:55b07fb1-b6da-4069-975d-e69d4278391a:39.736940847614,-104.981170751416"
+                                "Trip ID": "uber:55b07fb1-b6da-4069-975d-e69d4278391a:39.736940847614,-104.981170751416"
                             },
                             "starting_location": {
                                 "City": "Denver",

@@ -4,7 +4,7 @@ which can also be viewed in M_routes.json for debugging.
 The only needed function should be main_alg() from "Algorithm/main_alg.py"
 
 NOTE:
-***************Everything concerning walking is due to change to rideshare information
+***************Stations are connected by Uber rides. Uber time and cost are estimates (helpers.estimate_uber), not live quotes
 
 Currently main_alg takes:
 add1 - a string of the origin address

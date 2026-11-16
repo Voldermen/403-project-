@@ -4,7 +4,7 @@ Transportation route planner for continental United States.
 Currently built and tested off of examples.json
 Assumes clean data
 
-Assumes no time spent walking from station to station
+Stations are connected by estimated Uber rides (see helpers.estimate_uber)
 """
 
 
@@ -65,7 +65,7 @@ def normalize_methods(raw_methods):
             "scope": info.get("Scope", "Unknown"),
             "cost": float(info.get("Cost", 0)),
             "travel_minutes": int(info.get("Travel Time (min)", 0)),
-            # None = unscheduled (e.g. walking): can be taken any time.
+            # None = unscheduled (e.g. uber): can be taken any time.
             "departure": info.get("Departure"),
             "arrival": info.get("Arrival"),
             "date": info.get("Date"),
@@ -180,7 +180,7 @@ def leg_times(method, ready_at):
     """Return (depart, arrive) in minutes from start-day midnight, or None
     if the leg can't be taken when ready at `ready_at`.
 
-    Unscheduled legs (walking) depart the moment you're ready. Scheduled legs
+    Unscheduled legs (uber) depart the moment you're ready. Scheduled legs
     whose arrival clock time is before departure arrive the next day.
     """
     if method.get("departure") is None or method.get("arrival") is None:
@@ -326,8 +326,8 @@ def find_n_lowest_cost_paths(methods, origin, destination, startTime, objective,
 
     tie = itertools.count()  # tie-breaker so heapq never compares paths
     # trip_start (duration only): when you leave the door. None until the first
-    # scheduled leg is chosen, since leading walks can be shifted later for free;
-    # until then cost_so_far is just the minutes spent walking.
+    # scheduled leg is chosen, since leading uber rides can be shifted later for free;
+    # until then cost_so_far is just the minutes spent in ubers.
     # (cost, ready_at, tie, node, path, visited, trip_start)
     queue = [(0.0, start_time, next(tie), start_key, (), frozenset([start_key]), None)]
     labels = {}
@@ -338,7 +338,7 @@ def find_n_lowest_cost_paths(methods, origin, destination, startTime, objective,
         cost_so_far, ready_at, _, node, path, visited, trip_start = heapq.heappop(queue)
 
         if node == end_key:
-            route = tuple(m["id"] for _, _, m in path if m["type"] != "Walking")
+            route = tuple(m["id"] for _, _, m in path if m["type"] != "Uber")
             if route in seen_routes:
                 continue
             seen_routes.add(route)
@@ -365,7 +365,7 @@ def find_n_lowest_cost_paths(methods, origin, destination, startTime, objective,
                 label = (new_cost, arrive_time)
             else:  # duration
                 if trip_start is None and method.get("departure") is not None:
-                    # First scheduled leg: leave home just in time to walk here
+                    # First scheduled leg: leave home just in time to ride here
                     new_start = depart_time - cost_so_far
                 if new_start is None:
                     new_cost = cost_so_far + (arrive_time - depart_time)
@@ -378,7 +378,7 @@ def find_n_lowest_cost_paths(methods, origin, destination, startTime, objective,
                     label = (-new_start, arrive_time)
 
             # Prune if n labels already beat this one on both label values.
-            # The destination is never pruned, so walking variants of one
+            # The destination is never pruned, so uber variants of one
             # route can't crowd out a genuinely different route.
             if next_node != end_key:
                 node_labels = labels.setdefault((next_node, new_start is None), [])
@@ -478,7 +478,7 @@ if __name__ == "__main__":
     origin_lon=-92.6379
     dest_lat=29.7858
     dest_lon=-95.8244
-    # Look up the endpoints by the names add_walking_connections gives them, so
+    # Look up the endpoints by the names add_uber_connections gives them, so
     # this works with whatever trip main_alg last wrote to M_output_unified.json.
     # (Raw coords only work if they exactly match that run's geocoded origin/dest.)
     main_origin = "Trip Origin"

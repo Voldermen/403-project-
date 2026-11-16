@@ -16,9 +16,9 @@ def fetch_greyhound_info(origin_id, destination_id, date):
     return bus.convert_response(data)
     
 
-def fetch_amtrack_info(origin, dest, date):
-    
-    info = train.search_amtrak_gtfs(origin, dest, date)
+def fetch_amtrack_info(origin, dest, date, adults=1):
+
+    info = train.search_amtrak_gtfs(origin, dest, date, adults)
     return info
     
 
