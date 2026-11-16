@@ -33,6 +33,16 @@ services:
       environment:
         - TUNNEL_TOKEN=${TUNNEL_TOKEN}
 
+  dozzle:
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      - DOZZLE_NO_ANALYTICS=true
+      # Only show this project's containers (hides your Minecraft server etc.)
+      - DOZZLE_FILTER=label=com.docker.compose.project=docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
 volumes:
   app_code:
   app_venv:
