@@ -27,7 +27,7 @@
     });
     refreshModes();
     // Preserve unfinished inputs in this browser when connectivity is lost.
-    // The completed search and original provider JSON are also saved server-side.
+    // The completed search and full algorithm JSON are also saved server-side.
     const saveDraft = () => {
       try {
         const values = Object.fromEntries(new FormData(form).entries());
@@ -160,7 +160,7 @@
       style: 'https://tiles.openfreemap.org/styles/liberty'
     }).addTo(map);
     
-    if (!data || !data.origin || !data.destination) {
+    if (!data || !data.origin || !data.destination || !Number.isFinite(data.origin.lat) || !Number.isFinite(data.origin.lon) || !Number.isFinite(data.destination.lat) || !Number.isFinite(data.destination.lon)) {
       map.setView([39.2, -97.5], 4);
       return;
     }
