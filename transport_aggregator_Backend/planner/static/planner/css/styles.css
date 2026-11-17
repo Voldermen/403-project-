@@ -19,3 +19,7 @@
 .optional-inputs input[type="number"] { max-width: 100px; }
 
 .saved-clear-button { background: transparent; border: 0; color: inherit; opacity: .76; padding: .4rem; cursor: pointer; font: inherit; font-size: .78rem; text-decoration: underline; text-underline-offset: 3px; }
+
+.route-map-button { margin-top: 1rem; padding: 7px 12px; }
+.route-map-button[hidden] { display: none; }
+.route-map-button[aria-pressed="true"] { border-color: var(--purple); }

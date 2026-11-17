@@ -48,6 +48,14 @@ class FrontendConnectionTests(TestCase):
         restored = self.client.get(reverse("planner:results"))
         self.assertContains(restored, "Restored your last completed search")
         self.assertContains(restored, "$140")
+        for page in (response, restored):
+            self.assertContains(page, 'data-map-route="0"')
+            self.assertEqual(page.context["route_map_options"], [{
+                "mode": "planes",
+                "origin": {"label": "MSY", "lat": 29.99, "lon": -90.25},
+                "destination": {"label": "ORD", "lat": 41.97, "lon": -87.90},
+                "geometry": None,
+            }])
         self.assertEqual(search.call_count, 1)
         self.assertContains(self.client.get(reverse("planner:home")), 'value="2"')
 
