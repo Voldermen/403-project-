@@ -35,7 +35,7 @@
     });
     refreshModes();
     // Preserve unfinished inputs in this browser when connectivity is lost.
-    // The completed search and original provider JSON are also saved server-side.
+    // The completed search and full algorithm JSON are also saved server-side.
     const saveDraft = () => {
       try {
         const values = Object.fromEntries(new FormData(form).entries());
@@ -56,6 +56,7 @@
           "travel_date",
           "adults",
           "objective",
+          "start_time",
           "origin_lat",
           "origin_lon",
           "destination_lat",
@@ -277,39 +278,42 @@
     if (!validPlace(data?.origin) || !validPlace(data?.destination)) return;
     const overlay = L.layerGroup().addTo(map);
 
-    function draw(origin, destination, geometry, estimated = false) {
+    function draw(origin, destination, geometry, estimated = false, legs = null) {
       if (!validPlace(origin) || !validPlace(destination)) return false;
       overlay.clearLayers();
-      const points = [origin, destination];
-      const endpoints = points.map((place) => [place.lat, place.lon]);
-      points.forEach((place, i) => {
-        L.circleMarker(endpoints[i], {
-          radius: 9,
-          color: "#fff",
-          weight: 3,
-          fillColor: i === 0 ? "#655dc8" : "#fa7455",
-          fillOpacity: 1,
-        })
-          .bindPopup(
-            (i === 0 ? "Departure: " : "Arrival: ") + escapeHtml(place.label),
-          )
-          .addTo(overlay);
+      const segments = legs || [{ origin, destination, geometry, estimated }];
+      const allPoints = [];
+      const markers = new Set();
+      segments.forEach((segment) => {
+        const endpoints = [segment.origin, segment.destination];
+        if (!endpoints.every(validPlace)) return;
+        endpoints.forEach((place, i) => {
+          const key = `${place.lat},${place.lon},${place.label}`;
+          if (markers.has(key)) return;
+          markers.add(key);
+          L.circleMarker([place.lat, place.lon], {
+            radius: 9, color: "#fff", weight: 3,
+            fillColor: i === 0 ? "#655dc8" : "#fa7455", fillOpacity: 1,
+          }).bindPopup((i === 0 ? "Departure: " : "Arrival: ") + escapeHtml(place.label))
+            .addTo(overlay);
+        });
+        const hasPath = validGeometry(segment.geometry);
+        const line = hasPath
+          ? segment.geometry.map(([lon, lat]) => [lat, lon])
+          : endpoints.map((place) => [place.lat, place.lon]);
+        allPoints.push(...line, ...endpoints.map((place) => [place.lat, place.lon]));
+        L.polyline(line, {
+          color: segment.estimated ? "#b66b13" : "#665dc6", weight: 3, opacity: 0.9,
+          dashArray: hasPath ? (segment.estimated ? "10 5" : undefined) : "8 9",
+        }).addTo(overlay);
       });
-      const hasPath = validGeometry(geometry);
-      const line = hasPath
-        ? geometry.map(([lon, lat]) => [lat, lon])
-        : endpoints;
-      L.polyline(line, {
-        color: estimated ? "#b66b13" : "#665dc6",
-        weight: 3,
-        opacity: 0.9,
-        dashArray: hasPath ? (estimated ? "10 5" : undefined) : "8 9",
-      }).addTo(overlay);
+      // No leg with usable GPS: retain the search endpoints as an explicit fallback.
+      if (!allPoints.length) return draw(origin, destination, null);
       map.invalidateSize();
-      map.fitBounds(L.latLngBounds([...line, ...endpoints]).pad(0.2), {
+      map.fitBounds(L.latLngBounds(allPoints).pad(0.2), {
         maxZoom: 8,
       });
-      return hasPath;
+      return validGeometry(geometry);
     }
 
     draw(data.origin, data.destination, data.geometry);
@@ -344,60 +348,40 @@
         button.hidden = false;
         button.addEventListener("click", async () => {
           const current = ++selection;
-          const path = validGeometry(option.geometry) ? option.geometry : null;
-          const pathPoint = ([lon, lat], label) => ({ lat, lon, label });
-          const exactOrigin = validPlace(option.origin)
-            ? option.origin
-            : path && pathPoint(path[0], "Route start");
-          const exactDestination = validPlace(option.destination)
-            ? option.destination
-            : path && pathPoint(path[path.length - 1], "Route end");
-          const origin = exactOrigin || overview.origin;
-          const destination = exactDestination || overview.destination;
-          const exactEndpoints = exactOrigin && exactDestination;
           const label = "Option " + (index + 1) + ": ";
           buttons.forEach((other) =>
             other.setAttribute("aria-pressed", String(other === button)),
           );
-          draw(origin, destination, path);
-          caption.textContent =
-            label +
-            (path
-              ? "Route path supplied by the result."
-              : exactEndpoints
-                ? "Dashed line connects the trip endpoints only."
-                : "Exact boarding or arrival location unavailable. Showing search locations where needed.");
+          const allLegs = Array.isArray(option.legs) ? option.legs : [];
+          const legs = allLegs.filter((leg) => validPlace(leg.origin) && validPlace(leg.destination))
+            .map((leg) => ({ ...leg }));
+          const missing = legs.length !== allLegs.length || !legs.length;
+          const origin = overview.origin;
+          const destination = overview.destination;
+          draw(origin, destination, null, false, legs);
+          const detail = missing
+            ? " Some leg coordinates are unavailable; those legs are omitted. Search endpoints are shown if no leg has GPS."
+            : "";
+          caption.textContent = label + "Dashed lines join itinerary leg endpoints, not actual paths or stops." + detail;
           resultsMap.scrollIntoView({ block: "nearest" });
+          const buses = legs.filter((leg) => leg.mode === "bus");
+          if (!buses.length) return;
+          caption.textContent = label + "Loading estimated driving paths for bus legs." + detail;
+          await Promise.all(buses.map(async (leg) => {
+            try {
+              leg.geometry = await roadEstimate(leg.origin, leg.destination);
+              leg.estimated = true;
+            } catch (_) {
+              // Keep this leg's straight endpoint connector when routing fails.
+            }
+          }));
+          if (current !== selection) return;
+          draw(origin, destination, null, false, legs);
+          const estimates = buses.filter((leg) => leg.estimated).length;
+          caption.textContent = label + (estimates
+            ? "Orange lines: estimated driving paths for bus legs (OSRM / OpenStreetMap), not the operator’s actual paths or stops. Other dashed lines connect leg endpoints only."
+            : "Road estimates unavailable. Dashed lines connect itinerary leg endpoints only.") + detail;
 
-          // Never substitute a driving route for an air or train journey.
-          const bus = ["greyhound", "public_buses"].includes(option.mode);
-          if (path || !bus) return;
-          caption.textContent =
-            label +
-            "Loading a road-route estimate" +
-            (exactEndpoints
-              ? " between the trip endpoints."
-              : " using search locations where station GPS is missing.");
-          try {
-            const geometry = await roadEstimate(origin, destination);
-            // A slower response must not overwrite a later selection.
-            if (current !== selection) return;
-            draw(origin, destination, geometry, true);
-            caption.textContent =
-              label +
-              "Estimated driving route (OSRM / OpenStreetMap), not the bus operator’s actual path or stops. " +
-              (exactEndpoints
-                ? "Uses trip endpoints."
-                : "Uses search locations where station GPS is missing.");
-          } catch (_) {
-            if (current !== selection) return;
-            caption.textContent =
-              label +
-              "Road estimate unavailable. Dashed line connects locations only." +
-              (exactEndpoints
-                ? ""
-                : " Search locations are used where station GPS is missing.");
-          }
         });
       });
     } catch (_) {
