@@ -20,6 +20,9 @@
 
 .saved-clear-button { background: transparent; border: 0; color: inherit; opacity: .76; padding: .4rem; cursor: pointer; font: inherit; font-size: .78rem; text-decoration: underline; text-underline-offset: 3px; }
 
+.route-map-button { margin-top: 1rem; padding: 7px 12px; }
+.route-map-button[hidden] { display: none; }
+.route-map-button[aria-pressed="true"] { border-color: var(--purple); }
 /* Presentation of already-ranked multi-leg routes from Algorithm/main_alg.py. */
 .algorithm-legs { margin: 1rem 1.5rem 1.3rem; padding-top: .75rem; border-top: 1px solid #d7dce1; }
 .algorithm-legs summary { cursor: pointer; font-weight: 700; }

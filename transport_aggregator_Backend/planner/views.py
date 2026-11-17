@@ -1,5 +1,6 @@
 """Web pages use exclusively Algorithm/main_alg.py to compute travel routes."""
 from datetime import date
+from math import isfinite
 import logging
 import requests
 from django.http import JsonResponse
@@ -51,6 +52,32 @@ def home(request):
 def about(request):
     return render(request, 'planner/about.html', {'active': 'about'})
 
+def _map_point(location):
+    location = location or {}
+    gps = location.get("GPS") or {}
+    try:
+        lat, lon = float(gps["LAT"]), float(gps["LONG"])
+    except (KeyError, TypeError, ValueError, OverflowError):
+        return None
+    if isfinite(lat) and isfinite(lon) and -90 <= lat <= 90 and -180 <= lon <= 180:
+        return {"lat": lat, "lon": lon,
+                "label": location.get("Name") or location.get("City") or "Trip location"}
+    return None
+
+
+def _route_map_options(raw):
+    """Project map data in the algorithm's itinerary/leg order without reranking."""
+    options = []
+    for route in raw.get("routes", []):
+        legs = [{"mode": str(leg.get("type", "")).casefold(),
+                 "origin": _map_point(leg.get("from")),
+                 "destination": _map_point(leg.get("to")),
+                 "geometry": None}
+                for leg in route.get("legs", [])]
+        options.append({"legs": legs})
+    return options
+
+
 @never_cache
 def results(request):
     discard_outdated_results(request)
@@ -62,6 +89,8 @@ def results(request):
         if previous:
             context.update(previous)
             context['restored'] = True
+            context['route_map_options'] = _route_map_options(
+                request.session.get('planner_saved_json', {}))
         return render(request, 'planner/results.html', context)
     if not form.is_valid():
         return render(request, 'planner/results.html', context, status=400)
@@ -109,6 +138,7 @@ def results(request):
     request.session['planner_algorithm_revision'] = algorithm_revision()
     request.session.set_expiry(30 * 24 * 60 * 60)
     context.update(display)
+    context["route_map_options"] = _route_map_options(raw)
     return render(request, 'planner/results.html', context)
 
 @never_cache
