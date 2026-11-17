@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "planner",
-    "routes",  # Original backend app and APIs remain available.
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
