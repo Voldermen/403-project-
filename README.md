@@ -260,3 +260,95 @@ docker compose cp app:/app/<project-dir>/db.sqlite3 ./db-backup.sqlite3
 - Keep `DJANGO_DEBUG=0` on any public server.
 - Expose only Caddy, through the tunnel. Do not forward the application ports on a router.
 - Keep the log viewer behind Cloudflare Access.
+
+
+
+## Backend
+
+The backend is made using Python and Django. It connects the frontend to the transportation routing algorithm to process user requests and return transportation results.
+
+The backend doesn't calculate routes or find the best options for desired transportation options. It calls main_alg() in algorithm.
+
+## What does the Backend do?
+
+It recives user starting location, destionation, travel date, transportation preferences, and optimization settings.
+
+The backend calls main_alg() which handles transportation routing, comparisons, and cost calculations.
+
+The backend returns results from the algorithm's JSON output for display on the website. The displayed information: route costs, travel times, transportation types, and individual itinerary legs.
+
+It saves user searches using Django sessions. It keeps the user information so if they revisit that can access their previous search without having to input it all again.
+
+It provides API endpoints. It allows the frontend and other services to communicate with the backend through HTTP requests and JSON responses.
+
+
+## Files
+
+config/setting.py   Django configuration, environment variables, database, and session settings.
+
+config/urls.py   the main URL routing
+
+planner/views.py   Processes website requests and displays the search results.
+
+planner/api.py   This provides JSON API endpoints
+
+planner/algorithm_bridge.py   Connects Django to the algorithm
+
+planner/algorithm_version.py   Detects changes to algorithm and clears the outdated saved results (clears after 30 days)
+
+planner/forms.py   This validates the search inputs
+
+planner/services.py   Does the address autocomplete
+
+planner/urls.py   Defines the frontend page routes.
+
+planner/tests/   Has automated backend tests
+
+
+
+## API Endpoints
+
+/api/search/   GET   This runs the transportation algorithm and returns JSON results
+
+/api/address/    GET   Provides the address autocomplete 
+
+/api/saved/   GET   Gets the saved API search history
+
+/api/planner/saved-results/   GET   Returns the most recent saved algorithm JSON
+
+/api/draft/   POST   Saves unfinished search information
+
+/api/clear/   POST   Clears the saved session information.
+
+
+
+## Session Storage
+
+The user sessions are configured with a 30 day expiration date unless the user clears it.
+
+
+
+## How to run the backend
+this may vary depending on the OS
+
+install dependencies: python -m pip install -r requirements.txt
+
+make a .env file in the root by manage.py add:
+DJANGO_SECRET_KEY='YOUR_GENERATED_SECRET_KEY'
+DJANGO_DEBUG=1
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+
+initialize the database: python manage.py migrate
+
+start the server: python manage.py runserver
+
+the website is at: http://127.0.0.1:8000/
+
+backend test: python manage.py test planner
+
+This is only for development hosting is done through the docker and cloudflare.
+
+
+
+
+
