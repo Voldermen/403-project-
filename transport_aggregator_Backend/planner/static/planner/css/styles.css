@@ -19,12 +19,3 @@
 .optional-inputs input[type="number"] { max-width: 100px; }
 
 .saved-clear-button { background: transparent; border: 0; color: inherit; opacity: .76; padding: .4rem; cursor: pointer; font: inherit; font-size: .78rem; text-decoration: underline; text-underline-offset: 3px; }
-
-/* Presentation of already-ranked multi-leg routes from Algorithm/main_alg.py. */
-.algorithm-legs { margin: 1rem 1.5rem 1.3rem; padding-top: .75rem; border-top: 1px solid #d7dce1; }
-.algorithm-legs summary { cursor: pointer; font-weight: 700; }
-.algorithm-legs ol { margin: .75rem 0; padding-left: 1.4rem; }
-.algorithm-legs li { margin: .65rem 0; line-height: 1.55; }
-
-/* Room for the provided algorithm's earliest-departure selector. */
-.optional-inputs { flex-wrap: wrap; }

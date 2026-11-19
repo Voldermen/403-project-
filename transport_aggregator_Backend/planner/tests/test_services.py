@@ -1,31 +1,105 @@
-"""Autocomplete-only tests. Route selection is owned by Algorithm/main_alg.py."""
+from datetime import date
 from unittest.mock import patch
 
 from django.test import SimpleTestCase
+from planner.services import LocationError, normalize_legacy, resolve_location, search_routes
 
-from planner.services import lookup_addresses
 
+class ServiceTests(SimpleTestCase):
+    def test_normalize_flight_fare_and_spelling(self):
+        record = {"Method": {
+            "Type": "Air", "Cost": 125.5, "Travel Time (min)": 60,
+            "Staring Location": {"Name": "MSY"}, "Destination": {"Name": "ORD"},
+        }}
+        out = normalize_legacy(record, "planes", "test")
+        self.assertEqual(out["cost"], 125.5)
+        self.assertEqual(out["start_name"], "MSY")
+        self.assertEqual(out["end_name"], "ORD")
 
-class AddressAutocompleteTests(SimpleTestCase):
-    def test_short_query_does_not_call_photon(self):
-        with patch("planner.services.requests.get") as get:
-            self.assertEqual(lookup_addresses("NY"), [])
-        get.assert_not_called()
+    def test_null_train_fare_is_not_free(self):
+        record = {"Method": {"Type": "Rail", "Cost": None, "Travel Time (min)": 90}}
+        self.assertIsNone(normalize_legacy(record, "trains", "test")["cost"])
 
-    def test_us_suggestions_include_coordinates_and_exclude_other_countries(self):
-        features = [
-            {"properties": {"countrycode": "us", "name": "Chicago", "city": "Chicago", "state": "Illinois"},
-             "geometry": {"coordinates": [-87.6244212, 41.8755616]}},
-            {"properties": {"countrycode": "ca", "name": "Toronto"},
-             "geometry": {"coordinates": [-79.38, 43.65]}},
-        ]
-        with patch("planner.services.cache") as cache, patch("planner.services.requests.get") as get:
-            cache.get.return_value = None
-            get.return_value.json.return_value = {"features": features}
-            result = lookup_addresses("Chicago")
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0]["lat"], 41.8755616)
-        self.assertEqual(result[0]["lon"], -87.6244212)
-        self.assertIn("Chicago", result[0]["label"])
-        cache.set.assert_called_once()
-        get.assert_called_once()
+    def test_greyhound_schema(self):
+        record = {"method": {"info": {"Name": "Greyhound", "Cost": 35},
+                  "starting_location": {"Name": "A"}, "destination": {"Name": "B"}}}
+        self.assertEqual(normalize_legacy(record, "greyhound", "test")["cost"], 35)
+
+    def test_coordinate_input(self):
+        self.assertEqual(resolve_location("32.77, -96.79")["lat"], 32.77)
+        with self.assertRaises(LocationError):
+            resolve_location("-20, 10")
+
+def test_excluded_providers_are_not_called(self):
+
+    # Original Car test data
+    # record = {"mode": "car", "cost": None, "duration_minutes": 40}
+
+    # New Planes test data
+    record = {"mode": "planes", "cost": None, "duration_minutes": 40}
+
+    with patch("planner.services.PROVIDERS", {
+
+        # "car": lambda *args: [record],
+        "planes": lambda *args: [record],
+
+        # "planes": lambda *args: self.fail("disabled provider called"),
+        "trains": lambda *args: self.fail("disabled provider called"),
+
+    }):
+
+        # Original Car search
+        # result, notices = search_routes(
+        #     {"lat": 30, "lon": -90},
+        #     {"lat": 31, "lon": -90},
+        #     date.today(),
+        #     ["car"]
+        # )
+
+        # New Planes search
+        result, notices = search_routes(
+            {"lat": 30, "lon": -90},
+            {"lat": 31, "lon": -90},
+            date.today(),
+            ["planes"]
+        )
+
+    self.assertEqual(result[0]["rank"], 1)
+    self.assertEqual(notices, [])
+
+def test_cost_ranking_puts_missing_prices_last(self):
+
+    # Original Car data
+    # car = {"mode": "car", "cost": None, "duration_minutes": 60}
+
+    # New Train data
+    train = {"mode": "trains", "cost": None, "duration_minutes": 60}
+
+    bus = {"mode": "greyhound", "cost": 29, "duration_minutes": 100}
+
+    with patch("planner.services.PROVIDERS", {
+
+        # "car": lambda *args: [car],
+        "trains": lambda *args: [train],
+
+        "greyhound": lambda *args: [bus]
+
+    }):
+
+        # Original Car search
+        # rows, _ = search_routes({}, {}, date.today(),
+        #                         ["car", "greyhound"], objective="cost")
+
+        # New Train search
+        rows, _ = search_routes(
+            {}, {},
+            date.today(),
+            ["trains", "greyhound"],
+            objective="cost"
+        )
+
+    # Original assertion
+    # self.assertEqual([r["mode"] for r in rows], ["greyhound", "car"])
+
+    # New assertion
+    self.assertEqual([r["mode"] for r in rows], ["greyhound", "trains"])

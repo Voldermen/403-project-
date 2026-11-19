@@ -1,17 +1,19 @@
-"""One Django website; every route search delegates to Algorithm/main_alg.py."""
+"""Combine the original backend API unchanged with the supplied frontend pages."""
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic.base import RedirectView
-from planner import api
+from routes import views as backend_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/search/', api.search_api, name='search_api'),
-    path('api/flights/', api.flights_api, name='flights_api'),
-    path('api/saved/', api.saved_api, name='saved_api'),
-    path('api/draft/', api.save_draft_api, name='save_draft_api'),
-    path('api/clear/', api.clear_saved, name='clear_saved_api'),
-    path('clear-saved/', api.clear_saved, name='clear_saved'),
-    path('backend/', RedirectView.as_view(pattern_name='planner:home', permanent=False)),
-    path('', include('planner.urls')),
+    path("admin/", admin.site.urls),
+    # Existing provider-backend API URLs and handlers (not replaced).
+    path("api/search/", backend_views.search_api, name="search_api"),
+    path("api/flights/", backend_views.flights_api, name="flights_api"),
+    path("api/saved/", backend_views.saved_api, name="saved_api"),
+    path("api/draft/", backend_views.save_draft_api, name="save_draft_api"),
+    path("api/clear/", backend_views.clear_saved, name="clear_saved_api"),
+    path("clear-saved/", backend_views.clear_saved, name="clear_saved"),
+    # The backend's old testing webpage is available separately (no UI conflict).
+    path("backend/", backend_views.home, name="home"),
+    # Original frontend uses '/' and its existing templates/static styles.
+    path("", include("planner.urls")),
 ]

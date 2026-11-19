@@ -13,6 +13,9 @@ REQUIREMENTS_FILE="${REQUIREMENTS_FILE:-requirements.txt}"   # relative to PROJE
 EXTRA_PIP="${EXTRA_PIP:-gunicorn}"             # extra packages the repo doesn't list
 PULL_INTERVAL="${PULL_INTERVAL:-60}"           # seconds; 0 = pull once at startup only
 HASH_FILE="/opt/venv/.requirements.sha"
+# Gitignored API-keys file: mounted from the host, linked into the clone after each pull
+API_KEYS_SRC="${API_KEYS_SRC:-/run/secrets/api_keys.txt}"
+API_KEYS_DEST="${API_KEYS_DEST:-scripts/api_keys.txt}"   # relative to the repo root
 
 # Private repos: inject token into the clone URL (never echoed to logs)
 AUTH_URL="$REPO_URL"
@@ -49,6 +52,15 @@ sync_repo() {
     return 0
   fi
   return 1
+}
+
+link_secrets() {
+  if [ -f "$API_KEYS_SRC" ]; then
+    mkdir -p "$(dirname "$APP_DIR/$API_KEYS_DEST")"
+    ln -sf "$API_KEYS_SRC" "$APP_DIR/$API_KEYS_DEST"
+  else
+    log "WARNING: $API_KEYS_SRC not found, API keys will be missing"
+  fi
 }
 
 # Only reinstall when the requirements file (or EXTRA_PIP) actually changed
@@ -91,6 +103,7 @@ if [ ! -d "$APP_DIR/$PROJECT_DIR" ]; then
   sleep 30
   exit 1
 fi
+link_secrets
 install_deps
 start_app
 
@@ -109,6 +122,7 @@ while true; do
     exit "$code"
   fi
   if sync_repo; then
+    link_secrets
     install_deps
     stop_app
     start_app
