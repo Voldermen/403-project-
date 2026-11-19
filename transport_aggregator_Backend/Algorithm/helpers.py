@@ -1,0 +1,304 @@
+"""
+Method: Without airports
+corridor or window idea
+
+Mehtod: Assuming including Airports
+
+Think of trying to get to some aiport/ amtrac from another city
+find a bus/ train station (using greyhound api) in my city that can get me to or 
+near that city
+ 
+"""
+import requests
+import pandas as pd
+from math import asin, cos, radians, sin, sqrt
+
+airports = pd.read_csv("../data/airports_database/cleaned_airport.csv")
+greyhound = pd.read_csv("../data/greyhound_database/cleaned_greyhound.csv")
+amtrack = pd.read_csv("../data/amtrack_database/cleaned_amtrack.csv")
+
+#copied from scripts/transit_route to make use clear
+def find_distance(lat1, lon1, lat2, lon2):
+    """takes gps of two points, returns the distance in meters"""
+    r = 6371000
+    dphi = radians(lat2 - lat1)
+    dlmb = radians(lon2 - lon1)
+    a = sin(dphi / 2) ** 2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlmb / 2) ** 2
+    return 2 * r * asin(sqrt(a))
+
+
+# Uber (UberX) estimate constants. These are rough US averages, not live quotes;
+# real fares vary by city, time of day, and surge pricing.
+UBER_BASE_FARE = 2.50        # flat charge per ride
+UBER_BOOKING_FEE = 2.75      # service/booking fee per ride
+UBER_PER_MILE = 1.25         # charge per road mile
+UBER_PER_MINUTE = 0.30       # charge per minute in the car
+UBER_MIN_FARE = 8.00         # no ride costs less than this
+UBER_ROAD_CIRCUITY = 1.3     # road distance ~= straight-line distance * this
+UBER_AVG_SPEED_MPH = 30      # average driving speed (mix of city and highway)
+UBER_PICKUP_WAIT_MIN = 5     # time waiting for the driver to arrive
+
+METERS_PER_MILE = 1609.344
+
+
+def estimate_uber(distance_m):
+    """Estimate an Uber ride between two points.
+
+    takes the straight-line distance in meters between the points,
+    returns (travel_time_min, cost_usd). Travel time includes the pickup wait.
+    """
+    road_miles = distance_m * UBER_ROAD_CIRCUITY / METERS_PER_MILE
+    drive_min = road_miles / UBER_AVG_SPEED_MPH * 60
+    travel_time_min = max(1, round(UBER_PICKUP_WAIT_MIN + drive_min))
+
+    fare = (UBER_BASE_FARE + UBER_BOOKING_FEE
+            + UBER_PER_MILE * road_miles
+            + UBER_PER_MINUTE * drive_min)
+    cost = round(max(UBER_MIN_FARE, fare), 2)
+    return travel_time_min, cost
+
+#also from scripts
+def get_lat_long(street: str, city: str = None, state: str = None, zip_code: str = None) -> tuple:
+
+    url = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
+
+
+
+    address_parts = [street.strip()]
+
+    if city:
+        address_parts.append(city.strip())
+    if state:
+        address_parts.append(state.strip())
+    if zip_code:
+        address_parts.append(str(zip_code).strip())
+
+    combined_address = ", ".join(address_parts)
+
+    params = {
+        "address": combined_address,
+        "benchmark": "4",  # Standard baseline benchmark
+        "format": "json",
+    }
+
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        #print("Got API response")
+        matches = response.json().get("result", {}).get("addressMatches", [])
+        #print("Got coordinate match")
+
+        if matches:
+            coords = matches[0].get("coordinates", {})
+            # y = Latitude, x = Longitude
+            return coords.get("y"), coords.get("x")
+
+    except requests.exceptions.RequestException:
+        print("Error")
+        pass
+
+    return None, None
+
+
+
+def get_city(latitude: float, longitude: float) -> str:
+
+    url = "https://nominatim.openstreetmap.org/reverse"
+
+    params = {
+        "lat": latitude,
+        "lon": longitude,
+        "format": "jsonv2",
+        "addressdetails": 1,
+        "zoom": 18,
+    }
+
+    headers = {
+        "User-Agent": "AddressLookupTest"
+    }    
+
+    try:
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+        address = data.get("address", {})
+
+        street = address.get("road")
+        house_number = address.get("house_number")
+
+        # City can have different field names
+        city = (
+            address.get("city")
+            or address.get("town")
+            or address.get("village")
+            or address.get("municipality")
+            or address.get("hamlet")
+        )
+
+        return city
+        
+
+    except requests.exceptions.RequestException as exc:
+        print(f"Geocoding request failed: {exc}")
+        return None
+    except ValueError as exc:
+        print(f"Invalid JSON response: {exc}")
+        return None
+
+    except requests.exceptions.RequestException:
+        print("Error")
+        pass
+
+    return None
+
+
+
+
+
+
+def rank_distance(lat1, lon1, lat2, lon2):
+    """take two points dertmine the rank of travel
+        3:interstate/far (will use planes, amtrack)
+        2:regional/medium (will use planes, amtrack, and greyhound)
+        1:innercity/small (will use the transit_route)
+    """
+    distance = find_distance(lat1, lon1, lat2, lon2)
+    
+    #inner city <30km
+    if distance <= 30000:
+        return 1
+    #regional 30-500 km
+    elif distance <= 500000:
+        return 2
+    else:
+        return 3
+
+
+
+
+def find_nearest_greyhound(lat, lon, num):
+    """take in a lat and lon of some location and return the 
+    name or coords of the nearest bus station maybe also the distance to it"""
+  
+        
+    greyhound_df = greyhound.copy()   
+    
+    # Calculate distance to each airport
+    greyhound_df["distance_m"] = greyhound_df.apply(
+        lambda greyhound_df: find_distance(
+            lat,
+            lon,
+            greyhound_df["stop_lat"],
+            greyhound_df["stop_lon"]
+        ),
+        axis=1
+    )        
+
+    # Sort by distance and return the closest three
+    return greyhound_df.sort_values("distance_m").head(num)
+
+
+
+    
+
+def find_nearest_amtrack(lat,lon, num):
+    """take in a lat and lon of some location and return the name or coords of
+    nearest amteack station and distance to it"""
+    
+    
+    amtrack_df = amtrack.copy()
+    # Calculate distance to each airport
+    amtrack_df["distance_m"] = amtrack_df.apply(
+        lambda amtrack_df: find_distance(
+            lat,
+            lon,
+            amtrack_df["stop_lat"],
+            amtrack_df["stop_lon"]
+        ),
+        axis=1
+    )        
+
+    # Sort by distance and return the closest three
+    return amtrack_df.sort_values("distance_m").head(num)
+
+    
+
+
+
+def find_nearest_airports(lat,lon,num):
+    """take in a lat and lon of some locationa and return the three closest aiports
+    codes and coords in a a pandas dataframe"""
+    
+    airport_df = airports.copy() 
+
+    # Calculate distance to each airport
+    airport_df["distance_m"] = airport_df.apply(
+        lambda airport_df: find_distance(
+            lat,
+            lon,
+            airport_df["latitude_deg"],
+            airport_df["longitude_deg"]
+        ),
+        axis=1
+    )
+
+    #only grab important info
+    airport_df = airport_df[["name","latitude_deg","longitude_deg","icao_code","iata_code","gps_code","local_code","distance_m"]]
+
+    # Sort by distance and return the closest three
+    return airport_df.sort_values("distance_m").head(num)
+
+
+
+def get_bus_station_gps(station_id, df):
+    """to get gps for bus stations"""
+    match = df[df['stop_id'] == station_id]
+    if not match.empty:
+        return {
+            "LAT": float(match.iloc[0]['stop_lat']),
+            "LONG": float(match.iloc[0]['stop_lon'])
+        }
+    return {"LAT": None, "LONG": None}
+
+
+
+def get_train_station_gps(station_id, df):
+    """to get gps and city for amtrack stations"""
+    match = df[df['stop_id'] == station_id]
+    if not match.empty:
+        lat = float(match.iloc[0]['stop_lat'])
+        lon = float(match.iloc[0]['stop_lon'])
+        
+        city = get_city(lat, lon)
+        
+        return {
+            "LAT": lat,
+            "LONG": lon,
+            "City": city
+        }
+    return {"LAT": None, "LONG": None, "City": None}
+
+
+
+
+
+if __name__ == "__main__":
+
+    my_lat = 32.5
+    my_lon = -92.0
+
+    closest_air = find_nearest_airports(
+        my_lat,
+        my_lon
+    )
+    closest_am = find_nearest_amtrack(
+        my_lat,
+        my_lon
+    )
+    closest_grey = find_nearest_greyhound(
+        my_lat,
+        my_lon
+    )
+
+    print(closest_grey)

@@ -7,9 +7,6 @@ services:
       # Keeps the clone (including db.sqlite3) and installed packages across restarts
       - app_code:/app
       - app_venv:/opt/venv
-      # Your gitignored keys file, kept on the server next to this compose file:
-      #   ./secrets/api_keys.txt  ->  linked to scripts/api_keys.txt inside the repo
-      - ./secrets/api_keys.txt:/run/secrets/api_keys.txt:ro
     # No "ports:" here on purpose: only Caddy is reachable from outside.
     expose:
       - "8000"
@@ -18,7 +15,7 @@ services:
     image: caddy:2
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       # Read-only view of the app so Caddy can serve the CSS/JS files directly
@@ -27,14 +24,24 @@ services:
       - app
 
   cloudflared:
-      image: cloudflare/cloudflared:latest
-      restart: unless-stopped
-      command: tunnel --no-autoupdate run
-      environment:
-        - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    depends_on:
+      - caddy
+
+  dozzle:
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      - DOZZLE_NO_ANALYTICS=true
+      # Only show this project's containers (hides your Minecraft server etc.)
+      - DOZZLE_FILTER=label=com.docker.compose.project=docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
 
 volumes:
   app_code:
   app_venv:
-
-

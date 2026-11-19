@@ -132,14 +132,13 @@ def elapsed_minutes(first, last) -> int | None:
 
 
 def clock_time(value) -> str:
-    """Format local time as 'h:mm' with no AM/PM, matching our JSON example."""
-    hour, minute = time_parts(value)
+    """Format local time as 24-hour 'HH:MM' (matches the Greyhound/Amtrak output).
 
-    # 15 % 12 = 3, giving 3:00. "or 12" handles midnight/noon.
-    twelve_hour = hour % 12 or 12
-    # :02d prints minutes with two digits: 3:05 instead of 3:5.
-    # NOTE: Without AM/PM, the JSON alone cannot distinguish morning/evening.
-    return f"{twelve_hour}:{minute:02d}"
+    12-hour times without AM/PM are ambiguous: least_cost_path would read
+    3:35 PM as 3:35 AM.
+    """
+    hour, minute = time_parts(value)
+    return f"{hour:02d}:{minute:02d}"
 
 
 def itinerary_to_json(itinerary, priority: int) -> dict:
